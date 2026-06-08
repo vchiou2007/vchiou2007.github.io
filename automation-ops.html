@@ -1,0 +1,659 @@
+﻿<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Chiou | Automation Operations Engineering</title>
+  <style>
+    :root {
+      --ink: #0b1220;
+      --muted: #536173;
+      --line: #dce4ef;
+      --blue: #1477ff;
+      --cyan: #12b8ff;
+      --green: #10b981;
+      --violet: #7c3aed;
+      --pink: #e11d8a;
+      --amber: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(16, 185, 129, 0.18), transparent 30%),
+        radial-gradient(circle at top left, rgba(20, 119, 255, 0.13), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #eef8f4 46%, #ffffff 100%);
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px clamp(22px, 5vw, 76px);
+    }
+
+    .brand {
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--green), var(--blue), var(--violet));
+      box-shadow: 0 14px 32px rgba(16, 185, 129, 0.28);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 16px;
+      color: #334155;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 70px clamp(22px, 5vw, 76px) 58px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #14532d;
+      background: #dcfce7;
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    h1 {
+      max-width: 1080px;
+      margin: 24px 0 18px;
+      font-size: clamp(40px, 4.6vw, 64px);
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 940px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.72;
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .tags span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 900;
+      color: #243244;
+      box-shadow: 0 10px 24px rgba(20, 55, 110, 0.06);
+    }
+
+    section {
+      padding: 72px clamp(22px, 5vw, 76px);
+    }
+
+    .section-head {
+      max-width: 960px;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 3.4vw, 48px);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.72;
+      margin: 16px 0 0;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 24px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--green), var(--blue), var(--violet));
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 17px;
+    }
+
+    .dark {
+      color: #f8fafc;
+      background: #07111f;
+    }
+
+    .dark .kicker { color: #86efac; }
+    .dark .section-head p { color: #bed0e7; }
+
+    .flow {
+      display: grid;
+      gap: 18px;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 76px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+    }
+
+    .num {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      color: #86efac;
+      background: rgba(16, 185, 129, 0.16);
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    .flow-step h3 {
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: #bed0e7;
+      line-height: 1.75;
+    }
+
+    .system-map {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .node {
+      min-height: 138px;
+      padding: 18px;
+      border-radius: 8px;
+      color: #f8fafc;
+      background: linear-gradient(145deg, #0f172a, #1e3a8a);
+      box-shadow: 0 20px 54px rgba(20, 55, 110, 0.12);
+    }
+
+    .node b {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .node h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.22;
+    }
+
+    .practice-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .practice {
+      padding: 24px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .practice b {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #075985;
+      background: #e0f2fe;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .practice h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .practice p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.74;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 16px;
+    }
+
+    .chips span {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #0f172a;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .problem {
+      padding: 24px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .problem b {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #064e3b;
+      background: #d1fae5;
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .problem h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .problem p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.74;
+    }
+
+    .summary {
+      padding: 30px;
+      border-radius: 8px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(20, 119, 255, 0.88), rgba(16, 185, 129, 0.8)),
+        #0f172a;
+      box-shadow: 0 28px 70px rgba(20, 55, 110, 0.22);
+    }
+
+    .summary h2 {
+      color: #fff;
+    }
+
+    .summary p {
+      max-width: 980px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.8;
+      font-size: 18px;
+    }
+
+    .footer {
+      padding: 34px clamp(22px, 5vw, 76px);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #64748b;
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      .navlinks { display: none; }
+      .capability-grid,
+      .practice-grid,
+      .problem-grid,
+      .system-map { grid-template-columns: 1fr; }
+      .flow-step { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="vincent-personal-site.html"><span class="mark">V</span>Vincent Chiou</a>
+    <div class="navlinks">
+      <a href="vincent-personal-site.html">首頁</a>
+      <a href="loadrunner.html">LoadRunner</a>
+      <a href="dynatrace.html">Dynatrace</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">⚙️ Automation Operations Engineering</div>
+    <h1>把維運、部署、組態與交付流程自動化。</h1>
+    <p>
+      這一部分代表我對自動化維運的完整理解與實作能力：從 Linux / Shell 基礎、自動化腳本、Ansible 批次管理，
+      到 Jenkins、GitLab CI/CD、Docker、Harbor、Nexus、SonarQube 與 Kubernetes 部署流程。我關心的不是工具名稱，
+      而是如何把手動、容易出錯、難以追蹤的維運流程，轉成可重複、可審核、可回滾、可擴展的工程系統。
+    </p>
+    <div class="tags">
+      <span>Shell / Linux</span>
+      <span>Ansible</span>
+      <span>Jenkins Pipeline</span>
+      <span>GitLab CI/CD</span>
+      <span>Docker / Harbor</span>
+      <span>Kubernetes</span>
+      <span>SonarQube</span>
+      <span>Nexus</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Capability Overview</div>
+      <h2>我具備的自動化維運能力</h2>
+      <p>
+        這些能力不是單點工具，而是一條從程式碼提交、建置、品質檢查、映像製作、部署發布到環境管理的完整自動化鏈。
+      </p>
+    </div>
+
+    <div class="capability-grid">
+      <article class="card">
+        <div class="icon">🔧</div>
+        <h3>Linux / Shell 工程能力</h3>
+        <p>能用 Shell 腳本處理變數、條件判斷、迴圈、陣列、函式、檔案處理、日誌分析與批次作業，並搭配 find、xargs、sed、awk 等工具完成維運自動化。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🧩</div>
+        <h3>Ansible 組態管理</h3>
+        <p>能設計 inventory、ad-hoc 指令、playbook、variables、facts、handlers、tags、Jinja2 templates 與 roles，用自動化方式管理多台主機與服務。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🚀</div>
+        <h3>CI/CD Pipeline 設計</h3>
+        <p>能用 Jenkins 與 GitLab CI/CD 建立從 Git commit、build、test、code scan、package、image push 到 deployment 的自動化流程。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">📦</div>
+        <h3>容器與映像倉庫</h3>
+        <p>能理解 Dockerfile、image build、container operation、Harbor registry、Nexus artifact repository 與映像版本管理在交付流程中的角色。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">☸️</div>
+        <h3>Kubernetes 部署實作</h3>
+        <p>能理解 Kubernetes master/worker 架構、Jenkins slave on Kubernetes、NFS、YAML 資源、微服務部署與高可用服務發布流程。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">✅</div>
+        <h3>品質與治理</h3>
+        <p>能把 SonarQube code scan、Jenkins 權限與憑證、GitLab Runner、template reuse、artifact/cache 管理納入交付治理，降低發布風險。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="section-head">
+      <div class="kicker">End-to-End Flow</div>
+      <h2>我能設計的自動化交付流程</h2>
+      <p>
+        一個完整的自動化維運流程，應該能把開發、建置、掃描、封裝、部署、通知與環境管理接成同一條可追蹤的 pipeline。
+      </p>
+    </div>
+
+    <div class="flow">
+      <article class="flow-step">
+        <div class="num">01</div>
+        <div>
+          <h3>從 Git / GitLab 管理原始碼與變更</h3>
+          <p>建立 group、user、project、repository，理解 branch、merge request、webhook、runner 與 GitLab CI/CD YAML 如何驅動自動化流程。</p>
+        </div>
+      </article>
+
+      <article class="flow-step">
+        <div class="num">02</div>
+        <div>
+          <h3>用 Jenkins 或 GitLab CI 建立建置流程</h3>
+          <p>能設計自由風格專案、Maven project、Pipeline job、parameterized build、trigger、credential、permission 與 email notification。</p>
+        </div>
+      </article>
+
+      <article class="flow-step">
+        <div class="num">03</div>
+        <div>
+          <h3>加入 Maven / Nexus / SonarQube 品質節點</h3>
+          <p>能把 artifact repository、dependency 管理、編譯打包與程式碼掃描整合進 pipeline，讓交付結果可追蹤、可審核。</p>
+        </div>
+      </article>
+
+      <article class="flow-step">
+        <div class="num">04</div>
+        <div>
+          <h3>用 Docker 與 Harbor 建立映像交付鏈</h3>
+          <p>能撰寫 Dockerfile、製作微服務 image、推送到 Harbor、由目標環境拉取並發布應用，形成一致的部署基礎。</p>
+        </div>
+      </article>
+
+      <article class="flow-step">
+        <div class="num">05</div>
+        <div>
+          <h3>部署到多主機或 Kubernetes 環境</h3>
+          <p>能理解 Spring Cloud 微服務、本地部署、多服務集群、Eureka、Zuul、Nginx、高可用閘道，以及 Kubernetes 上的服務發布與 runner/slave 架構。</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Architecture Map</div>
+      <h2>自動化維運能力地圖</h2>
+      <p>
+        我把這些技能看成一張連續的工程地圖：每一層都能單獨使用，也能串成企業級交付平台。
+      </p>
+    </div>
+
+    <div class="system-map">
+      <article class="node">
+        <b>Foundation</b>
+        <h3>Linux Shell sed awk xargs</h3>
+      </article>
+      <article class="node">
+        <b>Config</b>
+        <h3>Ansible Playbook Roles Jinja2</h3>
+      </article>
+      <article class="node">
+        <b>Pipeline</b>
+        <h3>Jenkins GitLab CI Runner YAML</h3>
+      </article>
+      <article class="node">
+        <b>Package</b>
+        <h3>Maven Nexus Docker Harbor</h3>
+      </article>
+      <article class="node">
+        <b>Deploy</b>
+        <h3>Kubernetes Nginx Gateway Microservices</h3>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Hands-on Scenarios</div>
+      <h2>我實際操作過、理解過的場景</h2>
+      <p>
+        以下整理的是我可以用這些技能完成的實作類型。
+      </p>
+    </div>
+
+    <div class="practice-grid">
+      <article class="practice">
+        <b>Jenkins Engineering</b>
+        <h3>建立可治理的 Jenkins 持續整合平台</h3>
+        <p>能處理 Jenkins 安裝、插件管理、使用者權限、credential、global tools、Maven/Tomcat 整合、Pipeline job、build trigger、Git hook、郵件通知與分散式建置。</p>
+        <div class="chips"><span>Pipeline</span><span>Credentials</span><span>Git Hook</span><span>Master / Slave</span></div>
+      </article>
+
+      <article class="practice">
+        <b>GitLab CI/CD</b>
+        <h3>用 YAML 模板建立可重用的 GitLab Pipeline</h3>
+        <p>能理解 stages、jobs、rules、workflow、cache、artifacts、dependencies、needs、include、extends、trigger、image、services、environment 與 runner 部署。</p>
+        <div class="chips"><span>Runner</span><span>YAML</span><span>Cache</span><span>Artifacts</span></div>
+      </article>
+
+      <article class="practice">
+        <b>Container Delivery</b>
+        <h3>把微服務打包成映像並推送到 Harbor</h3>
+        <p>能從 GitLab 拉取原始碼，透過 Maven 編譯打包，使用 Dockerfile 建立微服務映像，推送到 Harbor，再由部署環境拉取與啟動。</p>
+        <div class="chips"><span>Dockerfile</span><span>Harbor</span><span>Maven</span><span>Image Versioning</span></div>
+      </article>
+
+      <article class="practice">
+        <b>Kubernetes Delivery</b>
+        <h3>把 Jenkins 與 Kubernetes 結合成動態建置與部署平台</h3>
+        <p>能理解 Kubernetes master/worker 安裝、NFS、Jenkins master、Kubernetes plugin、自定義 Jenkins slave image，以及在 Kubernetes 中發布微服務。</p>
+        <div class="chips"><span>K8S</span><span>NFS</span><span>Jenkins Slave</span><span>Microservices</span></div>
+      </article>
+
+      <article class="practice">
+        <b>Shell Automation</b>
+        <h3>用 Shell 腳本處理日常維運與資料加工</h3>
+        <p>能撰寫可維護的 Shell 腳本，處理參數、變數、字串、檔案、流程控制、陣列、函式、debug、批次 rename、日誌萃取與命令管線。</p>
+        <div class="chips"><span>sed</span><span>awk</span><span>find</span><span>xargs</span></div>
+      </article>
+
+      <article class="practice">
+        <b>Ansible Automation</b>
+        <h3>用 Ansible 管理多台主機與服務部署</h3>
+        <p>能使用 inventory、ad-hoc、playbook、modules、facts、conditions、loops、handlers、tags、Jinja2 templates 與 roles，完成 NFS、LNMP、使用者、服務、排程與防火牆管理。</p>
+        <div class="chips"><span>Playbook</span><span>Roles</span><span>Jinja2</span><span>Facts</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Problems I Can Help Solve</div>
+      <h2>我可以用自動化維運能力協助解決的問題</h2>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem">
+        <b>Release Risk</b>
+        <h3>發布流程太手動，容易漏步驟或環境不一致</h3>
+        <p>透過 Jenkins / GitLab CI/CD、標準化 build steps、artifact/image 版本管理與部署腳本，降低人工操作造成的風險。</p>
+      </article>
+
+      <article class="problem">
+        <b>Environment Drift</b>
+        <h3>多台主機設定不一致，問題很難追蹤</h3>
+        <p>透過 Ansible inventory、playbook、roles 與 templates，把環境設定轉成可版本化、可重複執行的基礎設施流程。</p>
+      </article>
+
+      <article class="problem">
+        <b>Delivery Visibility</b>
+        <h3>建置、掃描、封裝、部署缺乏透明度</h3>
+        <p>把 Git commit、build result、SonarQube scan、artifact、image tag 與 deployment status 串起來，讓交付過程可觀察、可稽核。</p>
+      </article>
+
+      <article class="problem">
+        <b>Platform Scaling</b>
+        <h3>團隊需要把交付流程擴展到微服務與 Kubernetes</h3>
+        <p>透過 container registry、Kubernetes runner/slave、YAML 資源與微服務部署模式，把單機或手動部署升級成平台化交付。</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="summary">
+      <h2>自動化維運摘要</h2>
+      <p>
+        我具備從 Linux / Shell、自動化腳本、Ansible 組態管理，到 Jenkins / GitLab CI/CD、Docker / Harbor、
+        Nexus / SonarQube、Kubernetes 部署與微服務發布的完整理解。這些能力讓我可以從架構師角度設計可重複、
+        可治理、可追蹤的維運與交付流程，並把傳統手動操作轉成標準化、自動化、平台化的工程能力。
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Vincent Chiou · Automation Operations Engineering</span>
+    <a href="vincent-personal-site.html">← 回首頁</a>
+  </footer>
+</body>
+</html>
