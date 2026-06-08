@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Chiou | LoadRunner Performance Engineering</title>
+  <style>
+    :root {
+      --ink: #0b1220;
+      --muted: #536173;
+      --line: #dce4ef;
+      --blue: #1477ff;
+      --cyan: #12b8ff;
+      --green: #10b981;
+      --violet: #7c3aed;
+      --amber: #f59e0b;
+      --red: #ef4444;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(18, 184, 255, 0.16), transparent 30%),
+        radial-gradient(circle at top left, rgba(20, 119, 255, 0.12), transparent 26%),
+        linear-gradient(180deg, #f8fbff 0%, #eef5ff 48%, #ffffff 100%);
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px clamp(22px, 5vw, 76px);
+    }
+
+    .brand {
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 14px 32px rgba(20, 119, 255, 0.28);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 16px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 70px clamp(22px, 5vw, 76px) 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #075985;
+      background: #e0f2fe;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    h1 {
+      max-width: 1040px;
+      margin: 24px 0 18px;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .tags span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 900;
+      color: #243244;
+      box-shadow: 0 10px 24px rgba(20, 55, 110, 0.06);
+    }
+
+    .case-link-card {
+      margin-top: 34px;
+      max-width: 920px;
+      display: block;
+      padding: 24px;
+      border-radius: 8px;
+      color: white;
+      background: linear-gradient(135deg, #0f5eea, #12b8ff, #7c3aed);
+      box-shadow: 0 24px 70px rgba(20, 55, 110, 0.2);
+    }
+
+    .case-link-card b {
+      display: inline-flex;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .case-link-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+    }
+
+    .case-link-card p {
+      margin: 0 0 18px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    .case-link-card span {
+      display: inline-flex;
+      padding: 11px 15px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    section {
+      padding: 72px clamp(22px, 5vw, 76px);
+    }
+
+    .section-head {
+      max-width: 920px;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4.8vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      margin: 16px 0 0;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 16px;
+    }
+
+    .architecture-photo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 24px;
+      align-items: center;
+      padding: 26px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 70px rgba(20, 55, 110, 0.12);
+    }
+
+    .architecture-photo img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid #dbeafe;
+      box-shadow: 0 18px 45px rgba(20, 55, 110, 0.16);
+    }
+
+    .architecture-photo h2 {
+      font-size: clamp(30px, 4vw, 48px);
+    }
+
+    .architecture-photo p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .photo-label {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #075985;
+      background: #e0f2fe;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .dark {
+      color: #f8fafc;
+      background: #07111f;
+    }
+
+    .dark .kicker { color: #67e8f9; }
+    .dark .section-head p { color: #bed0e7; }
+
+    .workflow {
+      display: grid;
+      gap: 22px;
+    }
+
+    .workflow-step {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 24px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+    }
+
+    .num {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      font-weight: 900;
+      color: #67e8f9;
+      background: rgba(56, 189, 248, 0.16);
+    }
+
+    .workflow-step h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .workflow-step p {
+      margin: 0;
+      color: #bed0e7;
+      line-height: 1.75;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .problem {
+      border-radius: 8px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .problem b {
+      display: inline-flex;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--violet), var(--blue));
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .problem h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .problem p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .footer {
+      padding: 34px clamp(22px, 5vw, 76px);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #64748b;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+      }
+
+      .brand {
+        flex: 0 0 auto;
+      }
+
+      .navlinks {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        max-width: 58vw;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+
+      .navlinks::-webkit-scrollbar {
+        display: none;
+      }
+
+      .navlinks a {
+        flex: 0 0 auto;
+        padding: 9px 11px;
+        border-radius: 999px;
+        background: #eef6ff;
+        border: 1px solid rgba(20, 119, 255, 0.16);
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 34px 18px 40px;
+      }
+
+      h1 {
+        font-size: 42px;
+        line-height: 1.04;
+      }
+
+      .hero p {
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      .case-link-card {
+        padding: 18px;
+      }
+
+      .case-link-card h2 {
+        font-size: 28px;
+        line-height: 1.12;
+      }
+
+      section {
+        padding: 44px 18px;
+      }
+
+      h2 {
+        font-size: 30px;
+        line-height: 1.14;
+      }
+
+      .section-head p {
+        font-size: 16px;
+      }
+
+      .capability-grid,
+      .problem-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .architecture-photo {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+
+      .architecture-photo h2 {
+        font-size: 28px;
+      }
+
+      .workflow-step {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .footer {
+        padding: 26px 18px 38px;
+        display: grid;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav {
+        display: grid;
+      }
+
+      .navlinks {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .tags span,
+      .case-link-card span {
+        width: fit-content;
+      }
+
+      .icon,
+      .num {
+        border-radius: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="vincent-personal-site.html"><span class="mark">V</span>Vincent Chiou</a>
+    <div class="navlinks">
+      <a href="vincent-personal-site.html">首頁</a>
+      <a href="dynatrace.html">Dynatrace</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">📈 LoadRunner · Performance Engineering</div>
+    <h1>我能用效能測試，把系統承載能力變成可以討論的數據。</h1>
+    <p>
+      我能運用 LoadRunner 建立一套效能工程方法：從使用者交易建模、腳本錄製與調校、
+      負載場景設計，到監控指標與報表分析，最後回到架構決策與容量規劃。
+    </p>
+    <div class="tags">
+      <span>VUGen Script Design</span>
+      <span>Transaction Modeling</span>
+      <span>Correlation</span>
+      <span>Data Driven Testing</span>
+      <span>Controller Scenario</span>
+      <span>SLA / Analysis</span>
+    </div>
+    <a class="case-link-card" href="loadrunner-sla-case.html">
+      <b>實作案例</b>
+      <h2>100 使用者 SLA 驗證：從腳本到正式報告</h2>
+      <p>
+        一個完整的效能測試設計案例：把 SLA 轉成 workload model、VUGen transactions、Controller scenario、
+        monitoring、dry run、steady-state 分析與 pass/fail 報告。
+      </p>
+      <span>查看完整案例 →</span>
+    </a>
+  </header>
+
+  <section>
+    <div class="architecture-photo">
+      <img src="architecture-photo-1.jpeg" alt="HP LoadRunner 架構圖，呈現 VUGen、Controller、Analysis、Load Generators 與 Web/App/DB Server 的關係">
+      <div>
+        <span class="photo-label">Architecture View</span>
+        <h2>我理解 LoadRunner 在效能測試架構中的角色。</h2>
+        <p>
+          這張架構圖很能代表我的理解：VUGen 負責建立虛擬使用者腳本，Controller 負責組織壓力場景與負載產生器，
+          Analysis 負責將測試結果轉成可判讀的效能洞察。這些元件一起模擬使用者流量，對 Web、Application 與 Database
+          層進行壓力驗證，最後回到架構調校與容量規劃。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">What I Can Do</div>
+      <h2>我具備的 LoadRunner 實務能力</h2>
+      <p>
+        我實際操作過 LoadRunner 的核心流程，因此可以從「怎麼測」進一步思考「測出來的數據對架構代表什麼」。
+      </p>
+    </div>
+
+    <div class="capability-grid">
+      <article class="card">
+        <div class="icon">🧩</div>
+        <h3>設計可重複的虛擬使用者腳本</h3>
+        <p>能使用 VUGen 錄製與回放腳本，拆分 actions，建立 transactions，加入文字與圖片檢查，確保腳本能代表真實操作流程。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🔁</div>
+        <h3>處理動態資料與關聯</h3>
+        <p>能進行 parameterization、data driven testing，以及手動/自動 correlation，處理 session id、token、動態欄位等常見問題。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">⏱️</div>
+        <h3>設定真實負載行為</h3>
+        <p>理解 run logic、think time、pacing、recording settings 與 runtime settings，讓測試節奏更接近真實使用者行為。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">📊</div>
+        <h3>建立 Controller 壓力場景</h3>
+        <p>能建立 manual 與 goal-oriented scenario，設計 basic schedule 與 real-world schedule，並加入 monitors / measurements。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">📉</div>
+        <h3>分析結果與找出瓶頸</h3>
+        <p>能使用 Analysis 報表、graphs、filter 與 granularity 觀察 response time、throughput、error pattern 與資源瓶頸。</p>
+      </article>
+
+      <article class="card">
+        <div class="icon">🎯</div>
+        <h3>定義 SLA 與尖峰同步壓力</h3>
+        <p>能使用 SLA 與 Rendezvous Point，驗證系統是否滿足服務品質要求，並模擬尖峰同步交易壓力。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="section-head">
+      <div class="kicker">How I Apply It</div>
+      <h2>我會怎麼把 LoadRunner 用在真實系統問題上</h2>
+      <p>
+        對企業架構師而言，效能測試不是按下「開始測試」而已，而是把業務情境、系統架構、基礎設施與容量規劃串在一起。
+      </p>
+    </div>
+
+    <div class="workflow">
+      <article class="workflow-step">
+        <div class="num">01</div>
+        <div>
+          <h3>把業務流程轉成可測量的交易</h3>
+          <p>先定義登入、查詢、下單、批次處理或資料擷取等關鍵流程，再用 transaction 把每段時間與成功率量化。</p>
+        </div>
+      </article>
+
+      <article class="workflow-step">
+        <div class="num">02</div>
+        <div>
+          <h3>設計符合真實世界的負載模型</h3>
+          <p>用 think time、pacing、使用者增長曲線與排程設計，避免做出不符合業務情境的「假壓力」。</p>
+        </div>
+      </article>
+
+      <article class="workflow-step">
+        <div class="num">03</div>
+        <div>
+          <h3>搭配監控資料找根因</h3>
+          <p>在 Controller 中加入監控指標，並把結果和應用、資料庫、主機、網路與雲端資源指標一起判讀。</p>
+        </div>
+      </article>
+
+      <article class="workflow-step">
+        <div class="num">04</div>
+        <div>
+          <h3>用報表支持架構決策</h3>
+          <p>將 response time、throughput、error rate、SLA 達成率整理成可溝通的結果，支援容量規劃、調校與上線決策。</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Problems I Can Help Solve</div>
+      <h2>我可以用這項技能協助解決的問題</h2>
+    </div>
+
+    <div class="problem-grid">
+      <article class="problem">
+        <b>Performance Risk</b>
+        <h3>新系統上線前，如何知道能不能承受尖峰流量？</h3>
+        <p>透過 load scenario、ramp-up、real-world schedule 與 SLA，建立上線前的效能驗證基準。</p>
+      </article>
+
+      <article class="problem">
+        <b>Bottleneck Analysis</b>
+        <h3>使用者反應慢，到底是應用、資料庫、網路還是主機？</h3>
+        <p>結合 transaction response time、monitoring measurements 與 Analysis 圖表，縮小瓶頸範圍。</p>
+      </article>
+
+      <article class="problem">
+        <b>Capacity Planning</b>
+        <h3>系統未來需要多少容量？</h3>
+        <p>用不同使用者量與交易量測試，觀察 throughput 與 response time 的關係，支援容量規劃。</p>
+      </article>
+
+      <article class="problem">
+        <b>Architecture Decision</b>
+        <h3>架構調整是否真的改善效能？</h3>
+        <p>用測試前後的數據比較，驗證調校、快取、資料庫改動或基礎設施擴充是否有效。</p>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Vincent Chiou · LoadRunner Performance Engineering</span>
+    <a href="vincent-personal-site.html">← 回首頁</a>
+  </footer>
+</body>
+</html>

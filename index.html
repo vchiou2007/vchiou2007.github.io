@@ -1,0 +1,1176 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Chiou | IT Architect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0b1220;
+      --muted: #536173;
+      --line: #dce4ef;
+      --glass: rgba(255, 255, 255, 0.76);
+      --blue: #1477ff;
+      --cyan: #12b8ff;
+      --violet: #7c3aed;
+      --green: #10b981;
+      --pink: #e11d8a;
+      --amber: #f59e0b;
+      --shadow: 0 24px 70px rgba(20, 55, 110, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Noto Sans TC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #f7f9fd;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      overflow: hidden;
+    }
+
+    .hero {
+      min-height: 88vh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      padding: 34px clamp(22px, 5vw, 76px) 60px;
+      background:
+        linear-gradient(90deg, rgba(248, 251, 255, 0.98) 0%, rgba(248, 251, 255, 0.94) 32%, rgba(248, 251, 255, 0.62) 58%, rgba(248, 251, 255, 0.16) 100%),
+        url("vincent-tech-hero.png") center right / cover no-repeat;
+    }
+
+    .nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px clamp(22px, 5vw, 76px);
+      z-index: 2;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--violet), var(--pink));
+      box-shadow: 0 10px 30px rgba(37, 99, 235, 0.32);
+    }
+
+    .navlinks {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      max-width: min(780px, 56vw);
+      padding-top: 86px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-portrait {
+      position: absolute;
+      right: clamp(22px, 5vw, 76px);
+      bottom: 58px;
+      width: min(34vw, 430px);
+      aspect-ratio: 4 / 5;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.56);
+      box-shadow: 0 34px 90px rgba(15, 23, 42, 0.22);
+      z-index: 1;
+    }
+
+    .hero-portrait img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .portrait-badge {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 8px;
+      color: #f8fafc;
+      background: rgba(15, 23, 42, 0.78);
+      backdrop-filter: blur(14px);
+      font-weight: 900;
+      box-shadow: 0 16px 34px rgba(15, 23, 42, 0.22);
+    }
+
+    .portrait-badge span {
+      color: #67e8f9;
+      font-size: 13px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border: 1px solid rgba(20, 119, 255, 0.18);
+      border-radius: 999px;
+      color: #0f5fcb;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 30px rgba(20, 119, 255, 0.08);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .pulse {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 7px rgba(16, 185, 129, 0.15);
+    }
+
+    h1 {
+      margin: 28px 0 18px;
+      font-size: clamp(48px, 8vw, 96px);
+      line-height: 0.95;
+      letter-spacing: 0;
+      max-width: 780px;
+    }
+
+    .hero-copy p {
+      max-width: 650px;
+      color: #425166;
+      font-size: clamp(18px, 2.2vw, 24px);
+      line-height: 1.65;
+      margin: 0 0 30px;
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: 1px solid transparent;
+    }
+
+    .btn.primary {
+      color: #fff;
+      background: #0b1220;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.2);
+    }
+
+    .btn.secondary {
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.84);
+      border-color: rgba(148, 163, 184, 0.28);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 720px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #243244;
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(20, 55, 110, 0.08);
+    }
+
+    section {
+      padding: 84px clamp(22px, 5vw, 76px);
+    }
+
+    .section-head {
+      max-width: 860px;
+      margin-bottom: 36px;
+    }
+
+    .section-kicker {
+      color: var(--blue);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      max-width: 720px;
+      margin: 18px 0 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 18px 55px rgba(31, 41, 55, 0.07);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .icon.blue { background: linear-gradient(135deg, var(--blue), var(--cyan)); }
+    .icon.green { background: linear-gradient(135deg, #059669, #22c55e); }
+    .icon.violet { background: linear-gradient(135deg, var(--violet), var(--pink)); }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .course-duo {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-top: 26px;
+    }
+
+    .course-card {
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-radius: 8px;
+      padding: 28px;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 28px 70px rgba(20, 55, 110, 0.18);
+    }
+
+    .course-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -80px -110px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      filter: blur(12px);
+    }
+
+    .course-card.loadrunner {
+      background: linear-gradient(135deg, #0f5eea, #12b8ff);
+    }
+
+    .course-card.dynatrace {
+      background: linear-gradient(135deg, #111827, #7c3aed 54%, #e11d8a);
+    }
+
+    .course-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .course-card h3 {
+      margin: 0 0 12px;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+
+    .course-card p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 17px;
+      line-height: 1.72;
+      max-width: 520px;
+    }
+
+    .course-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 22px 0;
+    }
+
+    .course-tags span {
+      display: inline-flex;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .course-link {
+      display: inline-flex;
+      width: fit-content;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.94);
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .showcase {
+      background: #07111f;
+      color: #f8fafc;
+      position: relative;
+    }
+
+    .showcase .section-kicker {
+      color: #67e8f9;
+    }
+
+    .showcase .section-head p {
+      color: #b7c4d8;
+    }
+
+    .pipeline {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: stretch;
+    }
+
+    .pipeline-main {
+      border-radius: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.24);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.86), rgba(30, 41, 59, 0.62));
+      padding: 26px;
+      min-height: 390px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
+    }
+
+    .steps {
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 38px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .num {
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: rgba(56, 189, 248, 0.18);
+      color: #67e8f9;
+      font-weight: 900;
+    }
+
+    .step strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .step span {
+      color: #afbdd1;
+      font-size: 14px;
+    }
+
+    .status {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.16);
+      color: #86efac;
+      font-size: 12px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .metrics {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metric {
+      border-radius: 8px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.92);
+      color: #101827;
+    }
+
+    .metric-label {
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .metric-value {
+      margin-top: 8px;
+      font-size: 32px;
+      font-weight: 900;
+    }
+
+    .metric p {
+      color: #536173;
+      margin: 8px 0 0;
+      line-height: 1.6;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 22px;
+      max-width: 970px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 22px;
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .tag.blue { background: var(--blue); }
+    .tag.violet { background: var(--violet); }
+    .tag.green { background: var(--green); }
+    .tag.pink { background: var(--pink); }
+
+    .timeline-item h3 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .experience {
+      background:
+        radial-gradient(circle at top left, rgba(20, 119, 255, 0.11), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(225, 29, 138, 0.1), transparent 34%),
+        #ffffff;
+    }
+
+    .career-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .career-map {
+      display: grid;
+      gap: 22px;
+    }
+
+    .career-item {
+      display: grid;
+      grid-template-columns: 116px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 18px 48px rgba(20, 55, 110, 0.08);
+    }
+
+    .year-pill {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      white-space: nowrap;
+    }
+
+    .career-item h3 {
+      margin: 0 0 9px;
+      font-size: 23px;
+    }
+
+    .career-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    .architecture-panel {
+      position: sticky;
+      top: 24px;
+      padding: 24px;
+      border-radius: 8px;
+      color: #f8fafc;
+      background:
+        linear-gradient(145deg, rgba(8, 16, 32, 0.96), rgba(20, 34, 62, 0.94)),
+        #07111f;
+      box-shadow: 0 28px 75px rgba(15, 23, 42, 0.26);
+      overflow: hidden;
+    }
+
+    .architecture-panel::before {
+      content: "";
+      position: absolute;
+      inset: -80px -80px auto auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: rgba(20, 184, 255, 0.24);
+      filter: blur(38px);
+    }
+
+    .architecture-panel h3,
+    .architecture-panel p,
+    .data-flow,
+    .learning-badges {
+      position: relative;
+    }
+
+    .architecture-panel h3 {
+      margin: 0 0 8px;
+      font-size: 25px;
+    }
+
+    .architecture-panel p {
+      margin: 0 0 22px;
+      color: #c5d2e6;
+      line-height: 1.7;
+    }
+
+    .data-flow {
+      display: grid;
+      gap: 14px;
+      margin-top: 12px;
+    }
+
+    .flow-node {
+      border: 1px solid rgba(148, 163, 184, 0.26);
+      border-radius: 8px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+    }
+
+    .flow-node strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .flow-node span {
+      color: #aab8cc;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .flow-arrow {
+      text-align: center;
+      color: #67e8f9;
+      font-weight: 900;
+    }
+
+    .learning-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .learning-badges span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .cta {
+      padding-bottom: 104px;
+    }
+
+    .cta-box {
+      padding: 40px;
+      border-radius: 8px;
+      color: white;
+      background:
+        linear-gradient(135deg, rgba(20, 119, 255, 0.95), rgba(124, 58, 237, 0.92), rgba(225, 29, 138, 0.86)),
+        #1d4ed8;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h2 {
+      max-width: 760px;
+    }
+
+    .cta-box p {
+      max-width: 720px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    .footer {
+      padding: 30px clamp(22px, 5vw, 76px);
+      color: #64748b;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-weight: 700;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        padding-top: 96px;
+        background:
+          linear-gradient(180deg, rgba(248, 251, 255, 0.96) 0%, rgba(248, 251, 255, 0.88) 52%, rgba(248, 251, 255, 0.5) 100%),
+          url("vincent-tech-hero.png") center / cover no-repeat;
+      }
+
+      .hero-copy {
+        max-width: 100%;
+      }
+
+      .hero-portrait {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        width: min(100%, 420px);
+        margin-top: 38px;
+      }
+
+      .navlinks {
+        display: none;
+      }
+
+      .grid,
+      .pipeline,
+      .course-duo,
+      .career-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .architecture-panel {
+        position: relative;
+        top: auto;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      section {
+        padding-top: 64px;
+        padding-bottom: 64px;
+      }
+
+      .step {
+        grid-template-columns: 38px 1fr;
+      }
+
+      .status {
+        grid-column: 2;
+        width: fit-content;
+      }
+
+      .cta-box {
+        padding: 26px;
+      }
+
+      .career-item {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero" id="top">
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top">
+          <span class="mark">V</span>
+          <span>Vincent Chiou</span>
+        </a>
+        <div class="navlinks">
+          <a href="#focus">技術焦點</a>
+          <a href="loadrunner.html">LoadRunner</a>
+          <a href="dynatrace.html">Dynatrace</a>
+          <a href="#lab">學習實驗室</a>
+          <a href="#experience">職涯經歷</a>
+          <a href="#journey">學習路線</a>
+        </div>
+      </nav>
+
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> Retired IT Architect · Still Building</div>
+        <h1>用架構師的眼光，重新探索現代 IT。</h1>
+        <p>
+          我曾經在企業 IT 架構與系統整合領域工作多年。退休後，我仍然保持對新技術的好奇，
+          近期專注於 LoadRunner、Dynatrace、CI/CD 與雲端自動化，持續把經驗轉化為新的理解。
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#focus">查看技術焦點</a>
+          <a class="btn secondary" href="#journey">我的學習方向</a>
+        </div>
+        <div class="chips" aria-label="Technology tags">
+          <span class="chip">⚙️ IT Architecture</span>
+          <span class="chip">📈 LoadRunner</span>
+          <span class="chip">🔎 Dynatrace</span>
+          <span class="chip">🚀 CI/CD</span>
+          <span class="chip">☁️ Cloud Mindset</span>
+        </div>
+      </div>
+
+      <figure class="hero-portrait" aria-label="Vincent Chiou cover photo">
+        <img src="vincent-cover-photo.png" alt="Vincent Chiou portrait">
+        <figcaption class="portrait-badge">
+          Vincent Chiou
+          <span>IT Architect</span>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="focus">
+      <div class="section-head">
+        <div class="section-kicker">Focus Areas</div>
+        <h2>把效能、監控與交付流程串成一個完整視角。</h2>
+        <p>
+          對我來說，工具不是單獨存在的。LoadRunner 看見壓力與瓶頸，Dynatrace 看見系統行為，
+          CI/CD 則讓交付變得可重複、可追蹤、可改善。
+        </p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="icon blue">📈</div>
+          <h3>LoadRunner 效能測試</h3>
+          <p>
+            以交易流程、使用者負載、回應時間與瓶頸分析為核心，理解系統在壓力下的真實表現。
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon green">🔎</div>
+          <h3>Dynatrace 可觀測性</h3>
+          <p>
+            透過 APM、服務拓撲、PurePath、異常偵測與根因分析，讓複雜系統的行為變得可閱讀。
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon violet">🚀</div>
+          <h3>CI/CD 自動化交付</h3>
+          <p>
+            從版本控管、建置、測試、自動部署到品質閘門，建立更穩定、更透明的交付節奏。
+          </p>
+        </article>
+      </div>
+
+      <div class="course-duo" aria-label="Course detail pages">
+        <a class="course-card loadrunner" href="loadrunner.html">
+          <div>
+            <h3>LoadRunner 效能工程能力</h3>
+            <p>
+              能設計效能測試腳本、建立壓力場景、分析瓶頸與 SLA，協助判斷系統在真實負載下是否可靠。
+            </p>
+            <div class="course-tags">
+              <span>Performance Testing</span>
+              <span>VUGen</span>
+              <span>Controller</span>
+              <span>SLA</span>
+            </div>
+          </div>
+          <span class="course-link">查看效能工程能力 →</span>
+        </a>
+
+        <a class="course-card dynatrace" href="dynatrace.html">
+          <div>
+            <h3>Dynatrace 可觀測性能力</h3>
+            <p>
+              能運用 OneAgent、PurePath、Grail、DQL 與雲端監控，理解系統行為、追蹤問題根因並推動自動化。
+            </p>
+            <div class="course-tags">
+              <span>Observability</span>
+              <span>OneAgent</span>
+              <span>DQL</span>
+              <span>AWS / GCP</span>
+            </div>
+          </div>
+          <span class="course-link">查看可觀測性能力 →</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="showcase" id="lab">
+      <div class="section-head">
+        <div class="section-kicker">Architecture Lab</div>
+        <h2>我喜歡把技術放回架構圖裡思考。</h2>
+        <p>
+          一個成熟的 IT 架構師，不只看單一工具的功能，而是看資料如何流動、風險如何被提前發現、
+          系統如何在每次交付後變得更可靠。
+        </p>
+      </div>
+
+      <div class="pipeline">
+        <div class="pipeline-main">
+          <div class="steps">
+            <div class="step">
+              <div class="num">01</div>
+              <div>
+                <strong>Plan & Model</strong>
+                <span>定義使用者旅程、關鍵交易、系統邊界與品質目標。</span>
+              </div>
+              <div class="status">Design</div>
+            </div>
+            <div class="step">
+              <div class="num">02</div>
+              <div>
+                <strong>Build & Test</strong>
+                <span>用 CI/CD 讓建置、測試與環境部署更可控。</span>
+              </div>
+              <div class="status">Pipeline</div>
+            </div>
+            <div class="step">
+              <div class="num">03</div>
+              <div>
+                <strong>Load & Observe</strong>
+                <span>透過 LoadRunner 模擬壓力，再用 Dynatrace 觀察端到端行為。</span>
+              </div>
+              <div class="status">Insight</div>
+            </div>
+            <div class="step">
+              <div class="num">04</div>
+              <div>
+                <strong>Improve & Repeat</strong>
+                <span>用數據回饋架構決策，讓系統持續演進。</span>
+              </div>
+              <div class="status">Optimize</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <div class="metric-label">Performance</div>
+            <div class="metric-value">Response Time</div>
+            <p>關注尖峰負載、交易延遲、吞吐量與使用者體驗。</p>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Observability</div>
+            <div class="metric-value">Root Cause</div>
+            <p>用可觀測性縮短問題定位時間，讓資訊從模糊變清楚。</p>
+          </div>
+          <div class="metric">
+            <div class="metric-label">Delivery</div>
+            <div class="metric-value">Quality Gate</div>
+            <p>把測試、監控與部署規則放進交付流程，降低人為風險。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="experience" id="experience">
+      <div class="section-head">
+        <div class="section-kicker">Professional Experience</div>
+        <h2>從研究所、IBM、銀行核心系統，到企業級資料平台。</h2>
+        <p>
+          我的背景橫跨計算機網路、軟體工程、資料平台、效能調校與企業架構。
+          這些經驗讓我看技術時，總是同時思考系統、資料、流程、風險與長期維運。
+        </p>
+      </div>
+
+      <div class="career-layout">
+        <div class="career-map">
+          <article class="career-item">
+            <div><span class="year-pill">研究所</span></div>
+            <div>
+              <h3>電子研究所 · 計算機網路與軟體工程</h3>
+              <p>
+                研究所主修電子工程，研究方向聚焦在計算機網路與軟體工程。這段訓練建立了我後來理解分散式系統、
+                企業 IT 架構與大型系統整合的基礎。
+              </p>
+            </div>
+          </article>
+
+          <article class="career-item">
+            <div><span class="year-pill">台灣 IBM</span></div>
+            <div>
+              <h3>系統工程師到產品經理</h3>
+              <p>
+                畢業後進入台灣 IBM，最初擔任系統工程師，之後轉任產品經理。工作範圍從台灣逐步擴展到大中國地區，
+                累積了技術、產品、市場與跨區域協作的完整經驗。
+              </p>
+            </div>
+          </article>
+
+          <article class="career-item">
+            <div><span class="year-pill">1997</span></div>
+            <div>
+              <h3>移民加拿大 · IBM Toronto Lab</h3>
+              <p>
+                1997 年移民加拿大後，進入 IBM 多倫多實驗室，參與 DB2 產品的 Performance Monitor 與 tuning 工作。
+                這兩年的經驗讓我更深入理解資料庫效能、監控與產品級軟體工程。
+              </p>
+            </div>
+          </article>
+
+          <article class="career-item">
+            <div><span class="year-pill">CIBC</span></div>
+            <div>
+              <h3>加拿大銀行業系統經驗</h3>
+              <p>
+                之後進入 CIBC 工作約兩年，開始更深入接觸加拿大金融業 IT 系統與企業級應用環境。
+              </p>
+            </div>
+          </article>
+
+          <article class="career-item">
+            <div><span class="year-pill">BMO</span></div>
+            <div>
+              <h3>Senior Solution / Technical Architect</h3>
+              <p>
+                隨後加入 BMO，長期擔任 Solution Architect、Technical Architect 等資深架構角色，直到 60 歲退休。
+                主要工作聚焦在大數據資料處理、資料擷取、企業級 Data Warehouse，以及從內部資料中心逐步轉向 AWS 的大型資料平台演進。
+              </p>
+            </div>
+          </article>
+
+          <article class="career-item">
+            <div><span class="year-pill">退休後</span></div>
+            <div>
+              <h3>持續學習 Python、AI、Machine Learning 與 LLM</h3>
+              <p>
+                退休後，我持續加強 Python programming，並深入學習 AI、Machine Learning、Transformer 與大型語言模型。
+                我上過台大線上課程，也購買並完成多門網路課程，把新技術與過去的企業架構經驗連在一起。
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <aside class="architecture-panel" aria-label="Enterprise data platform visual summary">
+          <h3>Enterprise Data Platform</h3>
+          <p>
+            我在 BMO 的核心經驗，是把資料擷取、處理、倉儲、效能與雲端遷移放在同一張企業級架構圖裡思考。
+          </p>
+
+          <div class="data-flow">
+            <div class="flow-node">
+              <strong>Source Systems</strong>
+              <span>銀行核心系統、交易資料、作業資料、跨部門資料來源。</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <strong>Data Ingestion & Processing</strong>
+              <span>資料擷取、清理、批次處理、品質檢核與自動化流程。</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <strong>Enterprise Data Warehouse</strong>
+              <span>企業級資料倉儲、效能調校、資料模型與可維運架構。</span>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-node">
+              <strong>AWS Modernization</strong>
+              <span>從自有資料中心逐步走向 AWS，讓資料平台更有彈性與擴展能力。</span>
+            </div>
+          </div>
+
+          <div class="learning-badges">
+            <span>Python</span>
+            <span>Machine Learning</span>
+            <span>Transformer</span>
+            <span>LLM</span>
+            <span>AWS</span>
+            <span>Data Warehouse</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="journey">
+      <div class="section-head">
+        <div class="section-kicker">Learning Journey</div>
+        <h2>退休不是停止，而是用更自由的方式學習。</h2>
+        <p>
+          這個網站可以持續擴充成個人技術筆記、作品集、學習紀錄與分享頁面。
+          以下是目前適合放在首頁的學習路線。
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div><span class="tag blue">LoadRunner</span></div>
+          <div>
+            <h3>從腳本到效能模型</h3>
+            <p>練習把真實業務流程轉換成測試腳本，理解 think time、correlation、parameterization 與測試情境設計。</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div><span class="tag green">Dynatrace</span></div>
+          <div>
+            <h3>從監控到可觀測性</h3>
+            <p>學習服務拓撲、交易追蹤、基礎設施指標、異常事件與根因分析，建立更完整的系統視野。</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div><span class="tag violet">CI/CD</span></div>
+          <div>
+            <h3>從手動交付到自動化流程</h3>
+            <p>理解 source control、build、test、deploy、approval 與 rollback 如何形成一套可靠的軟體交付機制。</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div><span class="tag pink">Architect</span></div>
+          <div>
+            <h3>把經驗轉化為判斷力</h3>
+            <p>用架構師角度連結技術、流程、風險與人，讓每一次學習都能回到更大的系統思考。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="cta-box">
+        <h2>下一步，可以把這裡變成你的個人技術品牌首頁。</h2>
+        <p>
+          之後可以加上真實照片、LinkedIn、履歷下載、技術文章、LoadRunner/Dynatrace 筆記、
+          以及你最喜歡的彩色標籤式學習摘要。
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="mailto:vchiou2007@gmail.com">聯絡 Vincent</a>
+          <a class="btn secondary" href="#top">回到頁首</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Vincent Chiou · IT Architect</span>
+    <span>LoadRunner · Dynatrace · CI/CD · Observability</span>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Chiou | Dynatrace Observability</title>
+  <style>
+    :root {
+      --ink: #0b1220;
+      --muted: #536173;
+      --line: #dce4ef;
+      --green: #10b981;
+      --blue: #1477ff;
+      --violet: #7c3aed;
+      --pink: #e11d8a;
+      --amber: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 30%),
+        radial-gradient(circle at top left, rgba(16, 185, 129, 0.14), transparent 26%),
+        linear-gradient(180deg, #f9fbff 0%, #eef4ff 48%, #ffffff 100%);
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px clamp(22px, 5vw, 76px);
+    }
+
+    .brand {
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--green), var(--violet), var(--pink));
+      box-shadow: 0 14px 32px rgba(124, 58, 237, 0.24);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 16px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 70px clamp(22px, 5vw, 76px) 54px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #14532d;
+      background: #dcfce7;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    h1 {
+      max-width: 1060px;
+      margin: 24px 0 18px;
+      font-size: clamp(44px, 7vw, 84px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 920px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .tags span {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      font-weight: 900;
+      color: #243244;
+      box-shadow: 0 10px 24px rgba(20, 55, 110, 0.06);
+    }
+
+    section {
+      padding: 72px clamp(22px, 5vw, 76px);
+    }
+
+    .section-head {
+      max-width: 960px;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--violet);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4.8vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      margin: 16px 0 0;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .capability {
+      padding: 24px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 22px;
+      margin-bottom: 18px;
+      background: linear-gradient(135deg, var(--green), var(--violet), var(--pink));
+    }
+
+    .capability h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+    }
+
+    .capability p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    .architecture-photo {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+      gap: 24px;
+      align-items: center;
+      padding: 26px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 70px rgba(20, 55, 110, 0.12);
+    }
+
+    .architecture-photo img {
+      width: 100%;
+      display: block;
+      border-radius: 8px;
+      border: 1px solid #e9d5ff;
+      box-shadow: 0 18px 45px rgba(124, 58, 237, 0.16);
+    }
+
+    .architecture-photo h2 {
+      font-size: clamp(30px, 4vw, 48px);
+    }
+
+    .architecture-photo p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .photo-label {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #5b21b6;
+      background: #f3e8ff;
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .dark {
+      color: #f8fafc;
+      background: #07111f;
+    }
+
+    .dark .kicker { color: #86efac; }
+    .dark .section-head p { color: #bed0e7; }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .case {
+      padding: 24px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+    }
+
+    .case b {
+      display: inline-flex;
+      width: fit-content;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #07111f;
+      background: #86efac;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+
+    .case h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .case p {
+      margin: 0;
+      color: #bed0e7;
+      line-height: 1.75;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .chips span {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #f8fafc;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .matrix-card {
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 24px;
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .matrix-card h3 {
+      margin: 0 0 12px;
+      font-size: 24px;
+    }
+
+    .matrix-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .footer {
+      padding: 34px clamp(22px, 5vw, 76px);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #64748b;
+      font-weight: 800;
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+      }
+
+      .brand {
+        flex: 0 0 auto;
+      }
+
+      .navlinks {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        max-width: 58vw;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+
+      .navlinks::-webkit-scrollbar {
+        display: none;
+      }
+
+      .navlinks a {
+        flex: 0 0 auto;
+        padding: 9px 11px;
+        border-radius: 999px;
+        background: #f3e8ff;
+        border: 1px solid rgba(124, 58, 237, 0.16);
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 34px 18px 40px;
+      }
+
+      h1 {
+        font-size: 42px;
+        line-height: 1.04;
+      }
+
+      .hero p {
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      section {
+        padding: 44px 18px;
+      }
+
+      h2 {
+        font-size: 30px;
+        line-height: 1.14;
+      }
+
+      .section-head p {
+        font-size: 16px;
+      }
+
+      .capability-grid,
+      .case-grid,
+      .architecture-photo,
+      .matrix {
+        grid-template-columns: 1fr;
+      }
+
+      .architecture-photo {
+        padding: 16px;
+      }
+
+      .architecture-photo h2 {
+        font-size: 28px;
+      }
+
+      .case,
+      .capability,
+      .matrix-card {
+        padding: 18px;
+      }
+
+      .matrix-card ul {
+        padding-left: 18px;
+      }
+
+      .footer {
+        padding: 26px 18px 38px;
+        display: grid;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav {
+        display: grid;
+      }
+
+      .navlinks {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .icon {
+        border-radius: 8px;
+      }
+
+      .case .chips {
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="vincent-personal-site.html"><span class="mark">V</span>Vincent Chiou</a>
+    <div class="navlinks">
+      <a href="vincent-personal-site.html">首頁</a>
+      <a href="loadrunner.html">LoadRunner</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">🔎 Dynatrace · Observability Architecture</div>
+    <h1>我能用 Dynatrace 看懂系統行為，並把監控資料轉成架構洞察。</h1>
+    <p>
+      Dynatrace 對我來說不是產品功能清單，而是一套現代可觀測性能力：從 OneAgent、PurePath、Grail 與 DQL，
+      到 AWS/GCP、Kubernetes、資料庫、微服務、Synthetic Monitoring、OpenPipeline、Workflow 與 Application Security。
+      我關心的是：系統為什麼慢、哪裡出錯、如何驗證、怎麼自動化、如何支援企業級治理。
+    </p>
+    <div class="tags">
+      <span>OneAgent Deployment</span>
+      <span>PurePath Root Cause</span>
+      <span>Grail / DQL</span>
+      <span>AWS / GCP Observability</span>
+      <span>Kubernetes Monitoring</span>
+      <span>Synthetic Monitoring</span>
+      <span>OpenPipeline</span>
+      <span>Application Security</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="architecture-photo">
+      <img src="architecture-photo-2.jpeg" alt="Dynatrace 平台能力圖，呈現 Infrastructure、Application、Digital Experience、Logs、Security、OpenPipeline、PurePath、OneAgent、Grail 等能力">
+      <div>
+        <span class="photo-label">Platform View</span>
+        <h2>我理解 Dynatrace 是一個整合式可觀測性平台。</h2>
+        <p>
+          這張平台圖很適合表達我的能力重點：Dynatrace 不只是單一監控畫面，而是把 Infrastructure Observability、
+          Application Observability、Digital Experience、Log Analytics、Application Security、Software Delivery
+          與 Business Observability 放在同一個平台中，底層再透過 OneAgent、PurePath、OpenPipeline、Grail、
+          AutomationEngine、Davis AI 與 Smartscape 串成可分析、可追蹤、可自動化的架構。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">What I Understand</div>
+      <h2>我理解 Dynatrace 各元件之間的關係</h2>
+      <p>
+        我不是只會看 dashboard，而是理解資料如何從 host、container、application、service、session、logs 與 metrics 進入平台，
+        再如何透過 trace、DQL、notebook、workflow 與 alert 變成可行動的資訊。
+      </p>
+    </div>
+
+    <div class="capability-grid">
+      <article class="capability">
+        <div class="icon">🛰️</div>
+        <h3>OneAgent 與自動發現</h3>
+        <p>理解 OneAgent 如何收集 host、process、service、container 與 application telemetry，並建立基礎觀測能力。</p>
+      </article>
+
+      <article class="capability">
+        <div class="icon">🧬</div>
+        <h3>PurePath 與端到端追蹤</h3>
+        <p>能用 PurePath 觀察跨服務交易路徑，追蹤 API request、service call、database query 與錯誤根因。</p>
+      </article>
+
+      <article class="capability">
+        <div class="icon">🧠</div>
+        <h3>Grail、DQL 與 Notebook</h3>
+        <p>能用 DQL 在 notebooks 中分析 logs、metrics、sessions 與 synthetic data，建立互動式排查與分析視角。</p>
+      </article>
+
+      <article class="capability">
+        <div class="icon">☁️</div>
+        <h3>AWS / GCP 雲端監控</h3>
+        <p>接觸過 EC2、EKS、RDS、S3、Amplify、GCP web app、Kubernetes 與雲端服務整合監控。</p>
+      </article>
+
+      <article class="capability">
+        <div class="icon">🤖</div>
+        <h3>Workflow 與自動化</h3>
+        <p>能理解 DQL task、external data、Slack/Jira integration、Jinja template 如何讓監控事件變成自動化流程。</p>
+      </article>
+
+      <article class="capability">
+        <div class="icon">🛡️</div>
+        <h3>Application Security</h3>
+        <p>理解 Runtime Application Protection、vulnerability triage、attack alert 與安全事件如何納入可觀測性平台。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="section-head">
+      <div class="kicker">Hands-on Scenarios</div>
+      <h2>我實際接觸過的實作場景</h2>
+      <p>
+        我曾經用這些技能分析使用者體驗、監控雲端與微服務環境、追蹤系統根因，並把監控資料延伸成可行動的架構洞察。
+      </p>
+    </div>
+
+    <div class="case-grid">
+      <article class="case">
+        <b>User Experience</b>
+        <h3>分析使用者體驗與前端效能</h3>
+        <p>用 Digital Experience Monitoring、Appdex、page load analysis、user session metrics 與 error analysis 判斷使用者體驗問題。</p>
+        <div class="chips"><span>Appdex</span><span>Page Load</span><span>User Sessions</span><span>Error Analysis</span></div>
+      </article>
+
+      <article class="case">
+        <b>Infrastructure</b>
+        <h3>監控主機、VPN server、container 與 Smartscape</h3>
+        <p>從 host metrics、Infrastructure & Operations app、container monitoring 到 Smartscape，理解基礎設施與服務拓撲。</p>
+        <div class="chips"><span>Host Metrics</span><span>Containers</span><span>Smartscape</span><span>OneAgent</span></div>
+      </article>
+
+      <article class="case">
+        <b>Database</b>
+        <h3>在 AWS 上做 PostgreSQL 監控</h3>
+        <p>接觸 EC2、PostgreSQL setup、OneAgent、ActiveGate、psql monitoring extension 與 database monitoring 的基本與進階資料。</p>
+        <div class="chips"><span>AWS EC2</span><span>PostgreSQL</span><span>ActiveGate</span><span>Database Monitoring</span></div>
+      </article>
+
+      <article class="case">
+        <b>Cloud Native</b>
+        <h3>監控 GCP web app 與 AWS 微服務</h3>
+        <p>理解 GCP deployment、Kubernetes cluster、EKS、queues、databases、microservices、logs、metrics 與 distributed tracing 的關係。</p>
+        <div class="chips"><span>GCP</span><span>AWS EKS</span><span>Kubernetes</span><span>Microservices</span></div>
+      </article>
+
+      <article class="case">
+        <b>Delivery Pipeline</b>
+        <h3>把 SDLC 與 OpenPipeline 連起來</h3>
+        <p>理解 OpenPipeline、Monaco、OAuth、GitHub WebHook、SDLC data export 與 Dynatrace Notebook 分析如何串成工程流程。</p>
+        <div class="chips"><span>OpenPipeline</span><span>Monaco</span><span>GitHub WebHook</span><span>SDLC Data</span></div>
+      </article>
+
+      <article class="case">
+        <b>Security</b>
+        <h3>把漏洞與攻擊偵測納入監控平台</h3>
+        <p>實作過 Node.js / Java Spring Boot app 部署、Runtime Application Protection、vulnerability triage 與 Log4j attack simulation。</p>
+        <div class="chips"><span>RAP</span><span>Vulnerability Triage</span><span>Log4j</span><span>AppSec</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Problems I Can Help Solve</div>
+      <h2>我可以用 Dynatrace 能力協助解決的問題</h2>
+    </div>
+
+    <div class="matrix">
+      <article class="matrix-card">
+        <h3>系統慢或不穩定時</h3>
+        <ul>
+          <li>用 PurePath 追蹤交易路徑，找出慢在哪一層。</li>
+          <li>用 host、process、service、database metrics 對照資源瓶頸。</li>
+          <li>用 user session 與 Appdex 判斷使用者實際感受。</li>
+        </ul>
+      </article>
+
+      <article class="matrix-card">
+        <h3>雲端與微服務變複雜時</h3>
+        <ul>
+          <li>用 Smartscape 與 Kubernetes monitoring 看服務拓撲。</li>
+          <li>把 AWS/GCP、container、database 與 application telemetry 放在同一個視角。</li>
+          <li>透過 logs、metrics、traces 關聯分析問題。</li>
+        </ul>
+      </article>
+
+      <article class="matrix-card">
+        <h3>需要自動化營運時</h3>
+        <ul>
+          <li>用 Workflows 把監控事件轉成通知、查詢與處理流程。</li>
+          <li>整合 Slack/Jira，讓問題追蹤更接近實際 IT 運作。</li>
+          <li>用 DQL task 與 template 產生可重複的處理方式。</li>
+        </ul>
+      </article>
+
+      <article class="matrix-card">
+        <h3>需要平台治理時</h3>
+        <ul>
+          <li>理解 access tokens、groups、policies 與 account management。</li>
+          <li>知道如何思考 data privacy、ownership、teams 與 alerting 設計。</li>
+          <li>能從架構師角度評估 SaaS、Managed 與平台 adoption。</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Vincent Chiou · Dynatrace Observability Architecture</span>
+    <a href="vincent-personal-site.html">← 回首頁</a>
+  </footer>
+</body>
+</html>

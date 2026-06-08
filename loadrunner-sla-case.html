@@ -1,0 +1,768 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vincent Chiou | LoadRunner SLA Case Study</title>
+  <style>
+    :root {
+      --ink: #0b1220;
+      --muted: #536173;
+      --line: #dce4ef;
+      --blue: #1477ff;
+      --cyan: #12b8ff;
+      --green: #10b981;
+      --violet: #7c3aed;
+      --amber: #f59e0b;
+      --red: #ef4444;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top right, rgba(18, 184, 255, 0.18), transparent 28%),
+        linear-gradient(180deg, #f8fbff 0%, #edf5ff 48%, #ffffff 100%);
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px clamp(22px, 5vw, 76px);
+    }
+
+    .brand {
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 14px 32px rgba(20, 119, 255, 0.28);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 16px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .hero {
+      padding: 72px clamp(22px, 5vw, 76px) 58px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #075985;
+      background: #e0f2fe;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    h1 {
+      max-width: 1100px;
+      margin: 24px 0 18px;
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 930px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .sla-panel {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      padding: 0 clamp(22px, 5vw, 76px) 70px;
+    }
+
+    .sla {
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 16px 44px rgba(20, 55, 110, 0.08);
+    }
+
+    .sla b {
+      display: block;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .sla span {
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    section {
+      padding: 72px clamp(22px, 5vw, 76px);
+    }
+
+    .section-head {
+      max-width: 980px;
+      margin-bottom: 34px;
+    }
+
+    .kicker {
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(32px, 4.8vw, 56px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.75;
+      margin: 16px 0 0;
+    }
+
+    .dark {
+      color: #f8fafc;
+      background: #07111f;
+    }
+
+    .dark .kicker { color: #67e8f9; }
+    .dark .section-head p { color: #bed0e7; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    .card.dark-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(148, 163, 184, 0.24);
+    }
+
+    .badge {
+      display: inline-flex;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.74;
+    }
+
+    .dark .card p { color: #bed0e7; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 18px 52px rgba(20, 55, 110, 0.08);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 15px 16px;
+      border-bottom: 1px solid #edf2f7;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f1f7ff;
+      color: #0f3f86;
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    td {
+      color: #2f3c4d;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 18px;
+      padding: 22px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+    }
+
+    .num {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: rgba(56, 189, 248, 0.17);
+      color: #67e8f9;
+      font-weight: 900;
+      font-size: 19px;
+    }
+
+    .step h3 {
+      margin: 0 0 8px;
+      font-size: 23px;
+    }
+
+    .step p {
+      margin: 0;
+      color: #bed0e7;
+      line-height: 1.75;
+    }
+
+    .callout {
+      margin-top: 24px;
+      padding: 22px;
+      border-radius: 8px;
+      color: #0f172a;
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      line-height: 1.75;
+      font-weight: 800;
+    }
+
+    .report {
+      padding: 28px;
+      border-radius: 8px;
+      color: white;
+      background: linear-gradient(135deg, #0f172a, #1d4ed8 48%, #7c3aed);
+      box-shadow: 0 28px 70px rgba(20, 55, 110, 0.22);
+    }
+
+    .report h3 {
+      margin: 0 0 16px;
+      font-size: 28px;
+    }
+
+    .report pre {
+      white-space: pre-wrap;
+      margin: 0;
+      line-height: 1.65;
+      font-family: "Microsoft JhengHei", Arial, sans-serif;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .footer {
+      padding: 34px clamp(22px, 5vw, 76px);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #64748b;
+      font-weight: 800;
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(148, 163, 184, 0.22);
+      }
+
+      .brand {
+        flex: 0 0 auto;
+      }
+
+      .navlinks {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        max-width: 58vw;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+
+      .navlinks::-webkit-scrollbar {
+        display: none;
+      }
+
+      .navlinks a {
+        flex: 0 0 auto;
+        padding: 9px 11px;
+        border-radius: 999px;
+        background: #eef6ff;
+        border: 1px solid rgba(20, 119, 255, 0.16);
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 34px 18px 34px;
+      }
+
+      h1 {
+        font-size: 38px;
+        line-height: 1.05;
+      }
+
+      .hero p {
+        font-size: 16px;
+        line-height: 1.72;
+      }
+
+      .sla-panel {
+        grid-template-columns: 1fr 1fr;
+        padding: 0 18px 40px;
+      }
+
+      .sla {
+        padding: 15px;
+      }
+
+      .sla b {
+        font-size: 23px;
+      }
+
+      section {
+        padding: 44px 18px;
+      }
+
+      h2 {
+        font-size: 30px;
+        line-height: 1.14;
+      }
+
+      .section-head p {
+        font-size: 16px;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .card,
+      .callout,
+      .report {
+        padding: 18px;
+      }
+
+      .step {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .num {
+        border-radius: 8px;
+      }
+
+      .table-wrap {
+        margin-left: -2px;
+        margin-right: -2px;
+      }
+
+      table {
+        min-width: 680px;
+      }
+
+      th,
+      td {
+        padding: 13px 14px;
+      }
+
+      .report h3 {
+        font-size: 24px;
+      }
+
+      .report pre {
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      .footer {
+        padding: 26px 18px 38px;
+        display: grid;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav {
+        display: grid;
+      }
+
+      .navlinks {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+
+      .sla-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .eyebrow,
+      .badge {
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="vincent-personal-site.html"><span class="mark">V</span>Vincent Chiou</a>
+    <div class="navlinks">
+      <a href="vincent-personal-site.html">首頁</a>
+      <a href="loadrunner.html">LoadRunner</a>
+      <a href="dynatrace.html">Dynatrace</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="eyebrow">📋 LoadRunner SLA Case Study</div>
+    <h1>100 位並行使用者 SLA 驗證：從腳本設計到正式報告。</h1>
+    <p>
+      這是一個完整的效能工程實作案例：已知 SLA 條件後，如何把它轉成可執行的 LoadRunner 測試設計。
+      重點不只是把 Vuser 設成 100，而是建立正確的業務比例、交易模型、pacing、monitoring、
+      steady-state 分析與專業報告。
+    </p>
+  </header>
+
+  <div class="sla-panel">
+    <div class="sla"><b>100</b><span>concurrent active users</span></div>
+    <div class="sla"><b>95th</b><span>Login/Search/Submit Order percentile SLA</span></div>
+    <div class="sla"><b>30 min</b><span>steady-state validation window</span></div>
+    <div class="sla"><b>&lt; 1%</b><span>error rate, with CPU below 80%</span></div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">SLA Translation</div>
+      <h2>第一步：把 SLA 轉成可測試條件</h2>
+      <p>
+        資深效能工程師不會一開始就打開 Controller 隨便放 100 users，而是先把 SLA 拆成明確的測試目標與判斷條件。
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>SLA 項目</th>
+            <th>測試標準</th>
+            <th>工程意義</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>並行使用者</td>
+            <td>100 concurrent active users</td>
+            <td>必須在 peak-hour 模型下穩定維持 100 位活躍使用者。</td>
+          </tr>
+          <tr>
+            <td>Login</td>
+            <td>95th percentile &lt;= 3 sec</td>
+            <td>不是看平均值，而是 95% 的登入交易要在 3 秒內完成。</td>
+          </tr>
+          <tr>
+            <td>Search</td>
+            <td>95th percentile &lt;= 2 sec</td>
+            <td>Search 通常是讀取壓力與資料庫查詢瓶頸的重要指標。</td>
+          </tr>
+          <tr>
+            <td>Submit Order</td>
+            <td>95th percentile &lt;= 5 sec</td>
+            <td>驗證下單流程、DB write、inventory、payment 或 order service 的承載能力。</td>
+          </tr>
+          <tr>
+            <td>Error / Throughput / CPU</td>
+            <td>Error &lt;= 1%, hits/sec &gt;= 20, CPU &lt;= 80%</td>
+            <td>同時看交易成功率、流量是否達標，以及 server 是否進入資源瓶頸。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="section-head">
+      <div class="kicker">End-to-End Design</div>
+      <h2>完整流程：從腳本到報告</h2>
+      <p>
+        這個案例的專業重點，是把 SLA 變成可重複執行、可監控、可判斷、可交付給團隊的測試流程。
+      </p>
+    </div>
+
+    <div class="timeline">
+      <article class="step">
+        <div class="num">01</div>
+        <div>
+          <h3>建立 workload model，而不是只設定 100 users</h3>
+          <p>將 100 位使用者拆成合理業務比例：Search_User 70、Buyer_User 20、Login_User 10。這比所有人同時下單更接近一般 peak-hour 行為。</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">02</div>
+        <div>
+          <h3>設計三種 VUGen 腳本與交易</h3>
+          <p>Search_User 包含 Login 與 Search；Buyer_User 包含 Login、Search、Submit_Order；Login_User 持續 Login/Logout，確保 steady state 期間仍有登入樣本。</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">03</div>
+        <div>
+          <h3>設定 think time、pacing 與資料驅動</h3>
+          <p>Search 使用 3-5 秒 think time，Buyer 使用 5-8 秒，並依照 hits/sec 目標調整 pacing。100 users 要達到 20 hits/sec，平均每位使用者約 5 秒產生 1 hit。</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">04</div>
+        <div>
+          <h3>在 Controller 建立正式場景</h3>
+          <p>Manual Scenario：10 分鐘 ramp-up 到 100 users，維持 30 分鐘 steady state，再用約 5 分鐘 ramp-down。正式 SLA 只用第 10 到第 40 分鐘判斷。</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">05</div>
+        <div>
+          <h3>測試前先接好 Web/App/DB/APM 監控</h3>
+          <p>正式測試前要先連接 CPU、memory、disk I/O、network、thread pool、connection pool、DB active sessions、lock waits、slow SQL 與 APM service metrics。</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">06</div>
+        <div>
+          <h3>先做 dry run，再做正式 SLA test</h3>
+          <p>先跑 1-user smoke test、5-10-user shakeout test、50-user trial run，確認 correlation、test data、monitoring、load generator 能力與腳本穩定性。</p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="num">07</div>
+        <div>
+          <h3>正式測試後只分析 steady-state</h3>
+          <p>排除 ramp-up、ramp-down、初始化與 cache warming，只用 30 分鐘穩定負載區間判斷 Login/Search/Submit_Order、error rate、hits/sec 與 CPU。</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Scenario Setup</div>
+      <h2>Controller 場景設計</h2>
+      <p>
+        這個設定讓測試符合 SLA 需求，也避免把 ramp-up 或 ramp-down 的不穩定資料拿來誤判系統能力。
+      </p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>項目</th>
+            <th>建議設定</th>
+            <th>原因</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Scenario Type</td>
+            <td>Manual Scenario</td>
+            <td>可精準控制每個 user group、ramp-up、steady state 與 ramp-down。</td>
+          </tr>
+          <tr>
+            <td>User Mix</td>
+            <td>Search 70 / Buyer 20 / Login 10</td>
+            <td>模擬 peak hour 中搜尋、購買與登入活動的合理混合。</td>
+          </tr>
+          <tr>
+            <td>Ramp-up</td>
+            <td>每分鐘增加 10 users，10 分鐘到 100 users</td>
+            <td>避免瞬間啟動造成非業務型衝擊，也方便觀察瓶頸何時出現。</td>
+          </tr>
+          <tr>
+            <td>Steady State</td>
+            <td>100 users 維持至少 30 分鐘</td>
+            <td>這是 SLA 的正式驗證期間。</td>
+          </tr>
+          <tr>
+            <td>Ramp-down</td>
+            <td>每 30 秒停止 10 users，約 5 分鐘結束</td>
+            <td>平順結束測試，避免資料與系統狀態突然中斷。</td>
+          </tr>
+          <tr>
+            <td>Logging</td>
+            <td>正式測試只開 errors only</td>
+            <td>避免 extended log 讓 load generator 自己成為瓶頸。</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Monitoring Strategy</div>
+      <h2>監控要在測試前接好</h2>
+      <p>
+        如果測試前沒有連接監控，測試後 Analysis 不會憑空產生 CPU、DB、thread pool 或 slow query 資料。
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <article class="card">
+        <span class="badge">Web / App Server</span>
+        <h3>基礎設施與應用資源</h3>
+        <p>CPU、memory、disk I/O、network I/O、process CPU、thread count、connection count。這些指標可以判斷是否是主機、process 或連線資源造成瓶頸。</p>
+      </article>
+
+      <article class="card">
+        <span class="badge">Database</span>
+        <h3>資料庫與查詢壓力</h3>
+        <p>DB CPU、active sessions、lock waits、query response time、connection pool usage、disk read/write latency。這些指標用來確認是否是 DB 查詢或鎖定造成交易變慢。</p>
+      </article>
+
+      <article class="card">
+        <span class="badge">APM</span>
+        <h3>服務層與根因分析</h3>
+        <p>若有 Dynatrace、AppDynamics、Datadog 或 New Relic，應觀察 service response time、failure rate、DB calls、external calls、GC、thread pool 與 connection pool。</p>
+      </article>
+
+      <article class="card">
+        <span class="badge">Load Generator</span>
+        <h3>測試工具本身也要監控</h3>
+        <p>如果 load generator CPU 過高、logging 過多、test data 不足或 correlation 錯誤，測試結果可能是測試設計問題，而不是系統真的不行。</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="dark">
+    <div class="section-head">
+      <div class="kicker">Pass / Fail Logic</div>
+      <h2>如何判斷通過或失敗</h2>
+      <p>
+        正式判斷只看 30 分鐘 steady state。任何重要 SLA 未達標，都不能算完整通過；但失敗後要先做 root cause，而不是直接怪開發團隊。
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <article class="card dark-card">
+        <span class="badge">Performance Engineer Issue</span>
+        <h3>測試設計問題</h3>
+        <p>Vusers 沒穩定到 100、script correlation 錯誤、think time/pacing 錯、test data 不足、load generator 過載、monitor 未接好、把 ramp-up 算進 SLA，這些應先修正測試設計後重跑。</p>
+      </article>
+
+      <article class="card dark-card">
+        <span class="badge">Dev / DBA / Infra Issue</span>
+        <h3>系統瓶頸問題</h3>
+        <p>Search API 慢、Submit Order timeout、DB slow query、CPU 長時間高於 90%、connection pool 滿、thread pool 滿、lock wait 高、GC pause 嚴重或 500 errors 超標，應帶證據交給對應團隊。</p>
+      </article>
+    </div>
+
+    <div class="callout">
+      在 100 concurrent active users 與 30 分鐘 steady state 條件下，報告摘要會直接指出超標的 transaction、95th percentile
+      與 SLA 目標的差距、APM 顯示的主要耗時來源，以及後續應由 DBA、開發或基礎架構團隊處理的具體方向。
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <div class="kicker">Executive Summary</div>
+      <h2>SLA 驗證摘要</h2>
+      <p>
+        以下是本次 LoadRunner SLA 驗證結果的中文與英文摘要。
+      </p>
+    </div>
+
+    <div class="report">
+      <h3>中文摘要</h3>
+      <pre>在 100 位並行活躍使用者與 30 分鐘 steady-state 驗證期間，Search transaction 的 95th percentile response time 為 3.8 秒，超過 SLA 目標 2 秒。
+
+Dynatrace 顯示，Search API 的資料庫呼叫佔整體 response time 的 78%。ProductSearch SQL 平均耗時 2.6 秒，資料庫 CPU 最高達到 87%。
+
+建議由 DBA 與開發團隊優先檢查 ProductSearch SQL 的 query plan、索引設計、connection pool 設定，以及是否需要加入或調整快取策略。</pre>
+    </div>
+
+    <div class="report">
+      <h3>English Summary</h3>
+      <pre>Under 100 concurrent active users and a 30-minute steady-state validation window, the Search transaction reached a 95th percentile response time of 3.8 seconds, exceeding the SLA target of 2 seconds.
+
+Dynatrace indicates that the database call within the Search API accounts for 78% of the total response time. The ProductSearch SQL averaged 2.6 seconds, and database CPU peaked at 87%.
+
+The DBA and development teams should prioritize reviewing the ProductSearch SQL query plan, index design, connection pool configuration, and potential cache strategy improvements.</pre>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>Vincent Chiou · LoadRunner SLA Case Study</span>
+    <a href="loadrunner.html">← 回 LoadRunner 技能頁</a>
+  </footer>
+</body>
+</html>
