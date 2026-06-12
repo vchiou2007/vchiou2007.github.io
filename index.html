@@ -697,6 +697,103 @@
       background: rgba(255, 255, 255, 0.88);
     }
 
+/* ===== 作品集 ===== */
+.portfolio {
+  background: #f0f4fe;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.portfolio-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.25s;
+  box-shadow: 0 4px 20px rgba(31,41,55,0.06);
+  display: flex;
+  flex-direction: column;
+}
+.portfolio-card:hover {
+  box-shadow: 0 12px 40px rgba(20,119,255,0.14);
+  transform: translateY(-3px);
+}
+.portfolio-preview {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.portfolio-preview.solar {
+  background: linear-gradient(135deg, #0b0e1a, #1a1a3e);
+}
+.portfolio-preview.worldcup {
+  background: linear-gradient(135deg, #0d9488, #0891b2);
+}
+.portfolio-preview.personal {
+  background: linear-gradient(135deg, #0b1220, #1e3a5f);
+}
+.portfolio-body {
+  padding: 20px 22px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.portfolio-body h3 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  letter-spacing: 0;
+}
+.portfolio-body p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  flex: 1;
+}
+.portfolio-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.portfolio-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+.portfolio-links .live {
+  color: #fff;
+  background: var(--blue);
+}
+.portfolio-links .live:hover {
+  background: #0f5fcb;
+}
+.portfolio-links .code {
+  color: var(--ink);
+  background: #f1f5f9;
+  border: 1px solid var(--line);
+}
+.portfolio-links .code:hover {
+  background: #e2e8f0;
+}
+
+@media (max-width: 900px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* ===== 作品集結束 ===== */
+
     .cta {
       padding-bottom: 104px;
     }
@@ -825,6 +922,7 @@
           <a href="#lab">學習實驗室</a>
           <a href="#experience">職涯經歷</a>
           <a href="#journey">學習路線</a>
+          <a href="#portfolio">作品集</a>
         </div>
       </nav>
 
@@ -1173,6 +1271,57 @@
             <p>用架構師角度連結技術、流程、風險與人，讓每一次學習都能回到更大的系統思考。</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+      <div class="section-head">
+        <div class="section-kicker">Portfolio</div>
+        <h2>把想法變成作品，從學習到實踐。</h2>
+        <p>退休後花時間玩出來的三個網頁作品，從太空到足球再到個人品牌，每一行都是自己寫的。</p>
+      </div>
+
+      <div class="portfolio-grid">
+        <article class="portfolio-card">
+          <a class="portfolio-preview solar" href="https://vchiou2007.github.io/solar-system/" target="_blank" rel="noopener" aria-label="太陽系 3D 模擬">
+            🪐
+          </a>
+          <div class="portfolio-body">
+            <h3>太陽系 3D 繞行模擬</h3>
+            <p>以 Three.js 打造的九大行星立體繞日模擬，支援旋轉視角、行星標示與動態軌道，從太空視角體驗天文之美。</p>
+            <div class="portfolio-links">
+              <a class="live" href="https://vchiou2007.github.io/solar-system/" target="_blank" rel="noopener">🔗 線上觀看</a>
+              <a class="code" href="https://github.com/vchiou2007/solar-system" target="_blank" rel="noopener">&lt;/&gt; 原始碼</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card">
+          <a class="portfolio-preview worldcup" href="https://vchiou2007.github.io/worldcup-2026/" target="_blank" rel="noopener" aria-label="2026 世界盃資訊站">
+            ⚽
+          </a>
+          <div class="portfolio-body">
+            <h3>2026 世界盃即時資訊站</h3>
+            <p>完整收錄 48 隊分組、賽程、即時比分與詳細統計數據。支援 PWA 離線瀏覽，每日 6 次自動更新賽果。</p>
+            <div class="portfolio-links">
+              <a class="live" href="https://vchiou2007.github.io/worldcup-2026/" target="_blank" rel="noopener">🔗 線上觀看</a>
+              <a class="code" href="https://github.com/vchiou2007/worldcup-2026" target="_blank" rel="noopener">&lt;/&gt; 原始碼</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="portfolio-card">
+          <a class="portfolio-preview personal" href="https://github.com/vchiou2007/vchiou2007.github.io" target="_blank" rel="noopener" aria-label="個人網站原始碼">
+            👨‍💻
+          </a>
+          <div class="portfolio-body">
+            <h3>Vincent Chiou 個人網站</h3>
+            <p>你正在看的這個網站。以純 HTML + CSS 打造，涵蓋技術焦點、職涯經歷、學習路線與作品集，持續擴充中。</p>
+            <div class="portfolio-links">
+              <a class="code" href="https://github.com/vchiou2007/vchiou2007.github.io" target="_blank" rel="noopener">&lt;/&gt; 原始碼</a>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
