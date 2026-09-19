@@ -1,4 +1,4 @@
-const VERSION='poetry-pocket-v1-ff636fa4d631';
+const VERSION='poetry-pocket-v1-82bf6bc05fdf';
 const FILES=['./','./index.html','./styles.css','./app.js','./core.js','./explorer.js','./views.js','./storage.js','./speech.js','./manifest.webmanifest','./data/poems.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable.png','./icons/apple-touch-icon.png'];
 const scoped=path=>new URL(path,self.registration.scope).href;
 self.addEventListener('install',event=>{

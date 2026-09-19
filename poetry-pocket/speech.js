@@ -44,3 +44,19 @@ export class PoetrySpeech {
     this.paused = !this.paused; this.onChange();
   }
 }
+
+// Follow actual speech boundary events, never an estimated lyric timer.
+export function syncReadingLines(root, player, enabled, reducedMotion=false) {
+  const active=enabled&&player.playing&&Number.isInteger(player.active)?player.active:null;
+  for(const group of root.querySelectorAll('.poem-lines')) {
+    group.classList.toggle('is-reading',active!==null);
+    group.classList.toggle('is-paused',active!==null&&player.paused);
+  }
+  for(const line of root.querySelectorAll('.poem-line')) {
+    const current=active!==null&&line.id===`line-${active}`;
+    const changed=current&&!line.classList.contains('active');
+    line.classList.toggle('active',current);
+    if(current)line.setAttribute('aria-current','true');else line.removeAttribute('aria-current');
+    if(changed)line.scrollIntoView({block:'center',behavior:reducedMotion?'auto':'smooth'});
+  }
+}

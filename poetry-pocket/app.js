@@ -1,6 +1,6 @@
 import { defaults, validatePoems, validateBackup, quoteEntries, pairEntries, togglePoem, toggleQuote, applyReview, searchPoems, escapeHTML as e } from './core.js';
 import { LearningStorage } from './storage.js';
-import { PoetrySpeech } from './speech.js';
+import { PoetrySpeech, syncReadingLines } from './speech.js';
 import * as view from './views.js';
 import * as explorer from './explorer.js';
 
@@ -51,11 +51,7 @@ function render(keepScroll=false) {
 function updateSpeechUI() {
   if(!poems.length)return;
   const isPoem=speechContext==='poem';
-  document.querySelectorAll('.poem-line.active').forEach(el=>el.classList.remove('active'));
-  if(isPoem&&speech.active!==null) {
-    const el=document.getElementById(`line-${speech.active}`);el?.classList.add('active');
-    if(el&&!dialog.open)el.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
-  }
+  syncReadingLines(app,speech,(isPoem||speechContext==='pair')&&!dialog.open,matchMedia('(prefers-reduced-motion: reduce)').matches);
   const label=document.querySelector('#play-label'),button=document.querySelector('#play-button');
   if(label){label.textContent=speech.playing&&isPoem?(speech.paused?'繼續':'暫停'):'朗讀';button.setAttribute('aria-label',label.textContent+'全詩');const symbol=button.querySelector('svg');if(symbol)symbol.outerHTML=view.icon(speech.playing&&!speech.paused&&isPoem?'pause':'play');}
 }
