@@ -1,0 +1,182 @@
+[
+  {
+    "poemID": "su-jiang",
+    "title": "江城子·乙卯正月二十日夜記夢",
+    "source": "https://zh.wikisource.org/zh-hant/江城子_(蘇軾)/江城子_(乙卯正月二十日夜記夢)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "afd63dc542acced6de252e9e3aeef1b66b9a1e9daafdb9b3da799a8e8c6940a3",
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+  },
+  {
+    "poemID": "su-shui",
+    "title": "水調歌頭·明月幾時有",
+    "source": "https://zh.wikisource.org/zh-hant/水調歌頭_(明月幾時有)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "840adca29c6389dc8788e6b9549bcf3370d29a64a0061b24c0a793a686229f5a",
+    "textualNote": "採來源「惟恐」正文；另有「又恐」。小序未編入朗讀正文。"
+  },
+  {
+    "poemID": "su-nian",
+    "title": "念奴嬌·赤壁懷古",
+    "source": "https://zh.wikisource.org/zh-hant/念奴嬌_(蘇軾)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "fab0b9a8a0412e0f3e65bc04fa32e9105a4224f5aa51ff9e18dd876d15fcde79",
+    "textualNote": "採「檣櫓」「人間如夢」「一尊」；另見「強虜」「人生如夢」等異文。赤壁為文學景點關聯，不等於確定古戰場。"
+  },
+  {
+    "poemID": "xin-po",
+    "title": "破陣子·為陳同甫賦壯詞以寄之",
+    "source": "https://www.classicalchineseliterature.org/article.php?article=破陣子（醉裏挑燈看劍）",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "d980d5c35b533d8fa04afef8d59a6bbb07142d06eb8d38ef519cdf9d0962365c",
+    "textualNote": "核對中國古詩文精讀所錄原文；「裏」統一為「裡」。的盧為馬名。背景與譯文為本 App 自撰摘要。 樂器的「絃」統一為「弦」；「夢回」有夢醒、夢中重返等解讀，本篇以夢中軍旅的閱讀脈絡理解。"
+  },
+  {
+    "poemID": "xin-qing",
+    "title": "青玉案·元夕",
+    "source": "https://zh.wikisource.org/zh-hant/青玉案_(辛棄疾)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "767679aaa93a060e38398e35a4c61919dd647858cd8f46732de9d20a37fd99ac",
+    "textualNote": "「裏」統一為「裡」；依來源保留「他」，不改為「她」。頓號改為閱讀分句用逗號。"
+  },
+  {
+    "poemID": "li-jing",
+    "title": "靜夜思",
+    "source": "https://zh.wikisource.org/zh-hant/靜夜思",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "ab6bc1742cb73d3f8770db1fdf4370e689f058b99c41119d938dfb222d9b671d",
+    "textualNote": "採頁面所列通行本「床前明月光」「舉頭望明月」；集本另見「床前看月光」「舉頭望山月」。 來源「牀」規範為「床」。"
+  },
+  {
+    "poemID": "li-zao",
+    "title": "早發白帝城",
+    "source": "https://zh.wikisource.org/zh-hant/早發白帝城",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "c63693e93ab352aaf58a3758e354e479c08dfbc42179784a7d3b0c3f37089b62",
+    "textualNote": "採「啼不盡」「輕舟已過」；來源另列「啼不住」等異文。"
+  },
+  {
+    "poemID": "li-huang",
+    "title": "黃鶴樓送孟浩然之廣陵",
+    "source": "https://zh.wikisource.org/zh-hant/黃鶴樓送孟浩然之廣陵",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "1d5d09e2522912f544643e9dc670ae3d0fbee1a98b0b2e35e03d963a6f28f114",
+    "textualNote": "來源正文「碧山盡」旁列「空」異文，本 App 採通行「碧空盡」；保留「唯見」。"
+  },
+  {
+    "poemID": "li-wang",
+    "title": "望廬山瀑布",
+    "source": "https://zh.wikisource.org/zh-hant/望廬山瀑布",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "c70482ed86ad533056bfe8b4816ee39899b1e1760ccb25a9a08d3bf265a450bc",
+    "textualNote": "收錄組詩其二；採「掛前川」「落九天」。"
+  },
+  {
+    "poemID": "du-deng",
+    "title": "登高",
+    "source": "https://zh.wikisource.org/zh-hant/登高",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "372882c16c049537754537d28cd02f509e6d47460dfa80b6a587c8560bb67d78",
+    "textualNote": "採來源正文「渚清」「常作客」「滾滾」。"
+  },
+  {
+    "poemID": "du-chun",
+    "title": "春望",
+    "source": "https://zh.wikisource.org/zh-hant/春望",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "71ab999d5d6b0409b133b636822c4379d6aeb28f6397197ddd7aebf3aba3acdd",
+    "textualNote": "採「城春」正文；「不勝簪」意指頭髮稀少到難以承住髮簪。"
+  },
+  {
+    "poemID": "wang-shan",
+    "title": "山居秋暝",
+    "source": "https://zh.wikisource.org/zh-hant/山居秋暝",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "0d9d2f662a0079148d9921562b5c503aeda32dd265379e1ac2c48543b5bc6ae2",
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+  },
+  {
+    "poemID": "wang-song",
+    "title": "送元二使安西",
+    "source": "https://zh.wikisource.org/zh-hant/送元二使安西",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "f3e0b3dfa6ca46ba68a5db10a21b56317920a90daba285fa768a5f21f4f6104c",
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+  },
+  {
+    "poemID": "meng-chun",
+    "title": "春曉",
+    "source": "https://zh.wikisource.org/zh-hant/春曉_(孟浩然)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "d993bd66b34778926c9ef0a239b77f6f9ede39be0522cb4d2af6138b1cbb93e7",
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+  },
+  {
+    "poemID": "zhang-feng",
+    "title": "楓橋夜泊",
+    "source": "https://zh.wikisource.org/zh-hant/楓橋夜泊",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "bffbf334e20d982ca56847b2c8bc3b22ee45358c00980d51e42ac7e6db46c243",
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+  },
+  {
+    "poemID": "liyu-ye",
+    "title": "夜雨寄北",
+    "source": "https://zh.wikisource.org/zh-hant/夜雨寄北",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "eabefcc968eefa33a1506025dfacd993a62eea5702ced57ac3d46e21d89e343e",
+    "textualNote": "採「何當」；寄贈對象與繫年有不同說法，不作定論。"
+  },
+  {
+    "poemID": "dumu-shan",
+    "title": "山行",
+    "source": "https://zh.wikisource.org/zh-hant/山行_(杜牧)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "98cb6af3140f68a66e8d2fdd5ee86e42ffb8db8cc0511df5e7c66f15fbb6ba51",
+    "textualNote": "採「白雲生處」；另有「白雲深處」。斜使用現代國語，不為押古韻改讀。"
+  },
+  {
+    "poemID": "qing-sheng",
+    "title": "聲聲慢",
+    "source": "https://zh.wikisource.org/zh-hant/聲聲慢_(李清照)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "8d4f6319ea1159da4d4608e643da25f8e817d2499044524303db8d06db863aa5",
+    "textualNote": "採「悽悽」「晚來風急」「守著」；來源另列「淒淒」「曉來」「守定」等異文。"
+  },
+  {
+    "poemID": "qing-ru",
+    "title": "如夢令·常記溪亭日暮",
+    "source": "https://zh.wikisource.org/zh-hant/如夢令_(李清照)/如夢令_(常記溪亭日暮)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "28b324e4cb2325c21c653766571708e952ccd7ad39fd4bf45496d3e71aa3abd2",
+    "textualNote": "明確收錄「常記溪亭日暮」一闋；「爭渡」解讀有分歧，非固定解為競渡。"
+  },
+  {
+    "poemID": "yue-man",
+    "title": "滿江紅·怒髮衝冠",
+    "source": "https://zh.wikisource.org/zh-hant/滿江紅_(怒髮衝冠)",
+    "checkedOn": "2026-09-18",
+    "method": "逐篇對照線上原文；異文與字形規範見 textualNote。非古籍影印本學術校勘。",
+    "textSHA256": "4dbd923656e6314fb7871ded681cf3c32a50a4e12865c7f8619d841494c8d784",
+    "textualNote": "作者歸屬未定；朝代依傳統分類。採來源主文「蕭蕭」「朝金闕」，另見「瀟瀟」「朝天闕」。凭／擡／閑／飡規範為憑／抬／閒／餐。"
+  }
+]
