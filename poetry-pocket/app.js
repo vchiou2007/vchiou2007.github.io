@@ -1,12 +1,16 @@
-import { defaults, validatePoems, validateBackup, quoteEntries, togglePoem, toggleQuote, applyReview, searchPoems, escapeHTML as e } from './core.js';
+import { defaults, validatePoems, validateBackup, quoteEntries, pairEntries, togglePoem, toggleQuote, applyReview, searchPoems, escapeHTML as e } from './core.js';
 import { LearningStorage } from './storage.js';
 import { PoetrySpeech } from './speech.js';
 import * as view from './views.js';
+import * as explorer from './explorer.js';
 
 const app=document.querySelector('#app'),dialog=document.querySelector('#sheet');
 const storage=new LearningStorage();
 let poems=[],state=defaults(),storageError='',offline='preparing',offlineError='',toastTimer,modal='',pendingBackup=null;
 const ui={query:'',category:'',quote:0,favoriteKind:'poems',practice:{id:'',mode:'read',revealed:new Set(),submitted:false,rating:false}};
+ui.catalogue={query:'',type:'',theme:'',sort:'default',selected:[]};
+ui.pairs={query:'',type:'',theme:'',saved:false};
+ui.pair={id:'',mode:'read',revealed:new Set()};
 let speechContext='';
 const speech=new PoetrySpeech(updateSpeechUI,toast);
 const channel=globalThis.BroadcastChannel?new BroadcastChannel('poetry-pocket-updates'):null;
@@ -25,11 +29,13 @@ function render(keepScroll=false) {
   applySettings();
   const poem=poems.find(p=>p.id===parts[1]);
   switch(page) {
-    case 'today': content=view.todayView(poems,state,offline);break;
+    case 'today': content=explorer.quickPicker(poems)+view.todayView(poems,state,offline);break;
+    case 'catalogue':if(params.has('type'))ui.catalogue.type=params.get('type');content=explorer.catalogueView(poems,state,ui.catalogue);tab='library';break;
+    case 'couplet':{const q=pairEntries(poems).find(q=>q.id===parts[1]);if(q&&ui.pair.id!==q.id)ui.pair={id:q.id,mode:'read',revealed:new Set()};content=q?explorer.pairPracticeView(q,state,ui.pair):view.empty('找不到這組名句','請回名句選重新選擇。','/quotes');tab='quotes';break;}
     case 'library':ui.query=params.get('search')||'';ui.category=params.get('category')||'';content=view.libraryView(poems,ui.query,ui.category);break;
     case 'authors':case 'locations':content=view.categoriesView(poems,page);tab='library';break;
     case 'read':content=poem?view.readerView(poem,state):view.empty('找不到這首詩','請回到詩集重新選擇。');tab='library';break;
-    case 'quotes':ui.quote=((ui.quote%quoteEntries(poems).length)+quoteEntries(poems).length)%quoteEntries(poems).length;content=view.quotesView(poems,state,ui.quote);break;
+    case 'quotes':content=explorer.pairsView(poems,state,ui.pairs);break;
     case 'study':content=view.studyView(poems,state);break;
     case 'practice':
       if(poem&&ui.practice.id!==poem.id)ui.practice={id:poem.id,mode:'read',revealed:new Set(),submitted:false,rating:false};
@@ -92,6 +98,13 @@ document.addEventListener('click',async event=>{
   const act=button.dataset.act;
   try{
     switch(act){
+      case 'compare-toggle':{const id=button.dataset.id;if(ui.catalogue.selected.includes(id))ui.catalogue.selected=ui.catalogue.selected.filter(x=>x!==id);else if(ui.catalogue.selected.length<4)ui.catalogue.selected.push(id);else {toast('最多選四首比較，請先取消一首。');break;}render(true);break;}
+      case 'compare-clear':ui.catalogue.selected=[];render(true);break;
+      case 'pair-mode':speech.stop();ui.pair.mode=button.dataset.value;ui.pair.revealed.clear();render(true);break;
+      case 'pair-reset':speech.stop();ui.pair.revealed.clear();render(true);break;
+      case 'pair-reveal':ui.pair.revealed.add(Number(button.dataset.index));render(true);break;
+      case 'pair-speak':{const q=pairEntries(poems).find(q=>q.id===button.dataset.id);if(q){speechContext='pair';speech.play(q.lines,state.settings.speed);}break;}
+
       case 'theme':if(await commit(s=>({...s,settings:{...s.settings,theme:button.dataset.value}}))){dialog.querySelectorAll('[data-act=theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===state.settings.theme)));}break;
       case 'settings':settings();break;case 'install':install();break;case 'close-sheet':dialog.close();break;
       case 'onboarding-next':onboarding(1);break;
@@ -130,7 +143,14 @@ document.addEventListener('click',async event=>{
     }
   }catch(error){toast(error.message||'操作未完成，請再試一次。');}
 });
+document.addEventListener('compositionend',event=>{if(['catalogue-search','pair-search'].includes(event.target.id))event.target.dispatchEvent(new Event('input',{bubbles:true}));});
 document.addEventListener('input',event=>{
+  if(event.isComposing)return;
+  if(['catalogue-search','pair-search'].includes(event.target.id)){
+    const id=event.target.id,pos=event.target.selectionStart;
+    (id==='catalogue-search'?ui.catalogue:ui.pairs).query=event.target.value;
+    render(true);const input=document.getElementById(id);input.focus({preventScroll:true});if(pos!==null)input.setSelectionRange(pos,pos);return;
+  }
   if(event.target.id!=='search-input')return;
   ui.query=event.target.value;
   document.querySelector('#search-results').innerHTML=view.libraryResults(poems,ui.query,ui.category);
@@ -140,6 +160,10 @@ document.addEventListener('input',event=>{
 document.addEventListener('submit',event=>{if(event.target.id==='search-form'){event.preventDefault();document.querySelector('#search-input').blur();}});
 document.addEventListener('change',async event=>{
   const target=event.target;
+  if(target.id==='quick-poem'){if(poems.some(p=>p.id===target.value))location.hash='/read/'+target.value;return;}
+  if(target.dataset.catalogue){ui.catalogue[target.dataset.catalogue]=target.value;history.replaceState(null,'','#/catalogue');render(true);return;}
+  if(target.dataset.pairs){ui.pairs[target.dataset.pairs]=target.dataset.pairs==='saved'?target.value==='yes':target.value;render(true);return;}
+
   if(target.id==='backup-file'){try{await importBackup(target.files[0]);}catch(error){toast(error instanceof SyntaxError?'備份不是有效的 JSON 檔案。':error.message);}target.value='';return;}
   if(!target.dataset.setting)return;
   const key=target.dataset.setting;const value=key==='zhuyin'?target.checked:key==='speed'?Number(target.value):target.value;
@@ -154,7 +178,7 @@ let swipeStart=null;
 document.addEventListener('pointerdown',event=>{if(event.target.closest('#quote-swipe'))swipeStart={x:event.clientX,y:event.clientY};});
 document.addEventListener('pointerup',event=>{
   if(!swipeStart)return;const x=event.clientX-swipeStart.x,y=event.clientY-swipeStart.y;swipeStart=null;
-  if(route().parts[0]==='quotes'&&Math.abs(x)>65&&Math.abs(x)>Math.abs(y)*1.5){ui.quote+=x<0?1:-1;render(true);}
+  if(document.querySelector('#quote-swipe')&&route().parts[0]==='quotes'&&Math.abs(x)>65&&Math.abs(x)>Math.abs(y)*1.5){ui.quote+=x<0?1:-1;render(true);}
 });
 document.addEventListener('pointercancel',()=>swipeStart=null);
 dialog.addEventListener('close',()=>{speech.stop();modal='';pendingBackup=null;});
@@ -179,6 +203,8 @@ async function prepareOffline(){
   }catch(error){offline='unavailable';offlineError=error.message;}
   const label=document.querySelector('#offline-label');if(label)label.textContent=offline==='ready'?'已備妥離線閱讀':'離線閱讀尚未就緒';
 }
+let refreshingWorker=false;
+if('serviceWorker' in navigator){const wasControlled=Boolean(navigator.serviceWorker.controller);navigator.serviceWorker.addEventListener('controllerchange',()=>{if(wasControlled&&!refreshingWorker){refreshingWorker=true;location.reload();}});}
 async function boot(){
   try{
     const response=await fetch('./data/poems.json');if(!response.ok)throw new Error('詩集暫時無法載入');poems=validatePoems(await response.json());

@@ -1,5 +1,5 @@
-const VERSION='poetry-pocket-v1-3f6b8bc8c708';
-const FILES=['./','./index.html','./styles.css','./app.js','./core.js','./views.js','./storage.js','./speech.js','./manifest.webmanifest','./data/poems.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable.png','./icons/apple-touch-icon.png'];
+const VERSION='poetry-pocket-v1-ff636fa4d631';
+const FILES=['./','./index.html','./styles.css','./app.js','./core.js','./explorer.js','./views.js','./storage.js','./speech.js','./manifest.webmanifest','./data/poems.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable.png','./icons/apple-touch-icon.png'];
 const scoped=path=>new URL(path,self.registration.scope).href;
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{

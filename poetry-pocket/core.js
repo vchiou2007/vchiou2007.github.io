@@ -46,7 +46,24 @@ export function maskLine(line, mode, index, revealed = false) {
   let n = 0;
   return [...line].map(c => /[\u3400-\u9fff]/u.test(c) && ++n % 3 === 0 ? '＿' : c).join('');
 }
-export function quoteEntries(poems) { return poems.flatMap(p => p.famousLines.map((text, i) => ({ id: `${p.id}:${i}`, text, poem: p }))); }
+const PAIR_RANGES={
+ 'su-jiang':[[[0],[1,2]],[[11],[12]]], 'su-shui':[[[0],[1]],[[17],[18]]],
+ 'su-nian':[[[0],[1,2]],[[9],[10]]], 'xin-po':[[[0],[1]],[[7],[8]]],
+ 'xin-qing':[[[9],[10,11,12]],[[4],[5,6]]], 'qing-sheng':[[[0,1],[2]],[[19],[20]]],
+ 'du-chun':[[[0],[1]],[[4],[5]]], 'wang-shan':[[[2],[3]],[[4],[5]]],
+ 'qing-ru':[[[0],[1]],[[4,5],[6]]], 'yue-man':[[[6],[7]],[[8],[9,10]]]
+};
+export function pairEntries(poems) {
+ const pairs=poems.flatMap(p=>{
+  const ranges=PAIR_RANGES[p.id]||[[[0],[1]],[[2],[3]]];
+  return ranges.map((halves,i)=>{
+   const lines=halves.map(indices=>indices.map(n=>p.lines[n]).join(''));
+   return {id:`${p.id}:pair:${i}`,lines,text:lines.join(''),poem:p};
+  });
+ });
+ return pairs.map((q,i)=>({...q,previous:pairs[(i+pairs.length-1)%pairs.length].id,next:pairs[(i+1)%pairs.length].id}));
+}
+export function quoteEntries(poems) { return [...poems.flatMap(p => p.famousLines.map((text, i) => ({ id: `${p.id}:${i}`, text, poem: p }))),...pairEntries(poems)]; }
 export function validateBackup(input, poems) {
   if (!input || input.schemaVersion !== 1 || !input.settings || !input.progress || Array.isArray(input.progress) || !Array.isArray(input.quotes) || !Array.isArray(input.events)) throw new Error('這不是有效的詩詞備份檔');
   if (Object.keys(input.progress).length > poems.length || input.events.length > 100000) throw new Error('備份內容超出限制');
