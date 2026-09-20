@@ -1,5 +1,5 @@
-const VERSION='poetry-pocket-v1-3d62d1cae170';
-const FILES=['./','./art/poetic-moonlight.webp','./index.html','./styles.css','./app.js','./core.js','./familiarity.js','./familiarity-ui.js','./explorer.js','./views.js','./storage.js','./speech.js','./feihua-core.js','./feihua-views.js','./recitation.js','./vendor/pinyin-pro.mjs','./vendor/character-variants.js','./data/feihua-keywords.json','./manifest.webmanifest','./data/poems.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable.png','./icons/apple-touch-icon.png'];
+const VERSION='poetry-pocket-v1-b5847bcceb8f';
+const FILES=['./','./welcome-carousel.js','./art/poetic-spring.webp','./art/poetic-lotus.webp','./art/poetic-autumn.webp','./art/poetic-moonlight.webp','./index.html','./styles.css','./app.js','./core.js','./familiarity.js','./familiarity-ui.js','./explorer.js','./views.js','./storage.js','./speech.js','./feihua-core.js','./feihua-views.js','./recitation.js','./vendor/pinyin-pro.mjs','./vendor/character-variants.js','./data/feihua-keywords.json','./manifest.webmanifest','./data/poems.json','./icons/icon-192.png','./icons/icon-512.png','./icons/icon-maskable.png','./icons/apple-touch-icon.png'];
 const scoped=path=>new URL(path,self.registration.scope).href;
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{

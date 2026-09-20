@@ -1,3 +1,4 @@
+import {mountWelcomeCarousel} from './welcome-carousel.js';
 import {createRegistry,setFamiliarity,LEVELS,SORTS,familiarityOf} from './familiarity.js';
 import * as fam from './familiarity-ui.js';
 import {lineEntries,validateKeywords,validKeyword,selectLines,learnLine} from './feihua-core.js';
@@ -75,6 +76,7 @@ function render(keepScroll=false) {
     default:content=view.empty('這頁還不在詩集裡','回到詩詞，從熟悉的一句開始。');tab='library';
   }
   app.innerHTML=view.shell(content,tab,storageError);
+  mountWelcomeCarousel(app);
   if(keepScroll)window.scrollTo(0,y);
   updateSpeechUI();
 }
