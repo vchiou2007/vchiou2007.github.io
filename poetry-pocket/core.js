@@ -1,8 +1,9 @@
+import {createRegistry,migrateFamiliarity,setFamiliarity} from './familiarity.js';
 import {lineEntries,cleanLineProgress} from './feihua-core.js';
 export const RATINGS = ['😕 完全忘了', '🤔 有印象', '🙂 大致記得', '😊 很熟'];
 export const THEMES = { paper: '宣紙', moon: '月夜', green: '青綠山水', blossom: '桃花', ink: '水墨', night: '深色夜讀' };
 export const SPEEDS = [0.7, 0.85, 1, 1.15, 1.25, 1.5, 1.75, 2, 2.5, 3];
-export const defaults = () => ({ schemaVersion: 1, settings: { theme: 'paper', size: 'large', zhuyin: true, speed: 1.25, onboarded: false }, progress: {}, lineProgress: {}, quotes: [], events: [] });
+export const defaults = () => ({ schemaVersion: 1, settings: { theme: 'paper', size: 'large', zhuyin: true, speed: 1.25, onboarded: false }, familiarity:{version:1,records:{}}, progress: {}, lineProgress: {}, quotes: [], events: [] });
 export function isZhuyin(text) { return typeof text === 'string' && /^[ㄅ-ㄩˊˇˋ˙]+$/u.test(text) && /[ㄅ-ㄩ]/u.test(text); }
 export function validatePoems(poems) {
   if (!Array.isArray(poems) || !poems.length || new Set(poems.map(p => p.id)).size !== poems.length) throw new Error('詩集格式錯誤');
@@ -29,7 +30,7 @@ export function applyReview(state, poemID, rating, now = new Date()) {
   const next = structuredClone(state);
   const old = next.progress[poemID] || { reviewCount: 0, isFavorite: false, masteryLevel: 0 };
   next.progress[poemID] = { ...old, lastReviewed: now.toISOString(), nextReviewDate: nextReviewDate(rating, old.reviewCount, now), reviewCount: old.reviewCount + 1, masteryLevel: rating };
-  next.events.push({ poemID, rating, date: now.toISOString() }); return next;
+  next.events.push({ poemID, rating, date: now.toISOString() }); return setFamiliarity(next,[{key:'poem:'+poemID,contentId:poemID,contentType:'poem'}],['weak','weak','shaky','familiar'][rating],now,true);
 }
 export function togglePoem(state, id) {
   const next = structuredClone(state);
@@ -85,6 +86,7 @@ export function validateBackup(input, poems) {
     return { poemID: e.poemID, date: new Date(e.date).toISOString(), rating: e.rating };
   });
   clean.lineProgress=cleanLineProgress(input.lineProgress,lineEntries(poems));
+  clean.familiarity=migrateFamiliarity(input,createRegistry(poems,quoteEntries(poems)));
   return clean;
 }
 export const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

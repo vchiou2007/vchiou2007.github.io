@@ -1,3 +1,4 @@
+import {familiarityOf} from './familiarity.js';
 export const han=c=>/^\p{Script=Han}$/u.test(c);
 export const validKeyword=c=>typeof c==='string'&&[...c].length===1&&han(c);
 export function lineEntries(poems){return poems.flatMap(poem=>(poem.studyLines||[]).map(s=>{const parts=s.indices.map(i=>poem.lines[i]);return {...s,poem,kind:'feihua',lines:[parts.slice(0,s.split).join(''),parts.slice(s.split).join('')],text:parts.join('')};}));}
@@ -7,10 +8,10 @@ export function validateKeywords(keywords,entries){
  for(const k of keywords)if(!validKeyword(k.character)||!Array.isArray(k.lineIds)||new Set(k.lineIds).size!==k.lineIds.length||k.lineIds.some(id=>!ids.get(id)?.text.includes(k.character)))throw Error('飛花令名句引用錯誤');
  return keywords;
 }
-export function selectLines(entries,keywords,character,state,filter='all',now=new Date()){
+export function selectLines(entries,keywords,character,state,filter='all',now=new Date(),registry=null){
  const k=keywords.find(k=>k.character===character),byId=new Map(entries.map(q=>[q.id,q]));
  let found=k?k.lineIds.map(id=>byId.get(id)).filter(Boolean):entries.filter(q=>q.text.includes(character));
- found=found.filter(q=>{const p=state.lineProgress?.[q.id];return filter==='favorite'?state.quotes.includes(q.id):filter==='recent'?Boolean(p?.lastStudied):filter==='unmastered'?p?.status!=='mastered':filter==='due'?Boolean(p?.nextReview&&Date.parse(p.nextReview)<=now.getTime()):true;});
+ found=found.filter(q=>{const p=state.lineProgress?.[q.id];return filter==='favorite'?state.quotes.includes(q.id):filter==='recent'?Boolean(p?.lastStudied):filter==='unmastered'?['weak','shaky'].includes(familiarityOf(state,registry?.resolve('quote',q.id)||'quote:'+q.id)):filter==='due'?Boolean(p?.nextReview&&Date.parse(p.nextReview)<=now.getTime()):true;});
  if(filter==='recent')found.sort((a,b)=>Date.parse(state.lineProgress[b.id].lastStudied)-Date.parse(state.lineProgress[a.id].lastStudied));
  return found;
 }

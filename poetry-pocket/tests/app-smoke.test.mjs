@@ -11,7 +11,7 @@ test('實際 App 啟動、飛花令路由、遮蔽和搜尋不影響舊路由',a
  globalThis.fetch=async path=>new Response(await readFile(new URL('../'+path.replace('./',''),import.meta.url)));
  globalThis.setInterval=()=>0;
  try{
-  await import('../app.js');await new Promise(resolve=>setTimeout(resolve,40));assert.ok(app.innerHTML.includes('今日飛花令複習'));
+  await import('../app.js');for(let i=0;i<200&&!app.innerHTML;i++)await new Promise(resolve=>setTimeout(resolve,10));assert.ok(app.innerHTML.includes('今日飛花令複習'),app.innerHTML.slice(0,300));
   for(const path of ['/feihua','/feihua/%E6%9C%88','/feihua/%E7%A7%8B','/catalogue','/quotes','/read/li-jing']){location.hash='#'+path;windows.hashchange();assert.ok(app.innerHTML.includes('<main'));assert.ok(!app.innerHTML.includes('undefined'));}
   location.hash='#/feihua/月';windows.hashchange();assert.ok(app.innerHTML.includes('飛花令・月'));
   const click=async dataset=>{for(const fn of handlers.click||[])await fn({target:{closest:s=>s==='button[data-act]'?{dataset}:null}});};

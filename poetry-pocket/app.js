@@ -1,3 +1,5 @@
+import {createRegistry,setFamiliarity,LEVELS,SORTS,familiarityOf} from './familiarity.js';
+import * as fam from './familiarity-ui.js';
 import {lineEntries,validateKeywords,validKeyword,selectLines,learnLine} from './feihua-core.js';
 import * as fhView from './feihua-views.js';
 import {RecitationRecognition,compareRecitation,readingFor} from './recitation.js';
@@ -14,10 +16,16 @@ const ui={query:'',category:'',quote:0,favoriteKind:'poems',practice:{id:'',mode
 ui.catalogue={query:'',type:'',theme:'',sort:'default',selected:[]};
 ui.pairs={query:'',type:'',theme:'',saved:false};
 ui.pair={id:'',mode:'read',revealed:new Set()};
-let fhEntries=[],fhKeywords=[];
+let fhEntries=[],fhKeywords=[],famRegistry=createRegistry([],[]),famTargets=[],famReview=false;
+ui.familiarity={};
+function familiarityOptions(){const {parts,params}=route();const key=[parts[0]||'today',parts[0]==='feihua'?parts[1]||'index':'',parts[0]==='favorites'?ui.favoriteKind:'',parts[0]==='my-recitation'?params.get('kind')||'poem':''].join('/');return ui.familiarity[key]??={filters:[],sort:'default',batch:false,selected:[]};}
+function openFamiliarity(keys,review=false){famTargets=[...new Set(keys)].map(key=>famRegistry.byKey.get(key)).filter(Boolean);famReview=review;if(!famTargets.length)return;showSheet('設定背誦熟悉度',fam.selector(famTargets,review),'familiarity');}
+function filterAddress(){const {parts,params}=route();params.delete('levels');history.replaceState(null,'','#/'+parts.map(encodeURIComponent).join('/')+(params.size?'?'+params.toString():''));}
+function familiarityQuote(id){const q=quoteEntries(poems).find(q=>q.id===id);if(!q)return null;const all=[...famRegistry.byKey.values()].filter(r=>r.contentType==='quote');const index=all.findIndex(r=>r.key===famRegistry.resolve('quote',id));return {...q,lines:q.lines||[q.text],previous:q.previous||all[(index+all.length-1)%all.length].contentId,next:q.next||all[(index+1)%all.length].contentId};}
+
 ui.fh={id:'',practice:false,stage:1,revealed:false,result:null,transcript:''};
 const recognition=new RecitationRecognition(text=>{const q=fhCurrent();if(!q)return;ui.fh.transcript=text;ui.fh.result=compareRecitation(q.text,text);render(true);},active=>{const label=document.querySelector('#fh-mic-status');if(label)label.textContent=active?'正在聆聽，請背出這兩句。':'聆聽已結束，可核對內容或再試一次。';const b=document.querySelector('[data-act="fh-listen"]');if(b)b.textContent=active?'停止聆聽':'我來背';},toast);
-function fhList(){const {parts,params}=route();return selectLines(fhEntries,fhKeywords,parts[1]||'',state,params.get('filter')||'all');}
+function fhList(){const {parts,params}=route();return fam.filterItems(selectLines(fhEntries,fhKeywords,parts[1]||'',state,params.get('filter')||'all',new Date(),famRegistry),'quote');}
 function fhCurrent(){return fhEntries.find(q=>q.id===ui.fh.id);}
 function fhReset(id){recognition.cancel();speech.stop();ui.fh={id,practice:false,stage:1,revealed:false,result:null,transcript:''};}
 let speechContext='';
@@ -36,19 +44,24 @@ function applySettings() {document.body.dataset.theme=state.settings.theme;docum
 function render(keepScroll=false) {
   const y=scrollY,{parts,params}=route(),page=parts[0]||'today';let content,tab=page;
   applySettings();
+  const options=familiarityOptions();
+  if(params.has('levels'))options.filters=params.get('levels').split(',').filter(x=>Object.hasOwn(LEVELS,x));
+  fam.configureFamiliarity(state,famRegistry,options);
   const poem=poems.find(p=>p.id===parts[1]);
   switch(page) {
-    case 'today': content=explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
+    case 'today': content=fam.homeFamiliarity()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
+    case 'my-recitation':content=fam.managerView(params.get('kind')==='quote'?'quote':'poem');tab='study';break;
     case 'feihua':{
       const char=parts[1],filter=params.get('filter')||'all';tab='study';
       if(!char){content=fhView.indexView(fhEntries,fhKeywords,state,filter);break;}
       if(!validKeyword(char)){content=view.empty('請輸入一個中文字','例如：月、花、秋。','/feihua');break;}
       const list=fhList(),id=params.get('line'),q=list.find(q=>q.id===id)||list[0];
-      if(q&&ui.fh.id!==q.id)fhReset(q.id);
-      content=q?fhView.cardView(q,char,state,ui.fh,list.indexOf(q),list.length,filter,recognition):view.empty('這個範圍暫時沒有名句','可回索引換一個字或篩選條件。','/feihua');break;
+      if(q&&ui.fh.id!==q.id)fhReset(q.id);if(!q)fhReset('');
+      content=(!ui.fh.practice?`<details class="fam-detail-filter" ${options.batch||options.filters.length?'open':''}><summary>篩選與批次標記${options.filters.length?' · '+options.filters.map(x=>LEVELS[x].short).join('＋'):''}</summary>${fam.controls(list,'quote')}</details>`:'')+(q?fhView.cardView(q,char,state,ui.fh,list.indexOf(q),list.length,filter,recognition):view.empty('這個範圍暫時沒有名句','可調整熟悉度篩選，或回索引換一個字。','/feihua'));
+      if(options.batch&&!ui.fh.practice)content+=`<section class="section"><h2>本字名句・批次標記</h2><div class="poem-list">${list.map(item=>`<article class="poem-row">${fam.quoteTools(item)}<p class="poem-text fam-excerpt">${e(item.text)}</p><p class="small muted">${e(item.poem.author)} · ${e(item.poem.title)}</p></article>`).join('')}</div></section>`;break;
     }
     case 'catalogue':if(params.has('type'))ui.catalogue.type=params.get('type');content=explorer.catalogueView(poems,state,ui.catalogue);tab='library';break;
-    case 'couplet':{const q=pairEntries(poems).find(q=>q.id===parts[1]);if(q&&ui.pair.id!==q.id)ui.pair={id:q.id,mode:'read',revealed:new Set()};content=q?explorer.pairPracticeView(q,state,ui.pair):view.empty('找不到這組名句','請回名句選重新選擇。','/quotes');tab='quotes';break;}
+    case 'couplet':{const q=familiarityQuote(parts[1]);if(q&&ui.pair.id!==q.id)ui.pair={id:q.id,mode:'read',revealed:new Set()};content=q?explorer.pairPracticeView(q,state,ui.pair):view.empty('找不到這組名句','請回名句選重新選擇。','/quotes');tab='quotes';break;}
     case 'library':ui.query=params.get('search')||'';ui.category=params.get('category')||'';content=view.libraryView(poems,ui.query,ui.category);break;
     case 'authors':case 'locations':content=view.categoriesView(poems,page);tab='library';break;
     case 'read':content=poem?view.readerView(poem,state):view.empty('找不到這首詩','請回到詩集重新選擇。');tab='library';break;
@@ -104,29 +117,39 @@ async function exportBackup() {
 async function importBackup(file) {
   if(!file)return;if(file.size>10*1024*1024)throw new Error('備份檔太大，請選擇 10 MB 以下的 JSON 備份。');
   const imported=validateBackup(JSON.parse(await file.text()),poems);pendingBackup=imported;
-  showSheet('確認匯入備份',`<p>這份備份有 <strong>${Object.values(imported.progress).filter(p=>p.reviewCount).length}</strong> 首學習紀錄、<strong>${Object.keys(imported.lineProgress).length}</strong> 組飛花令進度、<strong>${imported.events.length}</strong> 次複習。</p><p class="note section">匯入會取代這台裝置目前的學習紀錄與閱讀設定。建議先匯出現有備份。</p><div class="row wrap section">${view.button('先匯出目前資料','export')}${view.button('確認取代並匯入','confirm-import','','button primary')}</div>`,'import');
+  showSheet('確認匯入備份',`<p>這份備份有 <strong>${Object.values(imported.progress).filter(p=>p.reviewCount).length}</strong> 首學習紀錄、<strong>${Object.keys(imported.lineProgress).length}</strong> 組飛花令進度、<strong>${imported.events.length}</strong> 次複習，以及 <strong>${Object.keys(imported.familiarity.records).length}</strong> 項熟悉度標記。</p><p class="note section">匯入會取代這台裝置目前的學習紀錄與閱讀設定。建議先匯出現有備份。</p><div class="row wrap section">${view.button('先匯出目前資料','export')}${view.button('確認取代並匯入','confirm-import','','button primary')}</div>`,'import');
 }
 document.addEventListener('click',async event=>{
   const button=event.target.closest('button[data-act]');if(!button)return;
   const act=button.dataset.act;
   try{
     switch(act){
+      case 'fam-open':openFamiliarity([button.dataset.key]);break;
+      case 'fam-review':openFamiliarity([famRegistry.resolve(button.dataset.type,button.dataset.id)],true);break;
+      case 'fam-batch-set':openFamiliarity(familiarityOptions().selected);break;
+      case 'fam-set':{const targets=[...famTargets],review=famReview,value=button.dataset.value;if(!targets.length)break;dialog.querySelectorAll('[data-act=fam-set]').forEach(b=>b.disabled=true);if(await commit(s=>setFamiliarity(s,targets,value,new Date(),review),{rerender:false,message:targets.length===1?'熟悉度已儲存':`已更新 ${targets.length} 項熟悉度` })){familiarityOptions().selected=[];render(true);dialog.close();}else dialog.querySelectorAll('[data-act=fam-set]').forEach(b=>b.disabled=false);break;}
+      case 'fam-batch':{const o=familiarityOptions();o.batch=!o.batch;o.selected=[];render(true);break;}
+      case 'fam-all':familiarityOptions().selected=[...fam.currentFamiliarityUI().visible];render(true);break;
+      case 'fam-none':familiarityOptions().selected=[];render(true);break;
+      case 'fam-filter':{const o=familiarityOptions(),value=button.dataset.value;o.filters=value==='all'?[]:o.filters.includes(value)?o.filters.filter(x=>x!==value):[...o.filters,value];o.selected=[];filterAddress();render(true);break;}
+      case 'fam-unfamiliar':{const o=familiarityOptions();o.filters=['weak','shaky'];o.selected=[];filterAddress();render(true);break;}
+
       case 'fh-character':{const q=fhEntries.find(q=>q.id===button.dataset.id);if(q){const d=readingFor(q,Number(button.dataset.index));showSheet('字詞小箋',`<div class="large-character">${e(d.character)}</div><p class="character-sound">${e(d.zhuyin)}</p><p>${e(d.meaning)}</p><p class="section">${e(d.explanation)}</p><p class="small muted section">${e(d.source||'pinyin-pro 3.29.4 字音參考；多音字請配合文意。')}</p>`,'character');}break;}
       case 'fh-move':{const list=fhList(),index=list.findIndex(q=>q.id===ui.fh.id),q=list[index+Number(button.dataset.offset)];if(q){fhReset(q.id);location.hash=fhView.fhURL(route().parts[1],route().params.get('filter')||'all',q.id);}break;}
-      case 'fh-start':{const q=fhCurrent();if(q){recognition.cancel();speech.stop();ui.fh.practice=true;ui.fh.stage=1;ui.fh.revealed=false;await commit(s=>learnLine(s,q.id));}break;}
+      case 'fh-start':{const q=fhCurrent();if(q){recognition.cancel();speech.stop();familiarityOptions().batch=false;familiarityOptions().selected=[];ui.fh.practice=true;ui.fh.stage=1;ui.fh.revealed=false;await commit(s=>learnLine(s,q.id));}break;}
       case 'fh-exit':fhReset(ui.fh.id);render(true);break;
       case 'fh-stage':recognition.cancel();speech.stop();ui.fh.stage=Number(button.dataset.stage);ui.fh.revealed=false;ui.fh.result=null;ui.fh.transcript='';render(true);break;
       case 'fh-reveal':ui.fh.revealed=true;render(true);break;
       case 'fh-speak':{const q=fhCurrent();if(q){recognition.cancel();speechContext='feihua';speech.play(q.lines,state.settings.speed);}break;}
       case 'fh-listen':speech.stop();if(recognition.active)recognition.cancel();else{ui.fh.result=null;ui.fh.transcript='';render(true);recognition.start();}break;
-      case 'fh-review':{const q=fhCurrent();if(q){recognition.cancel();speech.stop();button.disabled=true;await commit(s=>learnLine(s,q.id,button.dataset.value),{message:button.dataset.value==='reset'?'已標為未學':'已更新下次複習時間'});}break;}
+      case 'fh-review':{const q=fhCurrent();if(q){recognition.cancel();speech.stop();button.disabled=true;await commit(s=>setFamiliarity(learnLine(s,q.id,button.dataset.value),[famRegistry.byKey.get(famRegistry.resolve('quote',q.id))],{forgot:'weak',familiar:'familiar',reset:'unlearned'}[button.dataset.value],new Date(),button.dataset.value!=='reset'),{message:button.dataset.value==='reset'?'已標為未學':'已更新下次複習時間'});}break;}
 
       case 'compare-toggle':{const id=button.dataset.id;if(ui.catalogue.selected.includes(id))ui.catalogue.selected=ui.catalogue.selected.filter(x=>x!==id);else if(ui.catalogue.selected.length<4)ui.catalogue.selected.push(id);else {toast('最多選四首比較，請先取消一首。');break;}render(true);break;}
       case 'compare-clear':ui.catalogue.selected=[];render(true);break;
       case 'pair-mode':speech.stop();ui.pair.mode=button.dataset.value;ui.pair.revealed.clear();render(true);break;
       case 'pair-reset':speech.stop();ui.pair.revealed.clear();render(true);break;
       case 'pair-reveal':ui.pair.revealed.add(Number(button.dataset.index));render(true);break;
-      case 'pair-speak':{const q=pairEntries(poems).find(q=>q.id===button.dataset.id);if(q){speechContext='pair';speech.play(q.lines,state.settings.speed);}break;}
+      case 'pair-speak':{const q=familiarityQuote(button.dataset.id);if(q){speechContext='pair';speech.play(q.lines,state.settings.speed);}break;}
 
       case 'theme':if(await commit(s=>({...s,settings:{...s.settings,theme:button.dataset.value}}))){dialog.querySelectorAll('[data-act=theme]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.value===state.settings.theme)));}break;
       case 'settings':settings();break;case 'install':install();break;case 'close-sheet':dialog.close();break;
@@ -171,14 +194,14 @@ document.addEventListener('input',event=>{
   if(event.isComposing)return;
   if(['catalogue-search','pair-search'].includes(event.target.id)){
     const id=event.target.id,pos=event.target.selectionStart;
-    (id==='catalogue-search'?ui.catalogue:ui.pairs).query=event.target.value;
+    (id==='catalogue-search'?ui.catalogue:ui.pairs).query=event.target.value;familiarityOptions().selected=[];
     render(true);const input=document.getElementById(id);input.focus({preventScroll:true});if(pos!==null)input.setSelectionRange(pos,pos);return;
   }
   if(event.target.id!=='search-input')return;
   ui.query=event.target.value;
-  document.querySelector('#search-results').innerHTML=view.libraryResults(poems,ui.query,ui.category);
-  document.querySelector('#result-count').textContent=`${searchPoems(poems,ui.query,ui.category).length} 首作品`;
-  history.replaceState(null,'',navigateSearch());
+  const position=event.target.selectionStart;
+  history.replaceState(null,'',navigateSearch());familiarityOptions().selected=[];render(true);
+  const input=document.querySelector('#search-input');input.focus({preventScroll:true});if(position!==null)input.setSelectionRange(position,position);
 });
 document.addEventListener('click',event=>{if(event.target.closest('[data-fh-reveal]')){ui.fh.revealed=true;render(true);}});
 document.addEventListener('keydown',event=>{if(event.target.matches('[data-fh-reveal]')&&['Enter',' '].includes(event.key)){event.preventDefault();ui.fh.revealed=true;render(true);}});
@@ -188,9 +211,12 @@ document.addEventListener('submit',event=>{
 if(event.target.id==='search-form'){event.preventDefault();document.querySelector('#search-input').blur();}});
 document.addEventListener('change',async event=>{
   const target=event.target;
+  if(target.hasAttribute('data-fam-sort')){if(Object.hasOwn(SORTS,target.value))familiarityOptions().sort=target.value;render(true);return;}
+  if(target.dataset.famSelect){const o=familiarityOptions(),key=target.dataset.famSelect;if(!famRegistry.byKey.has(key))return;o.selected=target.checked?[...new Set([...o.selected,key])]:o.selected.filter(x=>x!==key);render(true);return;}
+
   if(target.id==='quick-poem'){if(poems.some(p=>p.id===target.value))location.hash='/read/'+target.value;return;}
-  if(target.dataset.catalogue){ui.catalogue[target.dataset.catalogue]=target.value;history.replaceState(null,'','#/catalogue');render(true);return;}
-  if(target.dataset.pairs){ui.pairs[target.dataset.pairs]=target.dataset.pairs==='saved'?target.value==='yes':target.value;render(true);return;}
+  if(target.dataset.catalogue){familiarityOptions().selected=[];ui.catalogue[target.dataset.catalogue]=target.value;history.replaceState(null,'','#/catalogue');render(true);return;}
+  if(target.dataset.pairs){familiarityOptions().selected=[];ui.pairs[target.dataset.pairs]=target.dataset.pairs==='saved'?target.value==='yes':target.value;render(true);return;}
 
   if(target.id==='backup-file'){try{await importBackup(target.files[0]);}catch(error){toast(error instanceof SyntaxError?'備份不是有效的 JSON 檔案。':error.message);}target.value='';return;}
   if(!target.dataset.setting)return;
@@ -209,7 +235,7 @@ document.addEventListener('pointerup',event=>{
   if(document.querySelector('#quote-swipe')&&route().parts[0]==='quotes'&&Math.abs(x)>65&&Math.abs(x)>Math.abs(y)*1.5){ui.quote+=x<0?1:-1;render(true);}
 });
 document.addEventListener('pointercancel',()=>swipeStart=null);
-dialog.addEventListener('close',()=>{speech.stop();modal='';pendingBackup=null;});
+dialog.addEventListener('close',()=>{speech.stop();modal='';pendingBackup=null;famTargets=[];famReview=false;});
 window.addEventListener('hashchange',()=>{recognition.cancel();speech.stop();if(dialog.open)dialog.close();render();window.scrollTo(0,0);document.querySelector('#main')?.focus({preventScroll:true});});
 document.addEventListener('visibilitychange',async()=>{
   if(document.hidden){recognition.cancel();speech.stop();}else if(poems.length){try{const latest=await storage.read();if(latest)state=validateBackup(latest,poems);render(true);}catch(error){toast(error.message);}}
@@ -236,8 +262,8 @@ if('serviceWorker' in navigator){const wasControlled=Boolean(navigator.serviceWo
 async function boot(){
   try{
     const response=await fetch('./data/poems.json');if(!response.ok)throw new Error('詩集暫時無法載入');poems=validatePoems(await response.json());
-    fhEntries=lineEntries(poems);const keyResponse=await fetch('./data/feihua-keywords.json');if(!keyResponse.ok)throw Error('飛花令索引暫時無法載入');fhKeywords=validateKeywords(await keyResponse.json(),fhEntries);
-    try{await storage.open();const saved=await storage.read();if(saved)state=validateBackup(saved,poems);}catch(error){storageError=error.message+' 目前可閱讀，儲存功能需要修復後再用。';}
+    famRegistry=createRegistry(poems,quoteEntries(poems));fhEntries=lineEntries(poems);const keyResponse=await fetch('./data/feihua-keywords.json');if(!keyResponse.ok)throw Error('飛花令索引暫時無法載入');fhKeywords=validateKeywords(await keyResponse.json(),fhEntries);
+    try{await storage.open();const saved=await storage.read();if(saved){state=validateBackup(saved,poems);if(saved.familiarity===undefined)state=await storage.update(current=>validateBackup(current||defaults(),poems),defaults());}}catch(error){storageError=error.message+' 目前可閱讀，儲存功能需要修復後再用。';}
     render();prepareOffline();
     if(!state.settings.onboarded&&!storageError)onboarding();
   }catch(error){app.innerHTML=`<main class="loading"><h1>詩集暫時無法開啟</h1><p>${e(error.message)}</p><p>首次使用需要連線，離線時請從主畫面已安裝的版本開啟。</p><a class="button primary section" href="./">重新開啟</a></main>`;}
