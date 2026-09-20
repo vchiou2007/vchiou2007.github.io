@@ -1,3 +1,4 @@
+import characterVariants from './vendor/character-variants.js';
 import {createRegistry,migrateFamiliarity,setFamiliarity} from './familiarity.js';
 import {lineEntries,cleanLineProgress} from './feihua-core.js';
 export const RATINGS = ['😕 完全忘了', '🤔 有印象', '🙂 大致記得', '😊 很熟'];
@@ -15,9 +16,11 @@ export function validatePoems(poems) {
   }
   return poems;
 }
+const searchVariants={...characterVariants,'軾':'轼','願':'愿','閒':'闲','蘋':'苹','鍾':'钟','戰':'战','線':'线','諫':'谏'};
+export function normalizeSearch(text){return [...String(text).normalize('NFKC').toLowerCase()].map(c=>searchVariants[c]||c).join('').replace(/[\p{P}\p{S}\s]+/gu,'');}
+export function matchesSearch(text,query=''){const haystack=normalizeSearch(text);return query.trim().split(/\s+/u).filter(Boolean).every(term=>haystack.includes(normalizeSearch(term)));}
 export function searchPoems(poems, query = '', category = '') {
-  const terms = query.trim().split(/\s+/u).filter(Boolean);
-  return poems.filter(p => (!category || p.type === category || p.author === category || p.locations.includes(category)) && terms.every(t => [p.title, p.author, p.dynasty, p.type, ...p.lines, ...p.tags, ...p.locations].join(' ').includes(t)));
+ return poems.filter(p=>(!category||p.type===category||p.author===category||p.locations.includes(category))&&matchesSearch([p.title,p.author,p.dynasty,p.type,...p.lines,...p.tags,...p.locations].join(' '),query));
 }
 export function dailyPoem(poems, now = new Date()) { return poems[(now.getFullYear() * 372 + (now.getMonth() + 1) * 31 + now.getDate()) % poems.length]; }
 export function nextReviewDate(rating, count, now = new Date()) {

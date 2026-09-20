@@ -49,8 +49,8 @@ function render(keepScroll=false) {
   fam.configureFamiliarity(state,famRegistry,options);
   const poem=poems.find(p=>p.id===parts[1]);
   switch(page) {
-    case 'today': content=fam.homeFamiliarity()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
-    case 'my-recitation':content=fam.managerView(params.get('kind')==='quote'?'quote':'poem');tab='study';break;
+    case 'today': content=view.welcomeBanner()+fam.homeFamiliarity()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
+    case 'my-recitation':content=view.welcomeBanner()+fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'');tab='study';break;
     case 'feihua':{
       const char=parts[1],filter=params.get('filter')||'all';tab='study';
       if(!char){content=fhView.indexView(fhEntries,fhKeywords,state,filter);break;}
@@ -189,12 +189,12 @@ document.addEventListener('click',async event=>{
     }
   }catch(error){toast(error.message||'操作未完成，請再試一次。');}
 });
-document.addEventListener('compositionend',event=>{if(['catalogue-search','pair-search'].includes(event.target.id))event.target.dispatchEvent(new Event('input',{bubbles:true}));});
+document.addEventListener('compositionend',event=>{if(['search-input','recitation-search','catalogue-search','pair-search'].includes(event.target.id))event.target.dispatchEvent(new Event('input',{bubbles:true}));});
 document.addEventListener('input',event=>{
   if(event.isComposing)return;
-  if(['catalogue-search','pair-search'].includes(event.target.id)){
+  if(['recitation-search','catalogue-search','pair-search'].includes(event.target.id)){
     const id=event.target.id,pos=event.target.selectionStart;
-    (id==='catalogue-search'?ui.catalogue:ui.pairs).query=event.target.value;familiarityOptions().selected=[];
+    if(id==='recitation-search')ui.recitationQuery=event.target.value;else (id==='catalogue-search'?ui.catalogue:ui.pairs).query=event.target.value;familiarityOptions().selected=[];
     render(true);const input=document.getElementById(id);input.focus({preventScroll:true});if(pos!==null)input.setSelectionRange(pos,pos);return;
   }
   if(event.target.id!=='search-input')return;
@@ -208,7 +208,7 @@ document.addEventListener('keydown',event=>{if(event.target.matches('[data-fh-re
 document.addEventListener('submit',event=>{
  if(event.target.id==='fh-search'){event.preventDefault();const char=new FormData(event.target).get('character').trim();if(!validKeyword(char)){toast('請輸入一個中文字，例如「秋」。');return;}location.hash=fhView.fhURL(char);return;}
  if(event.target.id==='fh-check'){event.preventDefault();const q=fhCurrent(),text=document.querySelector('#fh-transcript').value;if(!text.trim()){toast('請先輸入背誦內容。');return;}recognition.cancel();ui.fh.transcript=text;ui.fh.result=compareRecitation(q.text,text);render(true);return;}
-if(event.target.id==='search-form'){event.preventDefault();document.querySelector('#search-input').blur();}});
+if(['search-form','recitation-search-form'].includes(event.target.id)){event.preventDefault();const input=document.getElementById(event.target.id==='search-form'?'search-input':'recitation-search');input.dispatchEvent(new Event('input',{bubbles:true}));document.getElementById(input.id)?.blur();}});
 document.addEventListener('change',async event=>{
   const target=event.target;
   if(target.hasAttribute('data-fam-sort')){if(Object.hasOwn(SORTS,target.value))familiarityOptions().sort=target.value;render(true);return;}
