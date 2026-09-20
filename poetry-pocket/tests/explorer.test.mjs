@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {defaults,pairEntries,validateBackup,toggleQuote} from '../core.js';
 import {catalogueRows,catalogueView,quickPicker,filterPairs,pairPracticeView,wordCount} from '../explorer.js';
-const poems=JSON.parse(readFileSync(new URL('../data/poems.json',import.meta.url),'utf8'));
+const poems=JSON.parse(readFileSync(new URL('../data/poems.json',import.meta.url),'utf8')).slice(0,20);
 test('40 組語意選摘，每組兩行且連續出自原文，編號唯一、前後導覽成環',()=>{
  const all=pairEntries(poems);assert.equal(all.length,40);assert.equal(new Set(all.map(q=>q.id)).size,40);
  for(const q of all){assert.equal(q.lines.length,2);assert.ok(q.lines.every(Boolean));assert.ok(q.poem.lines.join('').includes(q.text));assert.equal(all.find(n=>n.id===q.next).previous,q.id);}

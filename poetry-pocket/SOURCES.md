@@ -54,3 +54,11 @@
 新增作品先核對，再加入正式 JSON。SOURCE_REVIEW.json 保存本次核對後正文雜湊；修改正文必須重新核對並更新紀錄，雜湊本身不能證明史料正確。
 
 古典原文為公有領域；各網站的編輯文字、註釋與標誌可能另有授權條款。本 App 不附帶網站圖片、現代譯文、錄音或標誌。
+
+## 500 首原文擴充
+
+新增 480 首，合計唐詩 300 首、宋詞 200 首。原有 20 首與其校勘說明完整保留。新增資料來自 chinese-poetry/chinese-poetry 的唐詩三百首、宋詞三百首 JSON 選集，固定來源版本及逐筆索引見 CONTENT_EXPANSION.json。已去除同文或同作者同起句的重複條目，排除作者不完整及朝代歸屬不明的條目；不代表已完成逐字學術校勘。
+
+原文分行及繁體字形經整理；新增內容尚未提供經核對的逐字注音、白話翻譯及創作事件說明。兩句選摘取連續原文，不宣稱皆為知名度排名上的名句。
+
+資料集：https://github.com/chinese-poetry/chinese-poetry （MIT，附 LICENSE-chinese-poetry.txt）。繁體字形整理使用 OpenCC 字典：https://github.com/BYVoid/OpenCC （Apache-2.0；未將字典打包至 App）。
