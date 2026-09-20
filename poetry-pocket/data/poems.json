@@ -124,7 +124,65 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/水調歌頭_(明月幾時有)",
-    "textualNote": "採來源「惟恐」正文；另有「又恐」。小序未編入朗讀正文。"
+    "textualNote": "採來源「惟恐」正文；另有「又恐」。小序未編入朗讀正文。",
+    "studyLines": [
+      {
+        "id": "su-shui:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "端起酒杯詢問青天：這明月是從何時開始有的？"
+      },
+      {
+        "id": "su-shui:fh:14-16",
+        "indices": [
+          14,
+          15,
+          16
+        ],
+        "split": 1,
+        "explanation": "人有悲歡與聚散，月有陰晴與圓缺，自古就難以十全十美。"
+      },
+      {
+        "id": "su-shui:fh:4-6",
+        "indices": [
+          4,
+          5,
+          6
+        ],
+        "split": 1,
+        "explanation": "想乘風歸去，卻又擔心月宮太高、寒冷難耐。"
+      },
+      {
+        "id": "su-shui:fh:2-3",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "不知天上宮殿裡，今夜又是哪一年。"
+      },
+      {
+        "id": "su-shui:fh:7-8",
+        "indices": [
+          7,
+          8
+        ],
+        "split": 1,
+        "explanation": "在月下起舞與影相伴，哪裡比得上人間的親切溫暖？"
+      },
+      {
+        "id": "su-shui:pair:1",
+        "indices": [
+          17,
+          18
+        ],
+        "split": 1,
+        "explanation": "只願親人長久平安，縱隔千里，也能共賞明月。"
+      }
+    ]
   },
   {
     "id": "su-nian",
@@ -213,7 +271,19 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/念奴嬌_(蘇軾)",
-    "textualNote": "採「檣櫓」「人間如夢」「一尊」；另見「強虜」「人生如夢」等異文。赤壁為文學景點關聯，不等於確定古戰場。"
+    "textualNote": "採「檣櫓」「人間如夢」「一尊」；另見「強虜」「人生如夢」等異文。赤壁為文學景點關聯，不等於確定古戰場。",
+    "studyLines": [
+      {
+        "id": "su-nian:fh:6-8",
+        "indices": [
+          6,
+          7,
+          8
+        ],
+        "split": 2,
+        "explanation": "高聳亂石、拍岸巨浪，捲起像千堆白雪的浪花。"
+      }
+    ]
   },
   {
     "id": "xin-po",
@@ -269,7 +339,18 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://www.classicalchineseliterature.org/article.php?article=破陣子（醉裏挑燈看劍）",
-    "textualNote": "核對中國古詩文精讀所錄原文；「裏」統一為「裡」。的盧為馬名。背景與譯文為本 App 自撰摘要。 樂器的「絃」統一為「弦」；「夢回」有夢醒、夢中重返等解讀，本篇以夢中軍旅的閱讀脈絡理解。"
+    "textualNote": "核對中國古詩文精讀所錄原文；「裏」統一為「裡」。的盧為馬名。背景與譯文為本 App 自撰摘要。 樂器的「絃」統一為「弦」；「夢回」有夢醒、夢中重返等解讀，本篇以夢中軍旅的閱讀脈絡理解。",
+    "studyLines": [
+      {
+        "id": "xin-po:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "醉中挑亮燈火看劍，夢裡又回到軍營號角齊鳴的時刻。"
+      }
+    ]
   },
   {
     "id": "xin-qing",
@@ -328,7 +409,39 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/青玉案_(辛棄疾)",
-    "textualNote": "「裏」統一為「裡」；依來源保留「他」，不改為「她」。頓號改為閱讀分句用逗號。"
+    "textualNote": "「裏」統一為「裡」；依來源保留「他」，不改為「她」。頓號改為閱讀分句用逗號。",
+    "studyLines": [
+      {
+        "id": "xin-qing:fh:0-2",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "split": 1,
+        "explanation": "元夕花燈像千樹開花，焰火如星雨般紛紛落下。"
+      },
+      {
+        "id": "xin-qing:fh:7-8",
+        "indices": [
+          7,
+          8
+        ],
+        "split": 1,
+        "explanation": "元夕女子戴著華麗頭飾，含笑而過，留下淡淡香氣。"
+      },
+      {
+        "id": "xin-qing:fh:3-6",
+        "indices": [
+          3,
+          4,
+          5,
+          6
+        ],
+        "split": 2,
+        "explanation": "元夕街上車馬華美、簫聲四起，月光流轉，魚龍燈舞徹夜不停。"
+      }
+    ]
   },
   {
     "id": "li-jing",
@@ -357,7 +470,27 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/靜夜思",
-    "textualNote": "採頁面所列通行本「床前明月光」「舉頭望明月」；集本另見「床前看月光」「舉頭望山月」。 來源「牀」規範為「床」。"
+    "textualNote": "採頁面所列通行本「床前明月光」「舉頭望明月」；集本另見「床前看月光」「舉頭望山月」。 來源「牀」規範為「床」。",
+    "studyLines": [
+      {
+        "id": "li-jing:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "床前的月光明亮，恍惚以為是地上的白霜。"
+      },
+      {
+        "id": "li-jing:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "抬頭望著明月，低頭便思念故鄉。"
+      }
+    ]
   },
   {
     "id": "li-zao",
@@ -391,7 +524,27 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/早發白帝城",
-    "textualNote": "採「啼不盡」「輕舟已過」；來源另列「啼不住」等異文。"
+    "textualNote": "採「啼不盡」「輕舟已過」；來源另列「啼不住」等異文。",
+    "studyLines": [
+      {
+        "id": "li-zao:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "兩岸猿聲還未停，小船已駛過重重山嶺。"
+      },
+      {
+        "id": "li-zao:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "清晨辭別彩雲中的白帝城，一日便可返回千里外江陵。"
+      }
+    ]
   },
   {
     "id": "li-huang",
@@ -425,7 +578,27 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/黃鶴樓送孟浩然之廣陵",
-    "textualNote": "來源正文「碧山盡」旁列「空」異文，本 App 採通行「碧空盡」；保留「唯見」。"
+    "textualNote": "來源正文「碧山盡」旁列「空」異文，本 App 採通行「碧空盡」；保留「唯見」。",
+    "studyLines": [
+      {
+        "id": "li-huang:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "老朋友在春花煙柳的三月辭別黃鶴樓，乘船前往揚州。"
+      },
+      {
+        "id": "li-huang:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "朋友的孤帆漸漸消失，只見長江流向天邊。"
+      }
+    ]
   },
   {
     "id": "li-wang",
@@ -457,7 +630,18 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/望廬山瀑布",
-    "textualNote": "收錄組詩其二；採「掛前川」「落九天」。"
+    "textualNote": "收錄組詩其二；採「掛前川」「落九天」。",
+    "studyLines": [
+      {
+        "id": "li-wang:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "陽光照著香爐峰升起紫煙，遠看瀑布像掛在山前。"
+      }
+    ]
   },
   {
     "id": "du-deng",
@@ -513,7 +697,36 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/登高",
-    "textualNote": "採來源正文「渚清」「常作客」「滾滾」。"
+    "textualNote": "採來源正文「渚清」「常作客」「滾滾」。",
+    "studyLines": [
+      {
+        "id": "du-deng:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "急風高天中猿聲哀切，清水白沙上鳥兒盤旋。"
+      },
+      {
+        "id": "du-deng:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "落葉無邊地飄下，長江不盡地滾滾流來。"
+      },
+      {
+        "id": "du-deng:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "艱難身世使鬢髮斑白，困頓衰病又迫使自己停酒。"
+      }
+    ]
   },
   {
     "id": "du-chun",
@@ -558,7 +771,36 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/春望",
-    "textualNote": "採「城春」正文；「不勝簪」意指頭髮稀少到難以承住髮簪。"
+    "textualNote": "採「城春」正文；「不勝簪」意指頭髮稀少到難以承住髮簪。",
+    "studyLines": [
+      {
+        "id": "du-chun:fh:2-3",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "感傷時局，見花也落淚；痛恨離別，聞鳥也心驚。"
+      },
+      {
+        "id": "du-chun:pair:1",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "戰火連續多月，家人的一封信比萬金還珍貴。"
+      },
+      {
+        "id": "du-chun:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "國都雖遭破壞，山河依然存在，城中春草樹木卻長得深密。"
+      }
+    ]
   },
   {
     "id": "wang-shan",
@@ -603,7 +845,36 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/山居秋暝",
-    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。",
+    "studyLines": [
+      {
+        "id": "wang-shan:pair:0",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "明月照進松林，清泉從石頭上流過。"
+      },
+      {
+        "id": "wang-shan:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "即使春日芳華消歇，山中秋景仍值得留下。"
+      },
+      {
+        "id": "wang-shan:fh:0-1",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "空山剛下過雨，傍晚的天氣已有秋意。"
+      }
+    ]
   },
   {
     "id": "wang-song",
@@ -647,7 +918,27 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/送元二使安西",
-    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。",
+    "studyLines": [
+      {
+        "id": "wang-song:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "清晨細雨潤溼渭城輕塵，旅舍旁柳色清新。"
+      },
+      {
+        "id": "wang-song:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "勸朋友再喝一杯酒，出了陽關就難見故人了。"
+      }
+    ]
   },
   {
     "id": "meng-chun",
@@ -676,7 +967,27 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/春曉_(孟浩然)",
-    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。",
+    "studyLines": [
+      {
+        "id": "meng-chun:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "想起昨夜的風雨聲，不知吹落了多少花。"
+      },
+      {
+        "id": "meng-chun:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "春睡中不知天已亮，醒來處處聽見鳥鳴。"
+      }
+    ]
   },
   {
     "id": "zhang-feng",
@@ -710,7 +1021,27 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/楓橋夜泊",
-    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。"
+    "textualNote": "依來源正文，繁體字形與標點按本 App 閱讀格式整理。",
+    "studyLines": [
+      {
+        "id": "zhang-feng:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "月落、烏啼、寒霜滿天，江楓漁火伴著旅人的愁眠。"
+      },
+      {
+        "id": "zhang-feng:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "姑蘇城外寒山寺的鐘聲，在半夜傳到了客船。"
+      }
+    ]
   },
   {
     "id": "liyu-ye",
@@ -742,7 +1073,27 @@
     ],
     "theme": "青綠山水",
     "source": "https://zh.wikisource.org/zh-hant/夜雨寄北",
-    "textualNote": "採「何當」；寄贈對象與繫年有不同說法，不作定論。"
+    "textualNote": "採「何當」；寄贈對象與繫年有不同說法，不作定論。",
+    "studyLines": [
+      {
+        "id": "liyu-ye:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "你問我何時歸去，我也未能確定；巴山夜雨正漲滿秋池。"
+      },
+      {
+        "id": "liyu-ye:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "何時能與你共剪西窗燭花，再談起此刻巴山夜雨？"
+      }
+    ]
   },
   {
     "id": "dumu-shan",
@@ -772,7 +1123,27 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/山行_(杜牧)",
-    "textualNote": "採「白雲生處」；另有「白雲深處」。斜使用現代國語，不為押古韻改讀。"
+    "textualNote": "採「白雲生處」；另有「白雲深處」。斜使用現代國語，不為押古韻改讀。",
+    "studyLines": [
+      {
+        "id": "dumu-shan:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "停車只因喜愛傍晚楓林，霜染的紅葉勝過春花。"
+      },
+      {
+        "id": "dumu-shan:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "沿石徑走上秋山，白雲升起的地方有人家。"
+      }
+    ]
   },
   {
     "id": "qing-sheng",
@@ -819,7 +1190,48 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/聲聲慢_(李清照)",
-    "textualNote": "採「悽悽」「晚來風急」「守著」；來源另列「淒淒」「曉來」「守定」等異文。"
+    "textualNote": "採「悽悽」「晚來風急」「守著」；來源另列「淒淒」「曉來」「守定」等異文。",
+    "studyLines": [
+      {
+        "id": "qing-sheng:fh:11-13",
+        "indices": [
+          11,
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "黃花散落滿地，人也憔悴；如今還有誰有心情採摘？"
+      },
+      {
+        "id": "qing-sheng:fh:16-18",
+        "indices": [
+          16,
+          17,
+          18
+        ],
+        "split": 1,
+        "explanation": "梧桐樹上落著細雨，直到黃昏仍點點滴滴，添人愁緒。"
+      },
+      {
+        "id": "qing-sheng:fh:5-7",
+        "indices": [
+          5,
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "幾杯淡酒怎能抵擋傍晚的急風，也難抵內心的淒寒。"
+      },
+      {
+        "id": "qing-sheng:pair:1",
+        "indices": [
+          19,
+          20
+        ],
+        "split": 1,
+        "explanation": "眼前這般心境，哪裡是一個「愁」字就能說盡？"
+      }
+    ]
   },
   {
     "id": "qing-ru",
@@ -931,7 +1343,29 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://zh.wikisource.org/zh-hant/滿江紅_(怒髮衝冠)",
-    "textualNote": "作者歸屬未定；朝代依傳統分類。採來源主文「蕭蕭」「朝金闕」，另見「瀟瀟」「朝天闕」。凭／擡／閑／飡規範為憑／抬／閒／餐。"
+    "textualNote": "作者歸屬未定；朝代依傳統分類。採來源主文「蕭蕭」「朝金闕」，另見「瀟瀟」「朝天闕」。凭／擡／閑／飡規範為憑／抬／閒／餐。",
+    "studyLines": [
+      {
+        "id": "yue-man:pair:0",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "把多年功名看得像塵土，征戰足跡卻遍及遙遠路途。"
+      },
+      {
+        "id": "yue-man:fh:11-14",
+        "indices": [
+          11,
+          12,
+          13,
+          14
+        ],
+        "split": 2,
+        "explanation": "國家的恥辱尚未洗雪，臣子的悲憤又何時能平息？"
+      }
+    ]
   },
   {
     "id": "tang-6746662245aeb3eb",
@@ -961,7 +1395,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-6746662245aeb3eb:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "夕陽依著山巒落下，黃河奔流入海。"
+      }
+    ]
   },
   {
     "id": "tang-ca5f50a68a68b8b0",
@@ -1030,7 +1475,36 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-23d854e1b123b714:fh:5-6",
+        "indices": [
+          5,
+          6
+        ],
+        "split": 1,
+        "explanation": "捲起簾幕望月長嘆，思念的人如花美麗，卻遠在雲端。"
+      },
+      {
+        "id": "tang-23d854e1b123b714:fh:9-10",
+        "indices": [
+          9,
+          10
+        ],
+        "split": 1,
+        "explanation": "路途與關山太遙遠，連夢魂也難抵達思念之人的所在。"
+      },
+      {
+        "id": "tang-23d854e1b123b714:fh:7-8",
+        "indices": [
+          7,
+          8
+        ],
+        "split": 1,
+        "explanation": "上方是遙遠青天，下方是碧水波瀾，寫出阻隔的遼闊。"
+      }
+    ]
   },
   {
     "id": "tang-d8d1ba37838dfc5a",
@@ -1067,7 +1541,37 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-d8d1ba37838dfc5a:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "暮色籠罩花叢，月光漸白，滿懷愁思使人無法入睡。"
+      },
+      {
+        "id": "tang-d8d1ba37838dfc5a:fh:4-6",
+        "indices": [
+          4,
+          5,
+          6
+        ],
+        "split": 1,
+        "explanation": "琴曲含著思念，卻無人傳達；願春風把它送給遠方的你。"
+      },
+      {
+        "id": "tang-d8d1ba37838dfc5a:fh:7-8",
+        "indices": [
+          7,
+          8
+        ],
+        "split": 1,
+        "explanation": "從前明亮含情的眼睛，如今成了不斷流淚的泉水。"
+      }
+    ]
   },
   {
     "id": "tang-f862cdef72eaac73",
@@ -1097,7 +1601,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-f862cdef72eaac73:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "空山看不見人影，只聽到人的說話聲。"
+      }
+    ]
   },
   {
     "id": "tang-d9f7131e5900e8bd",
@@ -1127,7 +1642,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-d9f7131e5900e8bd:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "身在深林無人知曉，只有明月來相伴。"
+      }
+    ]
   },
   {
     "id": "tang-ffa6157c94f50d68",
@@ -1157,7 +1683,18 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-ffa6157c94f50d68:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "想到兄弟們登高插茱萸，會發現少了我一個。"
+      }
+    ]
   },
   {
     "id": "tang-b7e32baca516e916",
@@ -1191,7 +1728,36 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-b7e32baca516e916:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "相思的人怨夜太長，整夜都在想念遠方的人。"
+      },
+      {
+        "id": "tang-b7e32baca516e916:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "明月從海上升起，遠隔天涯的人此刻共望同一輪月亮。"
+      },
+      {
+        "id": "tang-b7e32baca516e916:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "月光無法捧來相贈，只好回去入睡，盼在夢中相見。"
+      }
+    ]
   },
   {
     "id": "tang-b2247d1b6a4c27f8",
@@ -1225,7 +1791,27 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-b2247d1b6a4c27f8:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "天晚了，不知故鄉在哪裡；江上煙波令人更添鄉愁。"
+      },
+      {
+        "id": "tang-b2247d1b6a4c27f8:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "昔日仙人已乘雲離去，只留下空蕩的黃鶴樓。"
+      }
+    ]
   },
   {
     "id": "tang-5c4f48b80d6af2fe",
@@ -1255,7 +1841,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-5c4f48b80d6af2fe:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "美酒盛在夜光杯裡，正欲飲時，馬上琵琶已催人出發。"
+      }
+    ]
   },
   {
     "id": "tang-6ac30bd77de5fcfb",
@@ -1289,7 +1886,36 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-6ac30bd77de5fcfb:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "借莊周夢蝶與望帝杜鵑的典故，寫迷惘、追慕與哀思。"
+      },
+      {
+        "id": "tang-6ac30bd77de5fcfb:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "月下滄海似有珍珠含淚，暖日藍田似有玉氣生煙，營造朦朧的追憶。"
+      },
+      {
+        "id": "tang-6ac30bd77de5fcfb:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "這段情感豈待今日回憶才覺惆悵，當時就已令人迷惘。"
+      }
+    ]
   },
   {
     "id": "tang-0f912549d2d8b960",
@@ -1323,7 +1949,27 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-0f912549d2d8b960:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "宴席上分組遊戲、飲春酒，紅燭照著熱鬧的場景。"
+      },
+      {
+        "id": "tang-0f912549d2d8b960:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "追想昨夜星光與春風，以及樓堂間的相會。"
+      }
+    ]
   },
   {
     "id": "tang-90568a989da32743",
@@ -1357,7 +2003,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-90568a989da32743:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "夢中為遠別而哭泣，醒後匆忙寫信，墨還沒磨濃。"
+      }
+    ]
   },
   {
     "id": "tang-b10c3f924107dc9f",
@@ -1391,7 +2048,27 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-b10c3f924107dc9f:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "莫讓相思之心像花般爭發，因為每一寸思念都可能化為灰燼。"
+      },
+      {
+        "id": "tang-b10c3f924107dc9f:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "東風颯颯，細雨飄來，荷塘外隱約響起春雷。"
+      }
+    ]
   },
   {
     "id": "tang-64cd30434c572d5c",
@@ -1425,7 +2102,45 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-64cd30434c572d5c:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "相見難，分別也難；春風漸弱、百花凋殘，更添離愁。"
+      },
+      {
+        "id": "tang-64cd30434c572d5c:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "如春蠶到死才吐盡絲、蠟燭成灰才流盡淚，寫至死不渝的思念。"
+      },
+      {
+        "id": "tang-64cd30434c572d5c:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "晨起照鏡擔憂鬢髮改變，夜裡吟詩更覺月光寒冷。"
+      },
+      {
+        "id": "tang-64cd30434c572d5c:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "想像相隔並不遙遠，希望青鳥殷勤往返傳遞消息。"
+      }
+    ]
   },
   {
     "id": "tang-3d102d1c6b0b69e3",
@@ -1457,7 +2172,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-3d102d1c6b0b69e3:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "回想深夜細縫精美帷帳，借閨中物事寫幽微心緒。"
+      }
+    ]
   },
   {
     "id": "tang-940fdfee02f46344",
@@ -1491,7 +2217,36 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-940fdfee02f46344:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "風浪不憐惜柔弱菱枝，月露又讓桂葉散發幽香，寄託身世之感。"
+      },
+      {
+        "id": "tang-940fdfee02f46344:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "如神女相會般的愛情終究像夢，獨居之人仍沒有伴侶。"
+      },
+      {
+        "id": "tang-940fdfee02f46344:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "深深放下帷幕，獨臥清夜，覺得時間格外漫長。"
+      }
+    ]
   },
   {
     "id": "tang-2fbb9f0ca1ba8828",
@@ -1557,7 +2312,18 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-6eff11f4a8e800dd:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "又送朋友離去，茂盛芳草彷彿也滿含離情。"
+      }
+    ]
   },
   {
     "id": "tang-f6f9586d56b09ae1",
@@ -1703,7 +2469,279 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:12-13",
+        "indices": [
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "她有如雲的鬢髮、如花的容顏，戴著金步搖，在暖帳中度過春夜。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:38-39",
+        "indices": [
+          38,
+          39
+        ],
+        "split": 1,
+        "explanation": "華麗首飾散落地上無人收取，寫出繁華驟然消散的悲涼。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:60-61",
+        "indices": [
+          60,
+          61
+        ],
+        "split": 1,
+        "explanation": "春夜桃李盛開、秋雨梧桐落葉，都勾起不盡的思念。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:48-49",
+        "indices": [
+          48,
+          49
+        ],
+        "split": 1,
+        "explanation": "在行宮看月色也傷心，雨夜聽鈴聲更覺斷腸。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:102-103",
+        "indices": [
+          102,
+          103
+        ],
+        "split": 1,
+        "explanation": "人間宮殿中的恩愛已斷，在海上仙境卻覺歲月悠長。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:114-115",
+        "indices": [
+          114,
+          115
+        ],
+        "split": 1,
+        "explanation": "七夕夜在長生殿，兩人避開旁人，低聲互訴心意。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:8-9",
+        "indices": [
+          8,
+          9
+        ],
+        "split": 1,
+        "explanation": "春寒時在華清池沐浴，溫潤泉水洗過潔白肌膚。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:14-15",
+        "indices": [
+          14,
+          15
+        ],
+        "split": 1,
+        "explanation": "春夜短暫，君王睡到日高，自此不再早朝。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:26-27",
+        "indices": [
+          26,
+          27
+        ],
+        "split": 1,
+        "explanation": "驪山宮殿高入雲霄，樂聲隨風飄送，處處可聞。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:42-43",
+        "indices": [
+          42,
+          43
+        ],
+        "split": 1,
+        "explanation": "黃塵漫天、秋風蕭瑟，沿曲折雲棧登上劍閣。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:98-99",
+        "indices": [
+          98,
+          99
+        ],
+        "split": 1,
+        "explanation": "她含淚寂寞的容貌，像一枝春雨中的梨花。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:44-45",
+        "indices": [
+          44,
+          45
+        ],
+        "split": 1,
+        "explanation": "峨眉山下少有人行，旗幟失色，日光也顯得暗淡。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:46-47",
+        "indices": [
+          46,
+          47
+        ],
+        "split": 1,
+        "explanation": "蜀地江水碧綠、山色青翠，君王卻朝夕沉浸在思念中。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:82-83",
+        "indices": [
+          82,
+          83
+        ],
+        "split": 1,
+        "explanation": "忽然聽說海上有座仙山，飄渺得像在虛空之中。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:86-87",
+        "indices": [
+          86,
+          87
+        ],
+        "split": 1,
+        "explanation": "仙山中有一位名叫太真的女子，雪白肌膚、如花容貌依稀相似。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:16-17",
+        "indices": [
+          16,
+          17
+        ],
+        "split": 1,
+        "explanation": "日日陪宴遊賞，春日相伴，夜晚也專享寵愛。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:20-21",
+        "indices": [
+          20,
+          21
+        ],
+        "split": 1,
+        "explanation": "華屋中盛妝侍宴，宴罷醉意融入春色。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:28-29",
+        "indices": [
+          28,
+          29
+        ],
+        "split": 1,
+        "explanation": "歌舞與樂聲纏綿，君王整日觀看仍不滿足。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "天生美貌難以埋沒，很快便被選到君王身旁。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:24-25",
+        "indices": [
+          24,
+          25
+        ],
+        "split": 1,
+        "explanation": "一家因女子受寵而顯貴，竟使人們改變重男輕女的想法。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:50-51",
+        "indices": [
+          50,
+          51
+        ],
+        "split": 1,
+        "explanation": "局勢轉變、君王返回，路過傷心之地卻徘徊不忍離去。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "楊家的女孩初長成人，深居閨中，尚不為外人所知。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:18-19",
+        "indices": [
+          18,
+          19
+        ],
+        "split": 1,
+        "explanation": "後宮美人雖多，君王的寵愛卻集中在一人身上。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:72-73",
+        "indices": [
+          72,
+          73
+        ],
+        "split": 1,
+        "explanation": "生死相隔已經多年，思念的人卻從未入夢相見。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:90-91",
+        "indices": [
+          90,
+          91
+        ],
+        "split": 1,
+        "explanation": "聽聞君王的使者到來，她在華帳中驚醒。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:100-101",
+        "indices": [
+          100,
+          101
+        ],
+        "split": 1,
+        "explanation": "含情凝望，向君王致意；一別之後，音訊與容貌都渺不可尋。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:106-107",
+        "indices": [
+          106,
+          107
+        ],
+        "split": 1,
+        "explanation": "只能把舊日首飾寄去，藉舊物表達深情。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:56-57",
+        "indices": [
+          56,
+          57
+        ],
+        "split": 1,
+        "explanation": "回來看見池苑仍舊，荷花和楊柳依然如昔。"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:58-59",
+        "indices": [
+          58,
+          59
+        ],
+        "split": 1,
+        "explanation": "荷花像她的臉，柳葉像她的眉，見景怎能不落淚？"
+      },
+      {
+        "id": "tang-f6f9586d56b09ae1:fh:116-117",
+        "indices": [
+          116,
+          117
+        ],
+        "split": 1,
+        "explanation": "願在天上像比翼鳥相伴，在地上像連理枝相連。"
+      }
+    ]
   },
   {
     "id": "tang-f54aa836d1b0286f",
@@ -1817,7 +2855,162 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-f54aa836d1b0286f:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "秋夜在潯陽江邊送客，楓葉和荻花在風中發出蕭瑟聲響。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:26-27",
+        "indices": [
+          26,
+          27
+        ],
+        "split": 1,
+        "explanation": "琴聲一會兒像花底黃鶯般流暢，一會兒像幽細泉流般低咽。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:74-75",
+        "indices": [
+          74,
+          75
+        ],
+        "split": 1,
+        "explanation": "春日清晨與秋月夜晚，往往只能取酒獨飲。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "酒也無法使離人歡樂，分別時只見茫茫江水浸著月影。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:36-37",
+        "indices": [
+          36,
+          37
+        ],
+        "split": 1,
+        "explanation": "四周船隻寂靜無聲，只有江心秋月明亮。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:50-51",
+        "indices": [
+          50,
+          51
+        ],
+        "split": 1,
+        "explanation": "一年又一年，在秋月春風中輕易度過歡樂歲月。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:22-23",
+        "indices": [
+          22,
+          23
+        ],
+        "split": 1,
+        "explanation": "粗弦的聲音像急雨，細弦的聲音像低聲私語。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:76-77",
+        "indices": [
+          76,
+          77
+        ],
+        "split": 1,
+        "explanation": "並非沒有山歌村笛，只是聲音粗雜，難以入耳。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "忽聽水上傳來琵琶聲，主人忘了回去，客人也不再出發。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:28-29",
+        "indices": [
+          28,
+          29
+        ],
+        "split": 1,
+        "explanation": "琴聲像受阻的冷泉逐漸凝澀，最後暫時停歇。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:48-49",
+        "indices": [
+          48,
+          49
+        ],
+        "split": 1,
+        "explanation": "昔日演奏時首飾敲碎、衣裙沾酒，寫繁華放縱的生活。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:60-61",
+        "indices": [
+          60,
+          61
+        ],
+        "split": 1,
+        "explanation": "深夜夢回少年往事，夢中啼哭，淚水弄花了妝容。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:64-65",
+        "indices": [
+          64,
+          65
+        ],
+        "split": 1,
+        "explanation": "彼此都是漂泊失意的人，相遇何必一定曾經相識。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "主人下馬、客人上船，舉杯送別卻缺少音樂相伴。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:10-11",
+        "indices": [
+          10,
+          11
+        ],
+        "split": 1,
+        "explanation": "把船移近，添酒撥亮燈火，重新開宴相見。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:30-31",
+        "indices": [
+          30,
+          31
+        ],
+        "split": 1,
+        "explanation": "幽深愁恨在停頓中湧出，此時的無聲反比有聲更動人。"
+      },
+      {
+        "id": "tang-f54aa836d1b0286f:fh:14-15",
+        "indices": [
+          14,
+          15
+        ],
+        "split": 1,
+        "explanation": "才轉軸撥弦試彈幾聲，尚未成曲，感情已經流露。"
+      }
+    ]
   },
   {
     "id": "tang-5fba8b77917dd6a9",
@@ -1871,7 +3064,85 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-5fba8b77917dd6a9:fh:24-27",
+        "indices": [
+          24,
+          25,
+          26,
+          27
+        ],
+        "split": 3,
+        "explanation": "把名馬和貴重皮衣都換成美酒，願與朋友共消長久的愁苦。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "人生得意時應盡情歡聚，莫讓酒杯空對明月。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "黃河彷彿從天而降，奔向大海而不再回頭。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "人生衰老何其迅速，晨如青絲的頭髮彷彿轉眼便白如雪。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "上天賦予的才能終有用處，錢財散去仍能再得。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:fh:22-23",
+        "indices": [
+          22,
+          23
+        ],
+        "split": 1,
+        "explanation": "主人何必說錢少，只管買酒來一同痛飲。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:fh:10-13",
+        "indices": [
+          10,
+          11,
+          12,
+          13
+        ],
+        "split": 2,
+        "explanation": "呼喚朋友舉杯飲酒，不要讓酒杯停下。"
+      },
+      {
+        "id": "tang-5fba8b77917dd6a9:fh:20-21",
+        "indices": [
+          20,
+          21
+        ],
+        "split": 1,
+        "explanation": "追想曹植昔日宴飲的豪興，以昂貴美酒盡情歡笑。"
+      }
+    ]
   },
   {
     "id": "tang-1f8a4667b87a5806",
@@ -1943,7 +3214,102 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-1f8a4667b87a5806:fh:23-26",
+        "indices": [
+          23,
+          24,
+          25,
+          26
+        ],
+        "split": 2,
+        "explanation": "月夜杜鵑的啼聲使空山更愁苦，蜀道的艱險令人聞之色變。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:9-10",
+        "indices": [
+          9,
+          10
+        ],
+        "split": 1,
+        "explanation": "傳說壯士在山崩中犧牲，才開闢了相通的天梯石棧。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:42-43",
+        "indices": [
+          42,
+          43
+        ],
+        "split": 1,
+        "explanation": "錦城雖說快樂，仍不如早早回到自己的家。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:11-12",
+        "indices": [
+          11,
+          12
+        ],
+        "split": 1,
+        "explanation": "高峰彷彿能擋住日車，山下急流衝撞、迂迴逆折。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:0-2",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "split": 2,
+        "explanation": "驚嘆山勢極高極險，蜀道難行，彷彿比登天還難。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:5-6",
+        "indices": [
+          5,
+          6
+        ],
+        "split": 1,
+        "explanation": "古老蜀地長久與外界隔絕，不與秦地人煙相通。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:31-32",
+        "indices": [
+          31,
+          32
+        ],
+        "split": 1,
+        "explanation": "山路如此危險，遠方來客又為何一定要到這裡？"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:13-14",
+        "indices": [
+          13,
+          14
+        ],
+        "split": 1,
+        "explanation": "連黃鶴也飛不過高山，善攀援的猿猴也為越山發愁。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:7-8",
+        "indices": [
+          7,
+          8
+        ],
+        "split": 1,
+        "explanation": "太白山西只有鳥兒能走的險道，橫越到峨眉高峰。"
+      },
+      {
+        "id": "tang-1f8a4667b87a5806:fh:21-22",
+        "indices": [
+          21,
+          22
+        ],
+        "split": 1,
+        "explanation": "古樹間鳥聲悲鳴，雌雄相隨，在林間盤旋。"
+      }
+    ]
   },
   {
     "id": "tang-e53899508dbefeee",
@@ -1983,7 +3349,45 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-e53899508dbefeee:fh:12-13",
+        "indices": [
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "終有一天能乘長風破巨浪，揚帆渡過大海。"
+      },
+      {
+        "id": "tang-e53899508dbefeee:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "要渡黃河卻被冰封，要登太行卻遇滿山大雪，借景寫阻礙。"
+      },
+      {
+        "id": "tang-e53899508dbefeee:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "借呂尚垂釣、伊尹夢日的典故，寄託被賞識重用的期待。"
+      },
+      {
+        "id": "tang-e53899508dbefeee:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "杯中好酒與盤中美食都十分昂貴，卻未必能排解心事。"
+      }
+    ]
   },
   {
     "id": "tang-9c1ced7bff976ced",
@@ -2025,7 +3429,36 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-9c1ced7bff976ced:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "大道本應像青天一樣寬廣，我卻偏偏無路可走。"
+      },
+      {
+        "id": "tang-9c1ced7bff976ced:fh:12-13",
+        "indices": [
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "昔日禮賢的君王已逝，如今還有誰願意迎接人才？"
+      },
+      {
+        "id": "tang-9c1ced7bff976ced:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "在權貴門下不得志，只能彈劍作歌，唱出心中苦悶。"
+      }
+    ]
   },
   {
     "id": "tang-d48660f892c258a1",
@@ -2067,7 +3500,63 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-d48660f892c258a1:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "把才華含藏於世，不必刻意以孤高自比雲月。"
+      },
+      {
+        "id": "tang-d48660f892c258a1:fh:12-13",
+        "indices": [
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "想起張翰因秋風而思歸的故事，寄託退身歸鄉之意。"
+      },
+      {
+        "id": "tang-d48660f892c258a1:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "不必像古代隱士般洗耳或採蕨絕食，寫詩人對處世方式的思索。"
+      },
+      {
+        "id": "tang-d48660f892c258a1:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "伍子胥與屈原雖忠直，仍遭不幸，藉古人命運抒發感慨。"
+      },
+      {
+        "id": "tang-d48660f892c258a1:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "看古來有才能的人，功成後不知退身，往往遭遇禍患。"
+      },
+      {
+        "id": "tang-d48660f892c258a1:fh:14-15",
+        "indices": [
+          14,
+          15
+        ],
+        "split": 1,
+        "explanation": "不如珍惜生前的一杯酒，何必過分追求身後虛名。"
+      }
+    ]
   },
   {
     "id": "tang-e47f1a94fa1983fe",
@@ -2161,7 +3650,18 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-d649c357cf10c7a7:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "彷彿遇到仙人的使者，被邀入仙家，寫道士居處的清雅。"
+      }
+    ]
   },
   {
     "id": "tang-e993a61facf0688f",
@@ -2171,12 +3671,12 @@
     "type": "唐詩",
     "lines": [
       "秦時明月漢時關，",
-      "萬裡長徵人未還。",
+      "萬里長征人未還。",
       "但使龍城飛將在，",
       "不教胡馬度陰山。"
     ],
     "famousLines": [
-      "秦時明月漢時關，萬裡長徵人未還。"
+      "秦時明月漢時關，萬里長征人未還。"
     ],
     "introduction": "王昌齡《橫吹曲辭 出塞 一》，原文選讀。",
     "background": "本篇收錄於 chinese-poetry 開源資料庫的《唐詩三百首》選集，作者署名為王昌齡。本次擴充先提供可追溯來源的原文；未逐篇核實具體創作年月、地點與生平事件，因此不以推測補寫創作背景。閱讀時可先觀察意象及上下句的連接，再使用朗讀與背誦功能反覆熟悉。",
@@ -2191,7 +3691,27 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。 本次飛花令整理將「萬裡長徵」校正為通行本「萬里長征」，避免繁簡轉換造成的詞義誤置。",
+    "studyLines": [
+      {
+        "id": "tang-e993a61facf0688f:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "若有善戰將領守邊，就不會讓敵騎越過陰山。"
+      },
+      {
+        "id": "tang-e993a61facf0688f:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "仍是秦漢時的明月與邊關，遠征萬里的將士卻遲遲未能回鄉。"
+      }
+    ]
   },
   {
     "id": "tang-87db1135874c6c20",
@@ -2221,7 +3741,27 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-87db1135874c6c20:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "何必讓羌笛奏出哀怨？春風也吹不到遙遠的玉門關。"
+      },
+      {
+        "id": "tang-87db1135874c6c20:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "黃沙直上白雲之間，孤城立在重重高山之中；本篇採「黃砂」版本。"
+      }
+    ]
   },
   {
     "id": "tang-8c0814bcee2fc88f",
@@ -2315,7 +3855,27 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-6dc48e9b08a163e7:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "孤舟上披蓑戴笠的老人，獨自在寒江雪中垂釣。"
+      },
+      {
+        "id": "tang-6dc48e9b08a163e7:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "群山沒有飛鳥，所有小路也看不到行人足跡。"
+      }
+    ]
   },
   {
     "id": "tang-0a863a86f973bb85",
@@ -2619,7 +4179,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-080194ee2e0d2e10:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "發誓洗雪前代君王之恥，使天下重新安定歸服。"
+      }
+    ]
   },
   {
     "id": "tang-4ab1c13b258d1739",
@@ -2751,7 +4322,18 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-262ae19747f92d8d:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "猿鳥彷彿仍敬畏諸葛亮軍令，風雲也像在守護營壘。"
+      }
+    ]
   },
   {
     "id": "tang-accc3d5ab82decde",
@@ -3805,7 +5387,27 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-b7d78df216f9832b:fh:24-25",
+        "indices": [
+          24,
+          25
+        ],
+        "split": 1,
+        "explanation": "拂去鎧甲灰塵，露出雪亮光澤，重新拿起閃耀的寶劍。"
+      },
+      {
+        "id": "tang-b7d78df216f9832b:fh:14-15",
+        "indices": [
+          14,
+          15
+        ],
+        "split": 1,
+        "explanation": "像落魄故侯賣瓜，又像陶淵明種柳，寫老將退居後的生活。"
+      }
+    ]
   },
   {
     "id": "tang-94d3037504064cf0",
@@ -3909,7 +5511,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-9a3dc3c2e4caadc3:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "華美樓閣彼此相望，紅桃綠柳垂向屋簷。"
+      }
+    ]
   },
   {
     "id": "tang-0933162ba09c2bc5",
@@ -3943,7 +5556,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-0933162ba09c2bc5:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "遇到醉酒放歌的朋友，如楚狂接輿來到五柳先生門前。"
+      }
+    ]
   },
   {
     "id": "tang-6ab7c80c6c8a9cc2",
@@ -4411,7 +6035,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-10eb2735672493d5:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "日暮東風中鳥聲含怨，落花使人想起墜樓之人的命運。"
+      }
+    ]
   },
   {
     "id": "tang-e2b564501ca487bc",
@@ -4573,7 +6208,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-9b0ae34b9c17a2d7:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "淚水溼透手巾，無法入夢，深夜仍聽見前殿排演歌聲。"
+      }
+    ]
   },
   {
     "id": "tang-4d5da42192f2d171",
@@ -5165,7 +6811,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-ff0a68fdcfcd75f1:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "登高遙望朋友，心思隨飛鳥遠去，直至鳥影消失。"
+      }
+    ]
   },
   {
     "id": "tang-f2bb8b223cf942af",
@@ -5201,7 +6858,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-f2bb8b223cf942af:fh:8-9",
+        "indices": [
+          8,
+          9
+        ],
+        "split": 1,
+        "explanation": "眼前景色使我想念故友，連夜間也為他縈夢。"
+      }
+    ]
   },
   {
     "id": "tang-d81d9b0d6a3c1975",
@@ -5235,7 +6903,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-d81d9b0d6a3c1975:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "樵夫差不多都已歸去，暮煙中的鳥兒也剛安定棲息。"
+      }
+    ]
   },
   {
     "id": "tang-66ac130b78ad8bc7",
@@ -5303,7 +6982,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-c9bedc5c25f1a85f:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "坐看別人垂釣，自己徒然羨慕，含蓄表達希望得到援引。"
+      }
+    ]
   },
   {
     "id": "tang-e15946c586ccbc23",
@@ -5575,7 +7265,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-c79335c210e1cbec:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "群山殘雪映著年夜，異鄉人獨對一盞孤燈。"
+      }
+    ]
   },
   {
     "id": "tang-9675af93b2c84f4f",
@@ -6031,7 +7732,36 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-df3f09e9eb69765c:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "皇帝的車駕遠出重門楊柳，回望宮中閣道與御苑春花。"
+      },
+      {
+        "id": "tang-df3f09e9eb69765c:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "雲中宮闕高聳，春雨中的樹木掩映著萬戶人家。"
+      },
+      {
+        "id": "tang-df3f09e9eb69765c:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "渭水環繞關塞，山勢迴繞宮苑，寫京城周邊的景觀。"
+      }
+    ]
   },
   {
     "id": "tang-853c828d2b2fb273",
@@ -6099,7 +7829,27 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-1d72772282d68261:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "高門樓閣映著餘暉，濃密桃李間柳絮飄飛。"
+      },
+      {
+        "id": "tang-1d72772282d68261:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "宮中疏鐘響起，官舍已晚，省署人少，鳥鳴更顯清幽。"
+      }
+    ]
   },
   {
     "id": "tang-54801123fcac4308",
@@ -6870,7 +8620,18 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-2e6bd51e6b90fa7c:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "忽然看見路旁新柳，才後悔讓丈夫遠去求取功名。"
+      }
+    ]
   },
   {
     "id": "tang-43f230eab3746623",
@@ -7088,7 +8849,18 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-a6d1f981547c269d:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "傍晚看來快要下雪了，你能來喝一杯嗎？"
+      }
+    ]
   },
   {
     "id": "tang-bde5737033ba70bb",
@@ -7894,7 +9666,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-f0a6a32b98c6987c:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "暮色中的花被宮牆遮掩，歸棲的鳥兒啾啾飛過。"
+      }
+    ]
   },
   {
     "id": "tang-9254e7fbfe6ee59f",
@@ -8098,7 +9881,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-3bcee05dda40d8f3:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "西山積雪映著駐軍，南邊清江橫跨著萬里橋，交織山河與邊防之思。"
+      }
+    ]
   },
   {
     "id": "tang-74cad1fc4a0beb1f",
@@ -8132,7 +9926,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-74cad1fc4a0beb1f:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "遠送到此終須告別，只有青山彷彿仍留著不盡情意。"
+      }
+    ]
   },
   {
     "id": "tang-bc9a3df6eea5837b",
@@ -8302,7 +10107,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-cd7a8c7bfe9a2159:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "歲末日影愈短，霜雪初晴後的冬夜格外清寒。"
+      }
+    ]
   },
   {
     "id": "tang-6649780974fb1244",
@@ -8400,7 +10216,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-c24e786f774e0d0c:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "江山故宅只留下文采遺跡，荒臺雲雨勾起對往事的想像。"
+      }
+    ]
   },
   {
     "id": "tang-5a201e94589e791d",
@@ -8830,7 +10657,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-893c754eb6f0b213:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "層層雲氣令人胸懷激盪，極目追隨遠方歸鳥。"
+      }
+    ]
   },
   {
     "id": "tang-4f37abb4d0fea081",
@@ -8993,7 +10831,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-02a37a5636be6c24:fh:22-23",
+        "indices": [
+          22,
+          23
+        ],
+        "split": 1,
+        "explanation": "楊花如雪覆在水草上，鳥兒銜巾飛過，寫出春日華麗景象。"
+      }
+    ]
   },
   {
     "id": "tang-6559d3ab8973dc8e",
@@ -9039,7 +10888,27 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-6559d3ab8973dc8e:fh:16-17",
+        "indices": [
+          16,
+          17
+        ],
+        "split": 1,
+        "explanation": "人有情而流淚，江水江花卻無窮無盡，愈顯人生悲苦。"
+      },
+      {
+        "id": "tang-6559d3ab8973dc8e:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "江邊宮門緊閉，新柳嫩蒲依然轉綠，卻不知為誰而美。"
+      }
+    ]
   },
   {
     "id": "tang-ec1b3c37ff70efc5",
@@ -9093,7 +10962,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-ec1b3c37ff70efc5:fh:24-25",
+        "indices": [
+          24,
+          25
+        ],
+        "split": 1,
+        "explanation": "聽說援軍願為國洗恥，但仍須謹慎言語，以防旁人窺伺。"
+      }
+    ]
   },
   {
     "id": "tang-5e6f8df12e33dfec",
@@ -9143,7 +11023,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-5e6f8df12e33dfec:fh:8-9",
+        "indices": [
+          8,
+          9
+        ],
+        "split": 1,
+        "explanation": "世情常厭棄衰敗之人，萬事變化如燭影轉動。"
+      }
+    ]
   },
   {
     "id": "tang-0fb9e718d8e012d5",
@@ -9185,7 +11076,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-0fb9e718d8e012d5:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "老朋友出現在夢中，彷彿知道我一直在思念他。"
+      }
+    ]
   },
   {
     "id": "tang-c39a089423d545ee",
@@ -9227,7 +11129,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-c39a089423d545ee:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "接連幾夜夢到你，更能感到彼此情誼深厚。"
+      }
+    ]
   },
   {
     "id": "tang-330661528d14e185",
@@ -9287,7 +11200,27 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-330661528d14e185:fh:18-19",
+        "indices": [
+          18,
+          19
+        ],
+        "split": 1,
+        "explanation": "其餘畫中的駿馬也極不凡，彷彿寒空裡翻動的煙雪。"
+      },
+      {
+        "id": "tang-330661528d14e185:fh:32-33",
+        "indices": [
+          32,
+          33
+        ],
+        "split": 1,
+        "explanation": "帝陵前松柏依舊，昔日駿馬已盡，只剩鳥兒迎風啼叫。"
+      }
+    ]
   },
   {
     "id": "tang-f95a89bf2a02c88d",
@@ -9450,7 +11383,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-7833f7220d441bb6:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "雲氣與巫峽相接，月光映著雪山，古柏顯得更蒼寒雄偉。"
+      }
+    ]
   },
   {
     "id": "tang-7d56c37273634bd5",
@@ -9570,7 +11514,18 @@
     "locations": [],
     "theme": "宣紙",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-6438a63aded9d140:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "託飛鳥傳話，把遙遠的思念帶給所念之人。"
+      }
+    ]
   },
   {
     "id": "tang-cc106c3e5b3248d8",
@@ -10761,7 +12716,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-3160386d273c5d5c:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "放下水晶簾，仍隔著簾幕凝望玲瓏秋月。"
+      }
+    ]
   },
   {
     "id": "tang-c5f2e64353065d3d",
@@ -10793,7 +12759,18 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-c5f2e64353065d3d:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "當你思念歸鄉時，正是我為思念而斷腸的時刻。"
+      }
+    ]
   },
   {
     "id": "tang-c6692853275f749a",
@@ -10825,7 +12802,27 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-c6692853275f749a:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "美麗的採桑女子，在綠水岸邊採摘桑葉。"
+      },
+      {
+        "id": "tang-c6692853275f749a:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "白皙的手伸向青桑枝，鮮明妝容在日光下更加動人。"
+      }
+    ]
   },
   {
     "id": "tang-62c41080161ca35b",
@@ -10889,7 +12886,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-2289a891478ee9a3:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "秋風吹送不盡的聲音，全都寄託著對邊關親人的思念。"
+      }
+    ]
   },
   {
     "id": "tang-7dd02eb61a8cd106",
@@ -11010,7 +13018,45 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-a4e3591e9b188405:fh:15-16",
+        "indices": [
+          15,
+          16
+        ],
+        "split": 1,
+        "explanation": "登高遠望天地，大江茫茫流去，永不回頭。"
+      },
+      {
+        "id": "tang-a4e3591e9b188405:fh:17-18",
+        "indices": [
+          17,
+          18
+        ],
+        "split": 1,
+        "explanation": "萬里黃雲改變風色，滾滾江流翻起雪山般的白浪。"
+      },
+      {
+        "id": "tang-a4e3591e9b188405:fh:23-24",
+        "indices": [
+          23,
+          24
+        ],
+        "split": 1,
+        "explanation": "以服丹與修道的想像，表達遠離世俗、追尋精神自在的願望。"
+      },
+      {
+        "id": "tang-a4e3591e9b188405:fh:13-14",
+        "indices": [
+          13,
+          14
+        ],
+        "split": 1,
+        "explanation": "翠色紅霞映著朝日，天空高遠，連飛鳥也難以到達。"
+      }
+    ]
   },
   {
     "id": "tang-3aec42a288d7adc8",
@@ -11081,7 +13127,27 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-3aec42a288d7adc8:fh:12-13",
+        "indices": [
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "謝靈運曾住的地方仍在，碧水蕩漾，猿聲清越。"
+      },
+      {
+        "id": "tang-3aec42a288d7adc8:fh:8-9",
+        "indices": [
+          8,
+          9
+        ],
+        "split": 1,
+        "explanation": "因嚮往而夢遊吳越，一夜飛越映著月光的鏡湖。"
+      }
+    ]
   },
   {
     "id": "tang-0d18476f97194833",
@@ -11113,7 +13179,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-0d18476f97194833:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "風吹柳花，酒肆滿店飄香，女子斟酒勸客品嘗。"
+      }
+    ]
   },
   {
     "id": "tang-1288471be03ed32f",
@@ -11181,7 +13258,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-52fae2bc7ff2b8a6:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "遊子的心意像浮雲飄泊，故人的情意像落日依戀不捨。"
+      }
+    ]
   },
   {
     "id": "tang-b00376f5fe1b3b12",
@@ -11219,7 +13307,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-b00376f5fe1b3b12:fh:8-9",
+        "indices": [
+          8,
+          9
+        ],
+        "split": 1,
+        "explanation": "刀斬不斷流水，飲酒也消不了愁，反而愁上加愁。"
+      }
+    ]
   },
   {
     "id": "tang-2a84e76055f42fbe",
@@ -11293,7 +13392,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/全唐诗/唐诗三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "tang-1f3ea4464dab1d2b:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "浮雲遮日如同讒言蔽明，望不見長安令人憂愁。"
+      }
+    ]
   },
   {
     "id": "tang-cf30a5d208492a40",
@@ -11364,7 +13474,18 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-3ba1573a6489f13a:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "披著蓑衣任憑風雨，微寒春風又吹醒了酒意。"
+      }
+    ]
   },
   {
     "id": "song-e8bdbb9fca144173",
@@ -11398,7 +13519,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-e8bdbb9fca144173:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "孤鳥挑遍寒枝仍不肯棲息，冷落江景映照孤高心境。"
+      }
+    ]
   },
   {
     "id": "song-ff414bdbe9a4078a",
@@ -11434,7 +13566,38 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-ff414bdbe9a4078a:fh:7-9",
+        "indices": [
+          7,
+          8,
+          9
+        ],
+        "split": 1,
+        "explanation": "不要說人不會因思念消瘦；西風吹簾，人比菊花還瘦。"
+      },
+      {
+        "id": "song-ff414bdbe9a4078a:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "薄霧濃雲籠罩漫長白日，香爐中瑞腦香漸漸燒盡。"
+      },
+      {
+        "id": "song-ff414bdbe9a4078a:fh:2-4",
+        "indices": [
+          2,
+          3,
+          4
+        ],
+        "split": 1,
+        "explanation": "又逢重陽，半夜的涼意透入枕席和紗帳。"
+      }
+    ]
   },
   {
     "id": "song-6556e71e4496e9ef",
@@ -11484,7 +13647,29 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-6556e71e4496e9ef:fh:3-5",
+        "indices": [
+          3,
+          4,
+          5
+        ],
+        "split": 2,
+        "explanation": "往昔繁華的歌舞樓臺，早已被風雨與歲月帶走。"
+      },
+      {
+        "id": "song-6556e71e4496e9ef:fh:0-2",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "split": 1,
+        "explanation": "江山千古依舊，卻無處尋找孫權那樣的英雄。"
+      }
+    ]
   },
   {
     "id": "song-0b351573f0580509",
@@ -11552,7 +13737,18 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-6c3b8d07764e87c7:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "唱一曲新詞、飲一杯酒，眼前仍是去年的天氣和亭臺。"
+      }
+    ]
   },
   {
     "id": "song-1cf14d9ab371b624",
@@ -11592,7 +13788,51 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-1cf14d9ab371b624:fh:4-6",
+        "indices": [
+          4,
+          5,
+          6
+        ],
+        "split": 1,
+        "explanation": "夕陽映山，天邊接水，芳草一直延伸到斜陽之外。"
+      },
+      {
+        "id": "song-1cf14d9ab371b624:fh:0-3",
+        "indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "split": 2,
+        "explanation": "碧雲、黃葉、秋水與寒煙，連成遼闊而清冷的秋景。"
+      },
+      {
+        "id": "song-1cf14d9ab371b624:fh:11-13",
+        "indices": [
+          11,
+          12,
+          13
+        ],
+        "split": 1,
+        "explanation": "不要獨倚高樓望月；酒入愁腸，只會化成思念的眼淚。"
+      },
+      {
+        "id": "song-1cf14d9ab371b624:fh:7-10",
+        "indices": [
+          7,
+          8,
+          9,
+          10
+        ],
+        "split": 2,
+        "explanation": "思鄉與羈旅愁緒縈繞，只有好夢才能暫時留住睡意。"
+      }
+    ]
   },
   {
     "id": "song-1b8727c1962f4161",
@@ -11626,7 +13866,18 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-1b8727c1962f4161:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "黃昏已夠孤獨淒愁，還要承受風雨吹打。"
+      }
+    ]
   },
   {
     "id": "song-3cc607dc612be12d",
@@ -11845,7 +14096,59 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-8b2b13f4b1a9059e:fh:0-2",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "split": 1,
+        "explanation": "明月如霜，清風似水，夜景清澈而美好。"
+      },
+      {
+        "id": "song-8b2b13f4b1a9059e:fh:6-8",
+        "indices": [
+          6,
+          7,
+          8
+        ],
+        "split": 2,
+        "explanation": "更鼓與落葉聲打破夜的寂靜，也驚斷了夢境。"
+      },
+      {
+        "id": "song-8b2b13f4b1a9059e:fh:9-11",
+        "indices": [
+          9,
+          10,
+          11
+        ],
+        "split": 2,
+        "explanation": "醒後在小園遍尋，茫茫夜色中再也找不到夢裡的景象。"
+      },
+      {
+        "id": "song-8b2b13f4b1a9059e:fh:21-23",
+        "indices": [
+          21,
+          22,
+          23
+        ],
+        "split": 2,
+        "explanation": "盼後來有人面對黃樓夜景時，也能替自己長嘆一聲。"
+      },
+      {
+        "id": "song-8b2b13f4b1a9059e:fh:18-20",
+        "indices": [
+          18,
+          19,
+          20
+        ],
+        "split": 2,
+        "explanation": "古今人生如夢，人未曾真正醒來，只是不斷添上新歡舊怨。"
+      }
+    ]
   },
   {
     "id": "song-1a4ce4186ebb4037",
@@ -11883,7 +14186,40 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-1a4ce4186ebb4037:fh:6-7",
+        "indices": [
+          6,
+          7
+        ],
+        "split": 1,
+        "explanation": "看著輞川圖中的暮春景色，想起王維描寫山水的詩句。"
+      },
+      {
+        "id": "song-1a4ce4186ebb4037:fh:8-11",
+        "indices": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "split": 2,
+        "explanation": "盼著歸期，身上的春衫仍讓人記起舊日相伴與西湖煙雨。"
+      },
+      {
+        "id": "song-1a4ce4186ebb4037:fh:2-5",
+        "indices": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "split": 2,
+        "explanation": "若到了松江渡口，不必驚動鷗鷺，那裡都是曾經走過的地方。"
+      }
+    ]
   },
   {
     "id": "song-8fa9a0a809c97c28",
@@ -12009,7 +14345,19 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-444bc9cf9ace7610:fh:2-4",
+        "indices": [
+          2,
+          3,
+          4
+        ],
+        "split": 1,
+        "explanation": "屏風幽靜，飄花輕得像夢，綿綿細雨像無邊愁緒。"
+      }
+    ]
   },
   {
     "id": "song-ee55395da60f915b",
@@ -12515,7 +14863,27 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-44bf1a6ee9a27b50:fh:13-14",
+        "indices": [
+          13,
+          14
+        ],
+        "split": 1,
+        "explanation": "細柳濃密得能藏住烏鴉，舞姿又如迴旋飛雪般輕盈。"
+      },
+      {
+        "id": "song-44bf1a6ee9a27b50:fh:9-10",
+        "indices": [
+          9,
+          10
+        ],
+        "split": 1,
+        "explanation": "又到傳送宮燭的寒食時節，人在愁中感到季節更替太匆忙。"
+      }
+    ]
   },
   {
     "id": "song-5afba6efbe6f4a9e",
@@ -12962,7 +15330,46 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-fd1fecc1cbd42806:fh:0-2",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "split": 1,
+        "explanation": "晚秋寒蟬悲鳴，傍晚的長亭外，急雨剛停。"
+      },
+      {
+        "id": "song-fd1fecc1cbd42806:fh:11-12",
+        "indices": [
+          11,
+          12
+        ],
+        "split": 1,
+        "explanation": "想像今夜酒醒，身在楊柳岸邊，只見曉風與殘月。"
+      },
+      {
+        "id": "song-fd1fecc1cbd42806:fh:9-10",
+        "indices": [
+          9,
+          10
+        ],
+        "split": 1,
+        "explanation": "多情的人自古就為離別傷心，更何況是在冷清秋日。"
+      },
+      {
+        "id": "song-fd1fecc1cbd42806:fh:15-16",
+        "indices": [
+          15,
+          16
+        ],
+        "split": 1,
+        "explanation": "即使滿腹情意與感受，往後又能向誰傾訴？"
+      }
+    ]
   },
   {
     "id": "song-431ea37a2a94926a",
@@ -13105,7 +15512,38 @@
     "locations": [],
     "theme": "桃花",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-a4139fd9bda148b9:fh:2-4",
+        "indices": [
+          2,
+          3,
+          4
+        ],
+        "split": 2,
+        "explanation": "日頭升到花梢，黃鶯穿過柳枝，人卻仍倦臥被中。"
+      },
+      {
+        "id": "song-a4139fd9bda148b9:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "春來景色雖美，心中卻愁悶，對任何事都提不起興趣。"
+      },
+      {
+        "id": "song-a4139fd9bda148b9:fh:8-10",
+        "indices": [
+          8,
+          9,
+          10
+        ],
+        "split": 2,
+        "explanation": "無可奈何，只恨對方一去後連音信也沒有。"
+      }
+    ]
   },
   {
     "id": "song-c1e1c8947e437fc1",
@@ -13484,7 +15922,19 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-69f0e40e25926a47:fh:2-4",
+        "indices": [
+          2,
+          3,
+          4
+        ],
+        "split": 1,
+        "explanation": "春景與山河勾起遠念，不妨在相聚時多赴酒宴。"
+      }
+    ]
   },
   {
     "id": "song-bc0f9213ee009418",
@@ -14147,7 +16597,68 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-3b272aba1932a69b:fh:3-5",
+        "indices": [
+          3,
+          4,
+          5
+        ],
+        "split": 2,
+        "explanation": "煙霧籠罩柳色，笛聲吹奏梅花曲，春意與愁思交織。"
+      },
+      {
+        "id": "song-3b272aba1932a69b:fh:6-8",
+        "indices": [
+          6,
+          7,
+          8
+        ],
+        "split": 2,
+        "explanation": "元宵天氣雖然溫和，也難保轉眼沒有風雨。"
+      },
+      {
+        "id": "song-3b272aba1932a69b:fh:0-2",
+        "indices": [
+          0,
+          1,
+          2
+        ],
+        "split": 1,
+        "explanation": "夕陽像熔金，暮雲像美玉合攏；身在美景中卻不知心向何處。"
+      },
+      {
+        "id": "song-3b272aba1932a69b:fh:14-16",
+        "indices": [
+          14,
+          15,
+          16
+        ],
+        "split": 2,
+        "explanation": "追想昔日節慶，人們戴著翠冠雪柳，爭相妝扮整齊美麗。"
+      },
+      {
+        "id": "song-3b272aba1932a69b:fh:11-13",
+        "indices": [
+          11,
+          12,
+          13
+        ],
+        "split": 2,
+        "explanation": "回想中原繁盛時，閨中生活閒適，最重視元宵佳節。"
+      },
+      {
+        "id": "song-3b272aba1932a69b:fh:9-10",
+        "indices": [
+          9,
+          10
+        ],
+        "split": 1,
+        "explanation": "朋友乘車來邀約飲酒吟詩，自己卻婉言謝絕。"
+      }
+    ]
   },
   {
     "id": "song-a30e1009c97dbb37",
@@ -16273,7 +18784,36 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-41d25b82fdbfb822:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "日日思念卻不能相見，彼此仍喝著同一條長江的水。"
+      },
+      {
+        "id": "song-41d25b82fdbfb822:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "江水何時停流，離愁又何時才能終止？"
+      },
+      {
+        "id": "song-41d25b82fdbfb822:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "我住在長江上游，你住在長江下游，江水相連，人卻相隔。"
+      }
+    ]
   },
   {
     "id": "song-3dc8ebb695499a97",
@@ -16866,7 +19406,36 @@
     "locations": [],
     "theme": "青綠山水",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-786f0d8e5aa78f19:fh:4-5",
+        "indices": [
+          4,
+          5
+        ],
+        "split": 1,
+        "explanation": "春光與流水一同消逝，短短春日又能剩下多少？"
+      },
+      {
+        "id": "song-786f0d8e5aa78f19:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "花朵依戀枝頭，又被雨打溼，飛落不得，愁緒也難排遣。"
+      },
+      {
+        "id": "song-786f0d8e5aa78f19:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "細雨與微風吹拂，萬戶人家的楊柳籠在輕煙裡。"
+      }
+    ]
   },
   {
     "id": "song-d90eeb9f7d5e3c37",
@@ -17742,7 +20311,29 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-21d505780c7e7a0b:fh:12-14",
+        "indices": [
+          12,
+          13,
+          14
+        ],
+        "split": 2,
+        "explanation": "從昔日北方到南渡後的臨安，佳節春景似乎仍如往常。"
+      },
+      {
+        "id": "song-21d505780c7e7a0b:fh:9-11",
+        "indices": [
+          9,
+          10,
+          11
+        ],
+        "split": 2,
+        "explanation": "誰能明白禁火之夜的心情，滿城風雨彷彿都帶著愁意。"
+      }
+    ]
   },
   {
     "id": "song-15313edd6bbc378a",
@@ -18252,7 +20843,18 @@
     "locations": [],
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
-    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+    "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。",
+    "studyLines": [
+      {
+        "id": "song-c7edec5016a2c374:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "樓角晚霞漸退，淡黃柳枝間已有烏鴉棲息。"
+      }
+    ]
   },
   {
     "id": "song-522665b1ead7cbc5",
@@ -19413,5 +22015,71 @@
     "theme": "月夜",
     "source": "https://github.com/chinese-poetry/chinese-poetry/blob/b8594f81a89752241442f2ce267d6f66f96704ee/宋词/宋词三百首.json",
     "textualNote": "原文來自所列固定版本的開源選集，經繁體字形及分行整理；未宣稱為權威定本。兩句卡取原文開頭兩組連續語句，屬閱讀選摘，並非名句知名度排名。新增條目的逐字注音與白話解釋尚未校訂。"
+  },
+  {
+    "id": "wang-bochuan",
+    "title": "泊船瓜洲",
+    "author": "王安石",
+    "dynasty": "宋",
+    "type": "宋詩",
+    "lines": [
+      "京口瓜洲一水間，",
+      "鍾山祇隔數重山。",
+      "春風又綠江南岸，",
+      "明月何時照我還。"
+    ],
+    "famousLines": [
+      "春風又綠江南岸，明月何時照我還。"
+    ],
+    "introduction": "借江南春色寄託歸鄉之思。",
+    "background": "詩人泊船瓜洲，從京口與瓜洲隔水相望，寫到鍾山與自己的距離。後兩句由江南岸邊再度轉綠的春景，轉向明月何時照自己歸去的思念。「綠」把春風帶來的變化寫得鮮明，「還」則點出歸鄉之意。此處依香港教育局選文保留「鍾山祇隔」字形；常見版本也寫作「鐘山只隔」，不據字形差異推定不同作品。",
+    "translation": "京口與瓜洲之間只隔一條江，鍾山也只隔幾座山。春風吹綠了江南兩岸，明月何時才能照著我回到家鄉？",
+    "annotations": [
+      "還：回去，此處讀 ㄏㄨㄢˊ。",
+      "數重山：幾層山巒；重讀 ㄔㄨㄥˊ。"
+    ],
+    "difficultCharacters": [
+      {
+        "character": "還",
+        "zhuyin": "ㄏㄨㄢˊ",
+        "meaning": "歸去、返回。",
+        "lineContext": "明月何時照我還。",
+        "explanation": "詩人盼望回到家鄉。",
+        "source": "https://www.edb.gov.hk/attachment/tc/curriculum-development/kla/chi-edu/recommended-passages/KS2_15.pdf"
+      }
+    ],
+    "tags": [
+      "思鄉",
+      "春",
+      "月"
+    ],
+    "locations": [
+      "瓜洲",
+      "京口",
+      "鍾山"
+    ],
+    "theme": "青綠山水",
+    "source": "https://www.edb.gov.hk/attachment/tc/curriculum-development/kla/chi-edu/recommended-passages/ks2_15_text.pdf",
+    "textualNote": "依香港教育局《泊船瓜洲》選文；以句號收尾，保留「鍾山祇隔」傳統字形。",
+    "studyLines": [
+      {
+        "id": "wang-bochuan:pair:1",
+        "indices": [
+          2,
+          3
+        ],
+        "split": 1,
+        "explanation": "春風又吹綠江南，明月何時才能照著我回鄉？"
+      },
+      {
+        "id": "wang-bochuan:pair:0",
+        "indices": [
+          0,
+          1
+        ],
+        "split": 1,
+        "explanation": "京口與瓜洲只隔一條江，鍾山也只隔幾層山巒。"
+      }
+    ]
   }
 ]

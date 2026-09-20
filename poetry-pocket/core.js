@@ -1,7 +1,8 @@
+import {lineEntries,cleanLineProgress} from './feihua-core.js';
 export const RATINGS = ['😕 完全忘了', '🤔 有印象', '🙂 大致記得', '😊 很熟'];
 export const THEMES = { paper: '宣紙', moon: '月夜', green: '青綠山水', blossom: '桃花', ink: '水墨', night: '深色夜讀' };
 export const SPEEDS = [0.7, 0.85, 1, 1.15, 1.25, 1.5, 1.75, 2, 2.5, 3];
-export const defaults = () => ({ schemaVersion: 1, settings: { theme: 'paper', size: 'large', zhuyin: true, speed: 1.25, onboarded: false }, progress: {}, quotes: [], events: [] });
+export const defaults = () => ({ schemaVersion: 1, settings: { theme: 'paper', size: 'large', zhuyin: true, speed: 1.25, onboarded: false }, progress: {}, lineProgress: {}, quotes: [], events: [] });
 export function isZhuyin(text) { return typeof text === 'string' && /^[ㄅ-ㄩˊˇˋ˙]+$/u.test(text) && /[ㄅ-ㄩ]/u.test(text); }
 export function validatePoems(poems) {
   if (!Array.isArray(poems) || !poems.length || new Set(poems.map(p => p.id)).size !== poems.length) throw new Error('詩集格式錯誤');
@@ -63,7 +64,7 @@ export function pairEntries(poems) {
  });
  return pairs.map((q,i)=>({...q,previous:pairs[(i+pairs.length-1)%pairs.length].id,next:pairs[(i+1)%pairs.length].id}));
 }
-export function quoteEntries(poems) { return [...poems.flatMap(p => p.famousLines.map((text, i) => ({ id: `${p.id}:${i}`, text, poem: p }))),...pairEntries(poems)]; }
+export function quoteEntries(poems) { const all=[...poems.flatMap(p => p.famousLines.map((text, i) => ({ id: `${p.id}:${i}`, text, poem: p }))),...pairEntries(poems),...lineEntries(poems)]; return [...new Map(all.map(q=>[q.id,q])).values()]; }
 export function validateBackup(input, poems) {
   if (!input || input.schemaVersion !== 1 || !input.settings || !input.progress || Array.isArray(input.progress) || !Array.isArray(input.quotes) || !Array.isArray(input.events)) throw new Error('這不是有效的詩詞備份檔');
   if (Object.keys(input.progress).length > poems.length || input.events.length > 100000) throw new Error('備份內容超出限制');
@@ -83,6 +84,7 @@ export function validateBackup(input, poems) {
     if (!e || !ids.has(e.poemID) || !validDate(e.date) || !Number.isInteger(e.rating) || e.rating < 0 || e.rating > 3) throw new Error('複習紀錄格式錯誤');
     return { poemID: e.poemID, date: new Date(e.date).toISOString(), rating: e.rating };
   });
+  clean.lineProgress=cleanLineProgress(input.lineProgress,lineEntries(poems));
   return clean;
 }
 export const escapeHTML = value => String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
