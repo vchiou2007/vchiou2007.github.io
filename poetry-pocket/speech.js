@@ -9,7 +9,8 @@ export class PoetrySpeech {
     this.stop();
     if (!globalThis.speechSynthesis || !globalThis.SpeechSynthesisUtterance) { this.onError('這個瀏覽器不支援朗讀，請使用 iPhone Safari。'); return; }
     const voice = this.voice();
-    if (!voice) { this.onError('尚未找到中文語音，請下載中文聲音後再試。'); return; }
+    // Voice enumeration may still be empty on the first iOS gesture.
+    // Let the system select a voice for zh-TW without delaying speak().
     const remaining = lines.slice(lineIndex);
     if (!remaining.length) return;
     // A single utterance avoids restarting the voice engine between lines.
@@ -19,7 +20,8 @@ export class PoetrySpeech {
     const starts = segments.map(segment => { const start = offset; offset += segment.length; return start; });
     const utterance = new SpeechSynthesisUtterance(segments.join(''));
     const session = this.session;
-    utterance.voice = voice; utterance.lang = voice.lang; utterance.rate = speed;
+    if (voice) utterance.voice = voice;
+    utterance.lang = voice?.lang || 'zh-TW'; utterance.rate = speed;
     this.utterance = utterance; this.playing = true;
     utterance.onstart = () => { if (session === this.session) { this.active = lineIndex; this.onChange(); } };
     utterance.onboundary = event => {
@@ -36,7 +38,9 @@ export class PoetrySpeech {
       if (session !== this.session) return;
       this.stop(); this.onError('朗讀暫時無法播放，請再次點選朗讀。');
     };
-    this.onChange(); speechSynthesis.speak(utterance);
+    this.onChange();
+    try { speechSynthesis.speak(utterance); }
+    catch { if (session === this.session) { this.stop(); this.onError('朗讀暫時無法播放，請再次點選朗讀。'); } }
   }
   togglePause() {
     if (!this.playing) return;

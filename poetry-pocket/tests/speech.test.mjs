@@ -25,8 +25,13 @@ test('暫停繼續，重播後忽略舊回呼',()=>{
   player.play(['新句']);stale.onstart();stale.onend();assert.equal(player.active,null);assert.equal(queued.length,2);assert.ok(canceled>=2);
   queued[1].onstart();assert.equal(player.active,0);player.stop();queued[1].onend();assert.equal(player.playing,false);
 });
-test('缺少中文聲音與播放錯誤會顯示錯誤，不冒充已播放',()=>{
-  const original=speechSynthesis.getVoices;let message='';speechSynthesis.getVoices=()=>[];
-  const player=new PoetrySpeech(()=>{},m=>message=m);player.play(['詩']);assert.ok(message.includes('中文'));assert.equal(player.playing,false);
-  speechSynthesis.getVoices=original;queued=[];player.play(['詩']);queued[0].onerror({error:'network'});assert.equal(player.playing,false);assert.ok(message.includes('無法播放'));
+test('首次語音列表為空仍以臺灣中文送出朗讀，不誤報缺少聲音',()=>{
+ const original=speechSynthesis.getVoices;let message='';queued=[];
+ try{speechSynthesis.getVoices=()=>[];const player=new PoetrySpeech(()=>{},m=>message=m);player.play(['床前明月光。']);assert.equal(message,'');assert.equal(queued.length,1);assert.equal(queued[0].lang,'zh-TW');assert.equal(queued[0].voice,undefined);assert.equal(player.active,null);queued[0].onstart();assert.equal(player.active,0);queued[0].onend();assert.equal(player.playing,false);
+ speechSynthesis.getVoices=original;player.play(['疑是地上霜。']);assert.equal(queued[1].voice.lang,'zh-TW');assert.equal(message,'');
+ }finally{speechSynthesis.getVoices=original;}
+});
+test('實際播放錯誤仍顯示提示並清除狀態，包括同步例外',()=>{
+ let message='';queued=[];const player=new PoetrySpeech(()=>{},m=>message=m);player.play(['詩']);queued[0].onerror({error:'network'});assert.equal(player.playing,false);assert.ok(message.includes('無法播放'));
+ const original=speechSynthesis.speak;try{speechSynthesis.speak=()=>{throw Error('unavailable');};message='';player.play(['詩']);assert.equal(player.playing,false);assert.equal(player.utterance,null);assert.ok(message.includes('無法播放'));}finally{speechSynthesis.speak=original;}
 });
