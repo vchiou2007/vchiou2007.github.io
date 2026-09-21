@@ -38,7 +38,7 @@ function toast(message) {
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>element.classList.remove('show'),5000);
 }
 function route() {
-  const raw=(location.hash.slice(1)||'/today').split('?');
+  const raw=(location.hash.slice(1)||'/my-recitation').split('?');
   return {parts:raw[0].split('/').filter(Boolean).map(x=>{try{return decodeURIComponent(x);}catch{return x;}}),params:new URLSearchParams(raw[1]||'')};
 }
 function applySettings() {document.body.dataset.theme=state.settings.theme;document.body.dataset.size=state.settings.size;}
@@ -51,7 +51,7 @@ function render(keepScroll=false) {
   const poem=poems.find(p=>p.id===parts[1]);
   switch(page) {
     case 'today': content=fam.managerView('poem',ui.recitationQuery||'')+view.welcomeBanner()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
-    case 'my-recitation':content=fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'')+view.welcomeBanner();tab='study';break;
+    case 'my-recitation':content=fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'')+view.welcomeBanner();tab='my-recitation';break;
     case 'feihua':{
       const char=parts[1],filter=params.get('filter')||'all';tab='study';
       if(!char){content=fhView.indexView(fhEntries,fhKeywords,state,filter);break;}
