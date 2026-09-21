@@ -1,6 +1,6 @@
 // Device-local familiarity is independent of favorites and review scheduling.
 export const LEVELS={unlearned:{label:'尚未背誦',short:'未背'},familiar:{label:'已背熟',short:'熟'},shaky:{label:'已背過・不太熟',short:'不太熟'},weak:{label:'已背過・很不熟',short:'很不熟'}};
-export const SORTS={default:'預設順序',weak:'最不熟優先',familiar:'最熟優先',updated:'最近標記',reviewed:'最近複習'};
+export const SORTS={default:'預設順序',learnedFirst:'已背過優先',unlearnedFirst:'尚未背誦優先',weak:'最不熟優先',familiar:'最熟優先',updated:'最近標記',reviewed:'最近複習'};
 const keyOf=(type,id)=>`${type}:${id}`;
 const normalized=text=>text.replace(/[\s，。！？；、：,.!?;:“”「」『』]/gu,'');
 export function createRegistry(poems,quotes){
@@ -41,6 +41,7 @@ export function filterFamiliarity(items,type,state,registry,options={}){
  const weak={weak:0,shaky:1,unlearned:2,familiar:3},strong={familiar:0,shaky:1,weak:2,unlearned:3};
  const date=(item,field)=>Date.parse(state.familiarity?.records?.[key(item)]?.[field]||'')||0;
  if(options.sort==='weak'||options.sort==='familiar'){const order=options.sort==='weak'?weak:strong;result.sort((a,b)=>order[familiarityOf(state,key(a))]-order[familiarityOf(state,key(b))]);}
+ if(options.sort==='learnedFirst'||options.sort==='unlearnedFirst'){const learned=item=>familiarityOf(state,key(item))==='unlearned'?0:1;const direction=options.sort==='learnedFirst'?-1:1;result.sort((a,b)=>direction*(learned(a)-learned(b)));}
  if(options.sort==='updated'||options.sort==='reviewed'){const field=options.sort==='updated'?'updatedAt':'lastReviewedAt';result.sort((a,b)=>date(b,field)-date(a,field));}
  return result;
 }

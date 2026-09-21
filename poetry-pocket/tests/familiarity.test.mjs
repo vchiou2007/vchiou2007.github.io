@@ -46,3 +46,10 @@ test('飛花令只看不熟為紅黃，管理中心與收藏使用同一名句�
  configureFamiliarity(s,registry,{...options(),filters:['shaky','weak']});assert.ok(managerView('quote').includes('符合 1 項'));assert.ok(views.favoritesView(poems,s,'quotes').includes('fam-badge fam-shaky'));
  assert.equal(filterItems(entries,'quote').length,1);configureFamiliarity(defaults(),registry,options());
 });
+
+test('可切換已背過在前或未背在前，黃紅綠均屬已背過且同組保持順序',()=>{
+ const sample=poems.slice(0,4);let s=defaults();for(const [i,level] of ['familiar','unlearned','shaky','weak'].entries())s=setFamiliarity(s,[ref('poem',sample[i].id)],level,stamp);
+ const sorted=sort=>filterFamiliarity(sample,'poem',s,registry,{sort}).map(p=>p.id);
+ assert.deepEqual(sorted('learnedFirst'),[sample[0].id,sample[2].id,sample[3].id,sample[1].id]);
+ assert.deepEqual(sorted('unlearnedFirst'),[sample[1].id,sample[0].id,sample[2].id,sample[3].id]);
+});

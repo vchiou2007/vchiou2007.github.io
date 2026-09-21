@@ -50,8 +50,8 @@ function render(keepScroll=false) {
   fam.configureFamiliarity(state,famRegistry,options);
   const poem=poems.find(p=>p.id===parts[1]);
   switch(page) {
-    case 'today': content=view.welcomeBanner()+fam.homeFamiliarity()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
-    case 'my-recitation':content=view.welcomeBanner()+fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'');tab='study';break;
+    case 'today': content=fam.managerView('poem',ui.recitationQuery||'')+view.welcomeBanner()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
+    case 'my-recitation':content=fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'')+view.welcomeBanner();tab='study';break;
     case 'feihua':{
       const char=parts[1],filter=params.get('filter')||'all';tab='study';
       if(!char){content=fhView.indexView(fhEntries,fhKeywords,state,filter);break;}
@@ -129,6 +129,7 @@ document.addEventListener('click',async event=>{
       case 'fam-open':openFamiliarity([button.dataset.key]);break;
       case 'fam-review':openFamiliarity([famRegistry.resolve(button.dataset.type,button.dataset.id)],true);break;
       case 'fam-batch-set':openFamiliarity(familiarityOptions().selected);break;
+      case 'fam-order':if(Object.hasOwn(SORTS,button.dataset.value)){familiarityOptions().sort=button.dataset.value;render(true);}break;
       case 'fam-set':{const targets=[...famTargets],review=famReview,value=button.dataset.value;if(!targets.length)break;dialog.querySelectorAll('[data-act=fam-set]').forEach(b=>b.disabled=true);if(await commit(s=>setFamiliarity(s,targets,value,new Date(),review),{rerender:false,message:targets.length===1?'熟悉度已儲存':`已更新 ${targets.length} 項熟悉度` })){familiarityOptions().selected=[];render(true);dialog.close();}else dialog.querySelectorAll('[data-act=fam-set]').forEach(b=>b.disabled=false);break;}
       case 'fam-batch':{const o=familiarityOptions();o.batch=!o.batch;o.selected=[];render(true);break;}
       case 'fam-all':familiarityOptions().selected=[...fam.currentFamiliarityUI().visible];render(true);break;
