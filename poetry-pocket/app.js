@@ -50,8 +50,8 @@ function render(keepScroll=false) {
   fam.configureFamiliarity(state,famRegistry,options);
   const poem=poems.find(p=>p.id===parts[1]);
   switch(page) {
-    case 'today': content=fam.managerView('poem',ui.recitationQuery||'')+view.welcomeBanner()+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
-    case 'my-recitation':content=fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'')+view.welcomeBanner();tab='my-recitation';break;
+    case 'today': content=view.welcomeBanner()+fam.managerView('poem',ui.recitationQuery||'')+explorer.quickPicker(poems)+fhView.homeTile(fhEntries,fhKeywords,state)+view.todayView(poems,state,offline);break;
+    case 'my-recitation':content=view.welcomeBanner()+fam.managerView(params.get('kind')==='quote'?'quote':'poem',ui.recitationQuery||'');tab='my-recitation';break;
     case 'feihua':{
       const char=parts[1],filter=params.get('filter')||'all';tab='study';
       if(!char){content=fhView.indexView(fhEntries,fhKeywords,state,filter);break;}
@@ -239,7 +239,7 @@ document.addEventListener('pointerup',event=>{
 });
 document.addEventListener('pointercancel',()=>swipeStart=null);
 dialog.addEventListener('close',()=>{speech.stop();modal='';pendingBackup=null;famTargets=[];famReview=false;});
-window.addEventListener('hashchange',()=>{recognition.cancel();speech.stop();if(dialog.open)dialog.close();render();window.scrollTo(0,0);document.querySelector('#main')?.focus({preventScroll:true});});
+window.addEventListener('hashchange',()=>{recognition.cancel();speech.stop();if(dialog.open)dialog.close();render();window.scrollTo(0,0);});
 document.addEventListener('visibilitychange',async()=>{
   if(document.hidden){recognition.cancel();speech.stop();}else if(poems.length){try{const latest=await storage.read();if(latest)state=validateBackup(latest,poems);render(true);}catch(error){toast(error.message);}}
 });

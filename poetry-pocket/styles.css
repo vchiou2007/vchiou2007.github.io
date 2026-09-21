@@ -64,3 +64,6 @@ body{background-color:var(--bg);background-image:radial-gradient(ellipse at 0% 0
 .recitation-heading{margin-top:0}.recitation-heading+.filters{margin-top:8px;margin-bottom:8px}
 
 .brand-creator{display:block;font-size:.68rem;line-height:1.5;font-weight:400;letter-spacing:.03em;color:var(--muted)}.creator-signature{padding:16px;margin:0 0 18px;border:1px solid var(--line);border-radius:14px;background:var(--soft)}.creator-signature strong{font-size:1.15rem}.creator-signature p{font-size:.85rem;color:var(--muted);margin-top:4px}
+
+/* Touch navigation must never outline the full page or scroll container. */
+#main,#main:focus,#main:focus-visible,.recitation-table-wrap,.recitation-table-wrap:focus,.recitation-table-wrap:focus-visible{outline:none!important}
