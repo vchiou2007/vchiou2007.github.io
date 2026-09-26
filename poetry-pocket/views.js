@@ -1,5 +1,25 @@
 import {badge,itemTools,quoteTools,filterItems,controls,homeFamiliarity,statusOf} from './familiarity-ui.js';
 import { escapeHTML as e, dailyPoem, duePoems, maskLine, quoteEntries, searchPoems, THEMES, SPEEDS, RATINGS } from './core.js';
+
+// Keep the live input AND its ancestors attached: replacing or moving either
+// can terminate the keyboard's dictation/IME session, even if focus is restored.
+export function patchSearchView(root, html, input) {
+  if(!input || !root.contains?.(input))return false;
+  const next=root.ownerDocument.createElement('div');next.innerHTML=html;
+  const replacement=next.querySelector(`#${input.id}`);
+  if(!replacement)return false;
+  const chain=(leaf,top)=>{const path=[];for(let n=leaf;n&&n!==top;n=n.parentNode)path.unshift(n);return path;};
+  const oldPath=chain(input,root),newPath=chain(replacement,next);
+  if(oldPath.length!==newPath.length||oldPath.some((n,i)=>n.tagName!==newPath[i].tagName))return false;
+  for(let i=0;i<oldPath.length;i++){
+    const parent=i?oldPath[i-1]:root,kept=oldPath[i],fresh=newPath[i];
+    const siblings=[...fresh.parentNode.childNodes],index=siblings.indexOf(fresh);
+    for(const sibling of [...parent.childNodes])if(sibling!==kept)sibling.remove();
+    for(const sibling of siblings.slice(0,index))parent.insertBefore(sibling.cloneNode(true),kept);
+    for(const sibling of siblings.slice(index+1))parent.appendChild(sibling.cloneNode(true));
+  }
+  return true;
+}
 const paths = {
   home:'M3 11 12 3l9 8M5 10v11h14V10M9 21v-7h6v7',
   book:'M12 5v16M3 3c4 0 6 0 9 2 3-2 5-2 9-2v16c-4 0-6 0-9 2-3-2-5-2-9-2Z',
