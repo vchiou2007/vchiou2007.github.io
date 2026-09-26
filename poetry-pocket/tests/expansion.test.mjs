@@ -5,10 +5,11 @@ import {validatePoems,pairEntries,defaults,validateBackup,searchPoems} from '../
 import {catalogueView,pairsView} from '../explorer.js';
 const poems=JSON.parse(readFileSync(new URL('../data/poems.json',import.meta.url),'utf8'));
 const audit=JSON.parse(readFileSync(new URL('../CONTENT_EXPANSION.json',import.meta.url),'utf8'));
+const enrichment=JSON.parse(readFileSync(new URL('../CONTENT_ENRICHMENT.json',import.meta.url),'utf8'));
 test('501 首具有唯一編號：300 首唐詩與 200 首宋詞，來源逐筆可追溯',()=>{
  assert.equal(validatePoems(poems).length,501);assert.equal(poems.filter(p=>p.type==='唐詩').length,300);assert.equal(poems.filter(p=>p.type==='宋詞').length,200);
  assert.equal(new Set(poems.map(p=>p.id)).size,501);assert.equal(audit.added.length,480);
- for(const p of poems.slice(20,500)){assert.ok(audit.added.some(a=>a.id===p.id&&a.source===p.source));assert.ok(p.translation.includes('尚未'));assert.ok(p.lines.length>=4);assert.ok(!/[�□]/.test(p.lines.join('')));}
+ for(const p of poems.slice(20,500)){assert.ok(audit.added.some(a=>a.id===p.id&&a.source===p.source));assert.ok(p.translation.includes('尚未')||enrichment.updates.some(u=>u.id===p.id&&u.translation===p.translation&&u.background===p.background&&u.sources.length>0));assert.ok(p.lines.length>=4);assert.ok(!/[�□]/.test(p.lines.join('')));}
  assert.ok(searchPoems(poems,'登鸛雀樓').some(p=>p.author==='王之渙'));assert.ok(searchPoems(poems,'雨霖').some(p=>p.author==='柳永'));
 });
 test('1,002 組兩句選摘都有完整原文，沒有空白或越界',()=>{
