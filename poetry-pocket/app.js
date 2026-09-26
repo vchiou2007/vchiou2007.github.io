@@ -42,7 +42,7 @@ function route() {
   return {parts:raw[0].split('/').filter(Boolean).map(x=>{try{return decodeURIComponent(x);}catch{return x;}}),params:new URLSearchParams(raw[1]||'')};
 }
 function applySettings() {document.body.dataset.theme=state.settings.theme;document.body.dataset.size=state.settings.size;}
-function render(keepScroll=false) {
+function render(keepScroll=false, input=document.activeElement) {
   const y=scrollY,{parts,params}=route(),page=parts[0]||'today';let content,tab=page;
   applySettings();
   const options=familiarityOptions();
@@ -75,7 +75,9 @@ function render(keepScroll=false) {
     case 'favorites':content=view.favoritesView(poems,state,ui.favoriteKind);break;
     default:content=view.empty('這頁還不在詩集裡','回到詩詞，從熟悉的一句開始。');tab='library';
   }
-  app.innerHTML=view.shell(content,tab,storageError);
+  const html=view.shell(content,tab,storageError);
+  const preserveSearch=keepScroll&&['search-input','recitation-search','catalogue-search','pair-search'].includes(input?.id);
+  if(!preserveSearch||!view.patchSearchView(app,html,input))app.innerHTML=html;
   mountWelcomeCarousel(app);
   if(keepScroll)window.scrollTo(0,y);
   updateSpeechUI();
@@ -196,15 +198,13 @@ document.addEventListener('compositionend',event=>{if(['search-input','recitatio
 document.addEventListener('input',event=>{
   if(event.isComposing)return;
   if(['recitation-search','catalogue-search','pair-search'].includes(event.target.id)){
-    const id=event.target.id,pos=event.target.selectionStart;
+    const id=event.target.id;
     if(id==='recitation-search')ui.recitationQuery=event.target.value;else (id==='catalogue-search'?ui.catalogue:ui.pairs).query=event.target.value;familiarityOptions().selected=[];
-    render(true);const input=document.getElementById(id);input.focus({preventScroll:true});if(pos!==null)input.setSelectionRange(pos,pos);return;
+    render(true,event.target);return;
   }
   if(event.target.id!=='search-input')return;
   ui.query=event.target.value;
-  const position=event.target.selectionStart;
-  history.replaceState(null,'',navigateSearch());familiarityOptions().selected=[];render(true);
-  const input=document.querySelector('#search-input');input.focus({preventScroll:true});if(position!==null)input.setSelectionRange(position,position);
+  history.replaceState(null,'',navigateSearch());familiarityOptions().selected=[];render(true,event.target);
 });
 document.addEventListener('click',event=>{if(event.target.closest('[data-fh-reveal]')){ui.fh.revealed=true;render(true);}});
 document.addEventListener('keydown',event=>{if(event.target.matches('[data-fh-reveal]')&&['Enter',' '].includes(event.key)){event.preventDefault();ui.fh.revealed=true;render(true);}});
