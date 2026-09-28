@@ -66,6 +66,14 @@ export function pairEntries(poems) {
    return {id:`${p.id}:pair:${i}`,lines,text:lines.join(''),poem:p};
   });
  });
+ // Append curated quotes after legacy entries so every legacy ID and index stays stable.
+ const ids=new Set(pairs.map(q=>q.id));
+ for(const p of poems)for(const q of p.curatedPairs||[]){
+  if(typeof q.id!=='string'||!/^fq-[a-f0-9]{16}$/.test(q.id)||ids.has(q.id)||!Array.isArray(q.indices)||q.indices.length<2||!q.indices.every((n,i)=>Number.isInteger(n)&&n>=0&&n<p.lines.length&&(!i||n===q.indices[i-1]+1))||!Number.isInteger(q.split)||q.split<1||q.split>=q.indices.length)throw new Error('新增名句格式錯誤');
+  const sourceLines=q.indices.map(n=>p.lines[n]);
+  const lines=[sourceLines.slice(0,q.split).join(''),sourceLines.slice(q.split).join('')];
+  ids.add(q.id);pairs.push({id:q.id,lines,text:lines.join(''),poem:p,explanation:q});
+ }
  return pairs.map((q,i)=>({...q,previous:pairs[(i+pairs.length-1)%pairs.length].id,next:pairs[(i+1)%pairs.length].id}));
 }
 export function quoteEntries(poems) { const all=[...poems.flatMap(p => p.famousLines.map((text, i) => ({ id: `${p.id}:${i}`, text, poem: p }))),...pairEntries(poems),...lineEntries(poems)]; return [...new Map(all.map(q=>[q.id,q])).values()]; }
