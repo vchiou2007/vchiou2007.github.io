@@ -8,184 +8,142 @@
   "bpm": 80,
   "rows": [
     {
-      "section": "弱起",
-      "text": "綠",
-      "source": "p001 第一譜列起拍；兩個八分音符合計 1 拍",
-      "beats": 1
-    },
-    {
       "section": "主歌 · 第一遍",
-      "text": "[C]草蒼[Am]蒼白",
-      "source": "p001 第一譜列 C、Am 各 1 小節",
-      "beats": 8
+      "text": "綠[C]草蒼[Am]蒼白[Dm]霧茫[G]茫",
+      "beats": 16,
+      "source": "p001 第一譜列；弱起綠合併入句，有移至下句；以有起點分行"
     },
     {
       "section": "",
-      "text": "[Dm]霧茫[G]茫有",
-      "source": "p001 第一譜列 Dm、G 各 1 小節",
-      "beats": 8
-    },
-    {
-      "section": "",
-      "text": "[F]位佳[Em]人在",
-      "source": "p001 第一譜列 F 接第二譜列 Em",
-      "beats": 8
-    },
-    {
-      "section": "",
-      "text": "[Dm]水[G]一[C]方綠",
-      "source": "p001 第二譜列 Dm/G 各 2 拍，第一結尾 C 4 拍；末拍綠為下遍弱起",
-      "beats": 8
+      "text": "有[F]位佳[Em]人在[Dm]水[G]一[C]方",
+      "beats": 16,
+      "source": "p001 第一至二譜列第一結尾；下遍弱起綠移至下句"
     },
     {
       "section": "主歌 · 第二遍",
-      "text": "[C]草萋[Am]萋白",
-      "source": "p001 第一譜列第二行歌詞，反覆展開",
-      "beats": 8
+      "text": "綠[C]草萋[Am]萋白[Dm]霧迷[G]離",
+      "beats": 16,
+      "source": "p001 第一譜列第二行歌詞；包括前一結尾末拍的綠"
     },
     {
       "section": "",
-      "text": "[Dm]霧迷[G]離有",
-      "source": "p001 第一譜列第二行歌詞，反覆展開",
-      "beats": 8
-    },
-    {
-      "section": "",
-      "text": "[F]位佳[Em]人靠",
-      "source": "p001 第一至二譜列第二行歌詞",
-      "beats": 8
-    },
-    {
-      "section": "",
-      "text": "[Dm]水[G]而[C]居",
-      "source": "p001 第二譜列第二結尾，跳過第一結尾",
-      "beats": 8
+      "text": "有[F]位佳[Em]人靠[Dm]水[G]而[C]居",
+      "beats": 17,
+      "source": "p001 第一至二譜列第二結尾；有為 1 拍弱起，加後續 4 小節"
     },
     {
       "section": "副歌 · 第一遍",
       "text": "[Am]我願逆流[Em]而上",
-      "source": "p001 第二譜列 Am 接第三譜列 Em",
-      "beats": 8
+      "beats": 8,
+      "source": "p001 第二至三譜列 Am/Em 各 4 拍"
     },
     {
       "section": "",
-      "text": "[F]依偎在他身[G]旁無",
-      "source": "p001 第三譜列 F、G 各 4 拍",
-      "beats": 8
+      "text": "[F]依偎在他身[G]旁",
+      "beats": 7,
+      "source": "p001 第三譜列 F/G；句尾無的 1 拍移入下一句"
     },
     {
       "section": "",
-      "text": "[Em]奈前有險[Dm]灘道",
-      "source": "p001 第三譜列 Em、Dm 各 4 拍",
-      "beats": 8
+      "text": "無[Em]奈前有險[Dm]灘",
+      "beats": 8,
+      "source": "p001 第三譜列；含上句移入無，末拍道移下句"
     },
     {
       "section": "",
-      "text": "[F]路又遠又[G]長",
-      "source": "p001 第四譜列 F、G 各 4 拍",
-      "beats": 8
+      "text": "道[F]路又遠又[G]長",
+      "beats": 9,
+      "source": "p001 第三至四譜列；道的 1 拍加 F/G 兩小節"
     },
     {
       "section": "",
       "text": "[Am]我願順水[Em]而下",
-      "source": "p001 第四譜列 Am、Em；依原譜保留順水",
-      "beats": 8
+      "beats": 8,
+      "source": "p001 第四譜列 Am/Em 各 4 拍"
     },
     {
       "section": "",
-      "text": "[F]找尋他的方[G]向卻",
-      "source": "p001 第四譜列 F 接 p002 第一譜列 G",
-      "beats": 8
+      "text": "[F]找尋他的方[G]向",
+      "beats": 7,
+      "source": "p001 第四譜列至 p002 第一譜列；卻的 1 拍移下句"
     },
     {
       "section": "",
-      "text": "[Em]見依稀彷[Dm]彿她",
-      "source": "p002 第一譜列 Em、Dm 各 4 拍",
-      "beats": 8
+      "text": "卻[Em]見依稀彷[Dm]彿",
+      "beats": 8,
+      "source": "p002 第一譜列；含卻，末拍她移下句；不拆散彷彿"
     },
     {
       "section": "",
-      "text": "[F]在水的[G]中[C]央",
-      "source": "p002 第一譜列 F/G 各 2 拍；第一結尾 C 後返回 p001 Am",
-      "beats": 8
+      "text": "她[F]在水的[G]中[C]央",
+      "beats": 9,
+      "source": "p002 第一譜列與第一結尾；含她的 1 拍"
     },
     {
       "section": "副歌 · 第二遍",
       "text": "[Am]我願逆流[Em]而上",
-      "source": "p001 第二譜列 Am 接第三譜列 Em，反覆第二行歌詞",
-      "beats": 8
+      "beats": 8,
+      "source": "p001 第二至三譜列 Am/Em 各 4 拍"
     },
     {
       "section": "",
-      "text": "[F]與她輕言細[G]語無",
-      "source": "p001 第三譜列 F、G 各 4 拍",
-      "beats": 8
+      "text": "[F]與她輕言細[G]語",
+      "beats": 7,
+      "source": "p001 第三譜列 F/G；句尾無的 1 拍移入下一句"
     },
     {
       "section": "",
-      "text": "[Em]奈前有險[Dm]灘道",
-      "source": "p001 第三譜列 Em、Dm 各 4 拍",
-      "beats": 8
+      "text": "無[Em]奈前有險[Dm]灘",
+      "beats": 8,
+      "source": "p001 第三譜列；含上句移入無，末拍道移下句"
     },
     {
       "section": "",
-      "text": "[F]路曲折無[G]已",
-      "source": "p001 第四譜列 F、G 各 4 拍",
-      "beats": 8
+      "text": "道[F]路曲折無[G]已",
+      "beats": 9,
+      "source": "p001 第三至四譜列；道的 1 拍加 F/G 兩小節"
     },
     {
       "section": "",
       "text": "[Am]我願順水[Em]而下",
-      "source": "p001 第四譜列 Am、Em；依原譜保留順水",
-      "beats": 8
+      "beats": 8,
+      "source": "p001 第四譜列 Am/Em 各 4 拍"
     },
     {
       "section": "",
-      "text": "[F]找尋他的蹤[G]跡卻",
-      "source": "p001 第四譜列 F 接 p002 第一譜列 G",
-      "beats": 8
+      "text": "[F]找尋他的蹤[G]跡",
+      "beats": 7,
+      "source": "p001 第四譜列至 p002 第一譜列；卻的 1 拍移下句"
     },
     {
       "section": "",
-      "text": "[Em]見依稀彷[Dm]彿她",
-      "source": "p002 第一譜列 Em、Dm 各 4 拍",
-      "beats": 8
+      "text": "卻[Em]見依稀彷[Dm]彿",
+      "beats": 8,
+      "source": "p002 第一譜列；含卻，末拍她移下句；不拆散彷彿"
     },
     {
       "section": "",
-      "text": "[F]在水的[G]中[C]立綠",
-      "source": "p002 第一譜列 F/G 各 2 拍；第二結尾 C 在第二譜列，原譜第二遍中立字樣疑似誤植，保留待校對",
-      "beats": 8
+      "text": "她[F]在水的[G]中[C]立",
+      "beats": 8,
+      "source": "p002 第一譜列與第二結尾；末拍綠移入尾段，原文中立待校對"
     },
     {
       "section": "尾段",
-      "text": "[C]草蒼[Am]蒼白",
-      "source": "p002 第二譜列 C、Am",
-      "beats": 8
+      "text": "綠[C]草蒼[Am]蒼白[Dm]霧茫[G]茫",
+      "beats": 16,
+      "source": "p002 第二譜列；前一結尾的綠移入本句"
     },
     {
       "section": "",
-      "text": "[Dm]霧茫[G]茫有",
-      "source": "p002 第二譜列 Dm、G",
-      "beats": 8
-    },
-    {
-      "section": "",
-      "text": "[F]位佳[Em]人在",
-      "source": "p002 第三譜列 F、Em",
-      "beats": 8
-    },
-    {
-      "section": "",
-      "text": "[Dm]水[G]一[C]方",
-      "source": "p002 第三譜列 Dm/G 與 C",
-      "beats": 8
+      "text": "有[F]位佳[Em]人在[Dm]水[G]一[C]方",
+      "beats": 17,
+      "source": "p002 第二至三譜列；包括有的 1 拍及句末延音"
     },
     {
       "section": "收尾",
       "text": "[C]_",
-      "source": "p002 第三譜列最後 C 小節，含休止 4 拍",
-      "beats": 4
+      "beats": 4,
+      "source": "p002 最後 C 小節含休止 4 拍"
     }
   ],
   "sourcePages": [
@@ -205,6 +163,7 @@
     "主歌與副歌依第一、第二結尾展開；本譜無獨立前奏或間奏，不另行編造。",
     "弱起 1 拍，57 個完整小節，共 229 拍；另加 4 拍預備。每行是樂句提示，非逐拍游標。",
     "原譜第二遍結尾顯示「她在水的中立」，疑似印刷／歌詞對位錯誤；暫保留原文字，請試唱校對。",
-    "保留原譜他／她與順水用字；Capo 未標示。"
+    "保留原譜他／她與順水用字；Capo 未標示。",
+    "依完整詞句換行，通常 4～8 字；弱起歸入所屬句，彷彿、白霧茫茫等詞組不跨行。重分每行拍數，總計仍為 229 拍。"
   ]
 }
