@@ -1,9 +1,8 @@
 'use strict';
 document.querySelector('#search').addEventListener('input',e=>{
- const visible='月亮代表我的心 鄧麗君'.includes(e.target.value.trim());
- document.querySelector('#moon').hidden=!visible;
- document.querySelector('#empty').hidden=visible;
- document.querySelector('#count').textContent=visible?'1 首':'0 首';
+ const query=e.target.value.trim().toLocaleLowerCase();let count=0;
+ for(const song of document.querySelectorAll('.song')){const visible=song.textContent.toLocaleLowerCase().includes(query);song.hidden=!visible;if(visible)count++;}
+ document.querySelector('#empty').hidden=count>0;document.querySelector('#count').textContent=count+' 首';
 });
 document.querySelector('#install').onclick=()=>document.querySelector('#installDialog').showModal();
 document.querySelector('#closeInstall').onclick=()=>document.querySelector('#installDialog').close();
