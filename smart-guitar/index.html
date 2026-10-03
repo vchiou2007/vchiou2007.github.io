@@ -1,10 +1,13 @@
 <!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#000000"><title>月亮代表我的心 · 智慧吉他譜</title><link rel="stylesheet" href="style.css"></head>
-<body><main id="app">
-<header><div class="heading"><div><h1 id="title">月亮代表我的心</h1><p><span id="artist">鄧麗君</span><span class="dot">·</span>靜態智慧吉他譜</p></div><div class="actions"><button id="favorite" aria-label="收藏歌曲" title="收藏歌曲">♡</button><button id="settings" aria-label="閱讀設定" title="閱讀設定">☷</button><button id="more" aria-label="歌曲工具" title="歌曲工具">⋯</button></div></div>
-<div class="metadata"><span>C 調</span><span id="capo">Capo 待確認</span><span>4/4</span><span id="bpm">BPM 待確認</span><button id="source">原譜 ↗</button></div></header>
-<div class="transport" aria-label="自動捲譜控制"><div class="transport-main"><select id="readingMode" aria-label="閱讀模式"><option value="continuous">連續捲譜</option><option value="pages">手動分頁</option></select><label class="tempo-label">BPM <input id="scrollBpm" type="number" min="20" max="300" step="1" value="74" aria-label="捲動速度 BPM"></label><button id="playScroll">▶ 開始</button><button id="restartScroll" aria-label="回到開頭">↶ 開頭</button><button id="timingSettings" aria-label="速度與拍數設定">拍數設定</button></div><div id="scrollProgress"><input id="beatSeek" type="range" min="0" max="144" step="0.01" value="0" aria-label="演奏進度"><span id="scrollClock" aria-live="off">準備演奏</span></div></div>
-<section id="score" aria-label="彩色和弦譜"></section>
-<div class="status"><span id="sectionStatus"></span><span id="saveStatus">換和弦提示 · 非逐拍節奏譜</span></div>
-<footer><div id="legend" aria-label="固定按鍵與和弦對照"></div><nav><button id="prev">〈 上一頁</button><button id="page" title="前往指定頁面" aria-label="選擇頁面"></button><button id="next">下一頁 〉</button></nav></footer>
-</main><dialog id="dialog"><div class="dialog-top"><h2 id="dialogTitle"></h2><button id="close" aria-label="關閉">×</button></div><div id="dialogBody"></div></dialog><div id="toast" role="status"></div><input type="file" id="file" accept="application/json,.json" hidden><script src="core.js"></script><script src="app.js"></script><script src="scroll.js"></script><script src="ipad.js"></script></body></html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#000000"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="智慧吉他"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><link rel="stylesheet" href="library.css"><title>智慧吉他 · 我的歌單</title></head>
+<body><main class="library"><header><div class="brand"><img src="icon-192.png" alt="" width="40" height="40"><span>智慧吉他</span></div><button id="install">加入主畫面 ↗</button></header>
+<section class="intro"><p class="eyebrow">你的音樂，隨時開始</p><h1>我的歌單</h1><p class="muted">選一首喜歡的歌，開始今天的彈唱。</p></section>
+<label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜尋歌名或歌手" aria-label="搜尋歌名或歌手"></label>
+<div class="list-heading"><h2>所有歌曲</h2><span id="count">1 首</span></div>
+<a class="song" id="moon" href="score.html"><div class="cover" aria-hidden="true"><span class="moon"></span><span class="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></div><div class="song-info"><h3>月亮代表我的心</h3><p>鄧麗君</p><div class="tags"><span>C 調</span><span>4/4</span><span>自動捲譜</span></div></div><span class="chevron" aria-hidden="true">›</span></a>
+<p id="empty" hidden class="muted">沒有符合的歌曲，請試試其他歌名或歌手。</p>
+<div class="tip"><span class="tip-icon">♫</span><div><strong>專注彈奏，讓樂譜跟著你</strong><p>進入歌曲後，設定 BPM 並按開始，即可連續捲譜。</p></div></div>
+<p id="offline" class="offline" role="status">正在準備離線使用…</p>
+<footer><span aria-hidden="true">♫</span><strong>歌單</strong></footer></main>
+<dialog id="installDialog"><button id="closeInstall" aria-label="關閉">×</button><h2>把智慧吉他放進主畫面</h2><ol><li>使用 iPad 或 iPhone 的 Safari 開啟本頁。</li><li>點「分享」，再選「加入主畫面」。</li><li>若出現「以 Web App 開啟」，請保持開啟。</li><li>點「加入」。之後從主畫面圖示啟動。</li></ol><p>從主畫面啟動時會以獨立 App 視窗呈現。首次請連網，等待離線準備完成。</p></dialog>
+<script src="library.js"></script><script src="pwa.js"></script></body></html>
