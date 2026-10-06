@@ -68,7 +68,7 @@ function renderAero(){
 function renderCueRail(){$('cueRail').replaceChildren();$('scoreLayout').classList.remove('has-cues')}
 function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.save();for(const cue of s.aeroband.drumCues||[]){if(cue.action!=='on')continue;const r=resolveCue(s,cue);if(!r||r.page!==p)continue;const anchor=cue.anchor.lyricIndex==null?r.mark:r.mark.lyrics[cue.anchor.lyricIndex];ctx.font='bold 27px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=3;ctx.strokeStyle='#20392b';ctx.fillStyle='#4ddf84';const x=anchor.x+(anchor.width||29)/2+10,y=anchor.y-(anchor.height||22)/2-5;ctx.strokeText('★',x,y);ctx.fillText('★',x,y)}ctx.restore()}
 
-const READER_BUILD='20261006.6';
+const READER_BUILD='20261006.7';
 // 原始圖片及標記座標保留；只裁切顯示範圍，避開四頁的灰邊與折痕。
 const scanCrops={4:{x:244,y:105,w:672,h:935},5:{x:244,y:105,w:672,h:935},6:{x:244,y:105,w:672,h:935},7:{x:244,y:105,w:672,h:935}};
 const fullPageDraw=draw;let cropDrawRequest=0;
@@ -81,7 +81,7 @@ for(const key of ['onpointerdown','onpointermove','onpointerup','onpointercancel
 let swipe=null;
 function turnBySwipe(dx){const target=pageIndex+(dx<0?1:-1);if(!song()||target<0||target>=song().pages.length)return;go(dx<0?1:-1);requestAnimationFrame(()=>readingSurface.scrollTo({top:$('scoreLayout').getBoundingClientRect().top-readingSurface.getBoundingClientRect().top+readingSurface.scrollTop,behavior:'instant'}))}
 readingSurface.addEventListener('touchstart',e=>{swipe=!correctionInput.checked&&e.touches.length===1&&$('scoreLayout').contains(e.target)?{x:e.touches[0].clientX,y:e.touches[0].clientY,axis:null,turned:false}:null},{passive:true});
-readingSurface.addEventListener('touchmove',e=>{if(!swipe)return;if(e.touches.length!==1){swipe=null;return}const t=e.touches[0],dx=t.clientX-swipe.x,dy=t.clientY-swipe.y;if(!swipe.axis&&Math.max(Math.abs(dx),Math.abs(dy))>12)swipe.axis=Math.abs(dx)>Math.abs(dy)*1.4?'x':'y';if(pageFit&&swipe.axis==='y'&&e.cancelable)e.preventDefault();if(pageFit&&swipe.axis==='y'&&e.cancelable)e.preventDefault();if(swipe.axis==='x'){if(e.cancelable)e.preventDefault();if(!swipe.turned&&Math.abs(dx)>=65){swipe.turned=true;turnBySwipe(dx)}}},{passive:false});
+readingSurface.addEventListener('touchmove',e=>{if(!swipe)return;if(e.touches.length!==1){swipe=null;return}const t=e.touches[0],dx=t.clientX-swipe.x,dy=t.clientY-swipe.y;if(!swipe.axis&&Math.max(Math.abs(dx),Math.abs(dy))>12)swipe.axis=Math.abs(dx)>Math.abs(dy)*1.4?'x':'y';if(swipe.axis==='y'&&e.cancelable)e.preventDefault();if(swipe.axis==='y'&&e.cancelable)e.preventDefault();if(swipe.axis==='x'){if(e.cancelable)e.preventDefault();if(!swipe.turned&&Math.abs(dx)>=65){swipe.turned=true;turnBySwipe(dx)}}},{passive:false});
 readingSurface.addEventListener('touchend',e=>{if(swipe&&!swipe.turned&&e.changedTouches.length){const t=e.changedTouches[0],dx=t.clientX-swipe.x,dy=t.clientY-swipe.y;if(swipe.axis!=='y'&&Math.abs(dx)>=65&&Math.abs(dx)>Math.abs(dy)*1.4)turnBySwipe(dx)}swipe=null},{passive:true});
 readingSurface.addEventListener('touchcancel',()=>{swipe=null},{passive:true});
 const buildBadge=el('span','閱讀版 '+READER_BUILD,'muted');buildBadge.id='readerVersion';document.querySelector('.toolbar').append(buildBadge);
@@ -96,7 +96,7 @@ fitExit.onclick=leaveWholePage;fitPrevious.onclick=()=>go(-1);fitNext.onclick=()
 const beforeFitGo=go;go=function(v){beforeFitGo(v);showWholePage()};const beforeFitRender=render;render=function(){beforeFitRender();refreshFitControls()};
 let verticalReadingTouch=null,fitSettleTimer;
 readingSurface.addEventListener('touchstart',e=>{clearTimeout(fitSettleTimer);verticalReadingTouch=e.touches.length===1&&$('scoreLayout').contains(e.target)&&!correctionInput.checked?{x:e.touches[0].clientX,y:e.touches[0].clientY,moved:false}:null},{passive:true});
-readingSurface.addEventListener('touchmove',e=>{if(!verticalReadingTouch)return;if(e.touches.length!==1){verticalReadingTouch=null;return}const dx=e.touches[0].clientX-verticalReadingTouch.x,dy=e.touches[0].clientY-verticalReadingTouch.y;if(Math.abs(dy)>45&&Math.abs(dy)>Math.abs(dx)*1.4){verticalReadingTouch.moved=true;verticalReadingTouch.direction=dy>0?'down':'up'}},{passive:true});
+readingSurface.addEventListener('touchmove',e=>{if(!verticalReadingTouch)return;if(e.touches.length!==1){verticalReadingTouch=null;return}const dx=e.touches[0].clientX-verticalReadingTouch.x,dy=e.touches[0].clientY-verticalReadingTouch.y;if(Math.abs(dy)>24&&Math.abs(dy)>Math.abs(dx)*1.4){verticalReadingTouch.moved=true;verticalReadingTouch.direction=dy>0?'down':'up'}},{passive:true});
 function settleWholePage(){if(verticalReadingTouch?.moved){const direction=verticalReadingTouch.direction;clearTimeout(fitSettleTimer);fitSettleTimer=setTimeout(direction==='down'?leaveWholePage:showWholePage,150)}verticalReadingTouch=null}
 readingSurface.addEventListener('touchend',settleWholePage,{passive:true});readingSurface.addEventListener('touchcancel',settleWholePage,{passive:true});
 
