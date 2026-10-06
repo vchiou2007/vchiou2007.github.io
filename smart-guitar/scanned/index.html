@@ -68,7 +68,7 @@ function renderAero(){
 function renderCueRail(){$('cueRail').replaceChildren();$('scoreLayout').classList.remove('has-cues')}
 function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.save();for(const cue of s.aeroband.drumCues||[]){if(cue.action!=='on')continue;const r=resolveCue(s,cue);if(!r||r.page!==p)continue;const anchor=cue.anchor.lyricIndex==null?r.mark:r.mark.lyrics[cue.anchor.lyricIndex];ctx.font='bold 27px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=3;ctx.strokeStyle='#20392b';ctx.fillStyle='#4ddf84';const x=anchor.x+(anchor.width||29)/2+10,y=anchor.y-(anchor.height||22)/2-5;ctx.strokeText('★',x,y);ctx.fillText('★',x,y)}ctx.restore()}
 
-const READER_BUILD='20261006.9';
+const READER_BUILD='20261006.10';
 // 原始圖片及標記座標保留；只裁切顯示範圍，避開四頁的灰邊與折痕。
 const scanCrops={4:{x:244,y:105,w:672,h:935},5:{x:244,y:105,w:672,h:935},6:{x:244,y:105,w:672,h:935},7:{x:244,y:105,w:672,h:935}};
 const fullPageDraw=draw;let cropDrawRequest=0;
@@ -118,6 +118,14 @@ function toggleScoreTheme(){scoreTheme=scoreTheme==='white'?'black':'white';try{
 themeButton.onclick=toggleScoreTheme;fitThemeButton.onclick=toggleScoreTheme;syncScoreTheme();
 const beforeThemeDraw=draw;let themeDrawRequest=0;
 draw=async function(){const request=++themeDrawRequest;await beforeThemeDraw();if(request!==themeDrawRequest||scoreTheme!=='black'||!page())return;const image=ctx.getImageData(0,0,canvas.width,canvas.height),data=image.data;for(let i=0;i<data.length;i+=4){const r=data[i],g=data[i+1],b=data[i+2];if(Math.max(r,g,b)-Math.min(r,g,b)>25)continue;const gray=Math.round(.299*r+.587*g+.114*b),value=gray>=210?0:255-gray;data[i]=data[i+1]=data[i+2]=value}ctx.putImageData(image,0,0)};
+
+// 單點不切換；雙擊與向上撥動都可進入整頁。校正模式保留原雙擊功能。
+const beforeDoubleTap=canvas.ondblclick;canvas.ondblclick=e=>{if(correctionInput.checked){beforeDoubleTap?.(e);return}e.preventDefault();showWholePage()};
+let tapStart=null,lastScoreTap=null;
+canvas.addEventListener('touchstart',e=>{if(correctionInput.checked||e.touches.length!==1){tapStart=null;lastScoreTap=null;return}tapStart={x:e.touches[0].clientX,y:e.touches[0].clientY,time:Date.now()}},{passive:true});
+canvas.addEventListener('touchmove',e=>{if(!tapStart)return;if(e.touches.length!==1||Math.abs(e.touches[0].clientX-tapStart.x)>12||Math.abs(e.touches[0].clientY-tapStart.y)>12){tapStart=null;lastScoreTap=null}},{passive:true});
+canvas.addEventListener('touchcancel',()=>{tapStart=null;lastScoreTap=null},{passive:true});
+canvas.addEventListener('touchend',e=>{const start=tapStart;tapStart=null;if(!start||correctionInput.checked||e.touches.length||e.changedTouches.length!==1)return;const t=e.changedTouches[0],now=Date.now();if(now-start.time>300||Math.abs(t.clientX-start.x)>12||Math.abs(t.clientY-start.y)>12){lastScoreTap=null;return}if(lastScoreTap&&now-lastScoreTap.time<350&&Math.abs(t.clientX-lastScoreTap.x)<24&&Math.abs(t.clientY-lastScoreTap.y)<24){if(e.cancelable)e.preventDefault();lastScoreTap=null;showWholePage()}else lastScoreTap={x:t.clientX,y:t.clientY,time:now}},{passive:false});
 
 init();
 </script></html>
