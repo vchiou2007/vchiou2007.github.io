@@ -87,7 +87,7 @@ function renderAero(){
 function renderCueRail(){$('cueRail').replaceChildren();$('scoreLayout').classList.remove('has-cues')}
 function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.save();for(const cue of s.aeroband.drumCues||[]){if(cue.action!=='on')continue;const r=resolveCue(s,cue);if(!r||r.page!==p)continue;const anchor=cue.anchor.lyricIndex==null?r.mark:r.mark.lyrics[cue.anchor.lyricIndex];ctx.font='bold 27px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=3;ctx.strokeStyle='#20392b';ctx.fillStyle='#4ddf84';const x=anchor.x+(anchor.width||29)/2+10,y=anchor.y-(anchor.height||22)/2-5;ctx.strokeText('★',x,y);ctx.fillText('★',x,y)}ctx.restore()}
 
-const READER_BUILD='20261007.4';
+const READER_BUILD='20261007.5';
 // 原始圖片及標記座標保留；只裁切顯示範圍，避開四頁的灰邊與折痕。
 const legacyScanCrops={4:{x:244,y:105,w:672,h:935},5:{x:244,y:105,w:672,h:935},6:{x:244,y:105,w:672,h:935},7:{x:244,y:105,w:672,h:935}};
 function getPageCrop(p){if(!p)return null;if(p.crop)return p.crop;return (p.sourceFile||'').startsWith('Document_20261006_0002.pdf#')?legacyScanCrops[p.pdfPage]:null}
@@ -176,7 +176,11 @@ for(const input of [librarySearchInput,$('search')]){
 }
 librarySearchInput.id='librarySearchInput';librarySearchInput.name='songSearch';
 const searchKeyboardButton=el('button','⌨ 輸入搜尋');searchKeyboardButton.id='searchKeyboardButton';searchKeyboardButton.type='button';searchKeyboardButton.setAttribute('aria-label','開啟搜尋鍵盤');librarySearchInput.after(searchKeyboardButton);
-searchKeyboardButton.onclick=()=>{librarySearchInput.blur();librarySearchInput.focus();if(navigator.virtualKeyboard?.show)navigator.virtualKeyboard.show()};
+// 使用 Safari 原生 prompt 的文字欄，與譜面手勢及固定捲動容器完全分離。
+function openNativeSongSearch(input=librarySearchInput){const value=window.prompt('搜尋歌名、作者、演唱者或書名',librarySearch);if(value===null)return;input.value=value;syncSearch(input)}
+searchKeyboardButton.textContent='搜尋';searchKeyboardButton.onclick=()=>openNativeSongSearch();
+for(const input of [librarySearchInput,$('search')]){input.readOnly=true;input.setAttribute('aria-haspopup','dialog');input.onclick=()=>openNativeSongSearch(input);input.oncontextmenu=e=>e.preventDefault();input.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openNativeSongSearch(input)}}}
+
 
 
 renderSongs=function(){const host=$('songs');host.replaceChildren();for(const s of library.songs.filter(matchesSong)){const b=el('button',s.title+' · '+s.pages.length+' 頁',s.id===songId?'active':'');b.onclick=()=>openScore(s.id);host.append(b)}};
