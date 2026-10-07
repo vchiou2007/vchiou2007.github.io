@@ -87,7 +87,7 @@ function renderAero(){
 function renderCueRail(){$('cueRail').replaceChildren();$('scoreLayout').classList.remove('has-cues')}
 function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.save();for(const cue of s.aeroband.drumCues||[]){if(cue.action!=='on')continue;const r=resolveCue(s,cue);if(!r||r.page!==p)continue;const anchor=cue.anchor.lyricIndex==null?r.mark:r.mark.lyrics[cue.anchor.lyricIndex];ctx.font='bold 27px Arial';ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=3;ctx.strokeStyle='#20392b';ctx.fillStyle='#4ddf84';const x=anchor.x+(anchor.width||29)/2+10,y=anchor.y-(anchor.height||22)/2-5;ctx.strokeText('★',x,y);ctx.fillText('★',x,y)}ctx.restore()}
 
-const READER_BUILD='20261007.3';
+const READER_BUILD='20261007.4';
 // 原始圖片及標記座標保留；只裁切顯示範圍，避開四頁的灰邊與折痕。
 const legacyScanCrops={4:{x:244,y:105,w:672,h:935},5:{x:244,y:105,w:672,h:935},6:{x:244,y:105,w:672,h:935},7:{x:244,y:105,w:672,h:935}};
 function getPageCrop(p){if(!p)return null;if(p.crop)return p.crop;return (p.sourceFile||'').startsWith('Document_20261006_0002.pdf#')?legacyScanCrops[p.pdfPage]:null}
@@ -145,12 +145,12 @@ let lastScoreTap=null,pointerTap=null,touchTap=null,ignoreScoreTapUntil=0;
 function canScoreTap(target){return activeTab==='score'&&!correctionInput.checked&&!target.closest('button,input,select,textarea,a,summary,label,nav')}
 function beginScoreTap(x,y,event){const now=Date.now();if(now<ignoreScoreTapUntil||!canScoreTap(event.target))return null;if(lastScoreTap&&now-lastScoreTap.time<=650&&Math.hypot(x-lastScoreTap.x,y-lastScoreTap.y)<=70){if(event.cancelable)event.preventDefault();lastScoreTap=null;pointerTap=touchTap=null;ignoreScoreTapUntil=now+650;clearTimeout(fitSettleTimer);showWholePage();return null}return{x,y,time:now}}
 function finishScoreTap(start,x,y){if(!start||Date.now()<ignoreScoreTapUntil)return;if(Date.now()-start.time<=500&&Math.hypot(x-start.x,y-start.y)<=20)lastScoreTap={x,y,time:Date.now()};else lastScoreTap=null}
-readingSurface.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;pointerTap=e.isPrimary?beginScoreTap(e.clientX,e.clientY,e):null},{capture:true});
+readingSurface.addEventListener('pointerdown',e=>{if(e.target.closest('input,textarea,select,button')||e.pointerType==='mouse')return;pointerTap=e.isPrimary?beginScoreTap(e.clientX,e.clientY,e):null},{capture:true});
 readingSurface.addEventListener('pointermove',e=>{if(pointerTap&&Math.hypot(e.clientX-pointerTap.x,e.clientY-pointerTap.y)>20){pointerTap=null;lastScoreTap=null}},{capture:true,passive:true});
 readingSurface.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;finishScoreTap(pointerTap,e.clientX,e.clientY);pointerTap=null},{capture:true});
 readingSurface.addEventListener('pointercancel',()=>{pointerTap=null},{capture:true});
 // 舊版 iPad Safari 的 Touch Events 備援。
-readingSurface.addEventListener('touchstart',e=>{if(e.touches.length!==1){touchTap=null;lastScoreTap=null;return}const t=e.touches[0];touchTap=beginScoreTap(t.clientX,t.clientY,e)},{capture:true,passive:false});
+readingSurface.addEventListener('touchstart',e=>{if(e.target.closest('input,textarea,select,button'))return;if(e.touches.length!==1){touchTap=null;lastScoreTap=null;return}const t=e.touches[0];touchTap=beginScoreTap(t.clientX,t.clientY,e)},{capture:true,passive:false});
 readingSurface.addEventListener('touchmove',e=>{if(!touchTap)return;if(e.touches.length!==1||Math.hypot(e.touches[0].clientX-touchTap.x,e.touches[0].clientY-touchTap.y)>20){touchTap=null;lastScoreTap=null}},{capture:true,passive:true});
 readingSurface.addEventListener('touchend',e=>{if(!e.touches.length&&e.changedTouches.length===1){const t=e.changedTouches[0];finishScoreTap(touchTap,t.clientX,t.clientY)}touchTap=null},{capture:true,passive:true});
 readingSurface.addEventListener('touchcancel',()=>{touchTap=null},{capture:true,passive:true});
@@ -170,15 +170,14 @@ const resultCount=el('p',null,'muted');resultCount.id='libraryResultCount';libra
 function refreshLibraryFilters(){for(const b of languageButtons)b.setAttribute('aria-pressed',String(languageFilter===b.dataset.language));collectionSelect.replaceChildren();for(const [value,label] of [['all','所有清單'],['favorites','★ 我的最愛'],...(library.collections||[]).map(c=>[c.id,c.name])]){const o=el('option',label);o.value=value;collectionSelect.append(o)}if(![...collectionSelect.options].some(o=>o.value===collectionFilter))collectionFilter='all';collectionSelect.value=collectionFilter}
 function syncSearch(input){librarySearch=input.value;librarySearchInput.value=librarySearch;$('search').value=librarySearch;renderLibraryCards();renderSongs()}
 librarySearchInput.oninput=()=>syncSearch(librarySearchInput);librarySearchInput.addEventListener('search',()=>syncSearch(librarySearchInput));$('search').oninput=()=>syncSearch($('search'));
-// iPad Safari：直接在使用者觸控結束的事件內取得輸入焦點，讓軟體鍵盤可開啟。
+// 搜尋使用原生輸入行為；不以 touchend 提前 focus，避免 Safari 焦點與鍵盤不同步。
 for(const input of [librarySearchInput,$('search')]){
- input.inputMode='search';input.setAttribute('enterkeyhint','search');input.autocomplete='off';input.autocapitalize='none';input.spellcheck=false;input.readOnly=false;input.disabled=false;input.style.fontSize='16px';input.style.touchAction='manipulation';
- let searchTouch=null;
- input.addEventListener('touchstart',e=>{searchTouch=e.touches.length===1?{x:e.touches[0].clientX,y:e.touches[0].clientY}:null},{passive:true});
- input.addEventListener('touchend',e=>{const t=e.changedTouches[0];if(searchTouch&&t&&Math.hypot(t.clientX-searchTouch.x,t.clientY-searchTouch.y)<12)input.focus();searchTouch=null},{passive:true});
- input.addEventListener('touchcancel',()=>{searchTouch=null},{passive:true});
- input.addEventListener('click',()=>input.focus());
+ input.type='text';input.inputMode='text';input.setAttribute('enterkeyhint','search');input.autocomplete='off';input.autocapitalize='none';input.spellcheck=false;input.readOnly=false;input.disabled=false;input.style.fontSize='18px';input.style.webkitUserSelect='text';input.style.userSelect='text';input.style.webkitTouchCallout='none';
 }
+librarySearchInput.id='librarySearchInput';librarySearchInput.name='songSearch';
+const searchKeyboardButton=el('button','⌨ 輸入搜尋');searchKeyboardButton.id='searchKeyboardButton';searchKeyboardButton.type='button';searchKeyboardButton.setAttribute('aria-label','開啟搜尋鍵盤');librarySearchInput.after(searchKeyboardButton);
+searchKeyboardButton.onclick=()=>{librarySearchInput.blur();librarySearchInput.focus();if(navigator.virtualKeyboard?.show)navigator.virtualKeyboard.show()};
+
 
 renderSongs=function(){const host=$('songs');host.replaceChildren();for(const s of library.songs.filter(matchesSong)){const b=el('button',s.title+' · '+s.pages.length+' 頁',s.id===songId?'active':'');b.onclick=()=>openScore(s.id);host.append(b)}};
 async function toggleFavorite(id){const s=library.songs.find(s=>s.id===id);if(!s)return;s.favorite=!s.favorite;renderLibraryCards();refreshScoreCollectionButtons();await persist()}
