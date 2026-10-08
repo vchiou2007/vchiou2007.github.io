@@ -396,7 +396,7 @@ function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.s
 
 
 
-const READER_BUILD='20261008.7';
+const READER_BUILD='20261008.8';
 
 
 
@@ -914,12 +914,12 @@ importLibrary=async function(f){if(!f)return;try{const v=validateLibrary(JSON.pa
 
 
 
-window.NodScoreBridge={wholePage:()=>showWholePage(),context:()=>({tab:activeTab,songId,title:song()?.title,pageIndex,pageCount:song()?.pages.length||0,correcting:correctionInput.checked,pageFit}),turn:(delta)=>{const target=pageIndex+delta;if(activeTab!=='score'||correctionInput.checked||!song()||target<0||target>=song().pages.length)return {turned:false,pageIndex};go(delta);return {turned:true,pageIndex};}};
+window.NodScoreBridge={scrollData:()=>{const s=song(),p=page(),next=s?.pages[pageIndex+1],ys=[...(p?.marks||[])].map(m=>m.y).sort((a,b)=>a-b),rows=[];for(const y of ys)if(!rows.length||y-rows.at(-1)>55)rows.push(y);return {next,crop:next?getPageCrop(next):null,styles:Object.fromEntries((next?.marks||[]).map(m=>[m.chord,style(m.chord,s)])),rows:Math.max(4,rows.length),beats:3===Number(s?.aeroband?.beatsPerMeasure)?3:4};},wholePage:()=>showWholePage(),context:()=>({tab:activeTab,songId,title:song()?.title,pageIndex,pageCount:song()?.pages.length||0,correcting:correctionInput.checked,pageFit}),turn:(delta)=>{const target=pageIndex+delta;if(activeTab!=='score'||correctionInput.checked||!song()||target<0||target>=song().pages.length)return {turned:false,pageIndex};go(delta);return {turned:true,pageIndex};}};
 init();
 
 
 
-</script><script type="module" src="./nod-score.mjs?v=6"></script></html>
+</script><script type="module" src="./nod-score.mjs?v=6"></script><script type="module" src="./auto-scroll.mjs?v=1"></script></html>
 
 
 
