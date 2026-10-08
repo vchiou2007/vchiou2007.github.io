@@ -12,7 +12,7 @@ let camera=new CameraService($('cameraVideo'),frame=>{
   if(lastFaceStatus!==frame.face){lastFaceStatus=frame.face;status(frame.face?'FACE DETECTED':'FACE LOST',frame.face?'偵測到人臉；雙眼穩定睜開後開始判斷眨眼':'沒有可靠的雙眼分數，已取消未完成手勢');}
   if(['OPEN','BLINKS'].includes(calibration.stage)){
     calibration.feed(frame.t,frame.left,frame.right,frame.face);controller.loseFace();$('calibrationStatus').textContent=calibration.message;
-    if(calibration.stage==='DONE'){settings={...settings,...Object.fromEntries(['openThreshold','closedThreshold'].map(k=>[k,calibration.result[k]]))};controller.configure(settings);for(const k of ['openThreshold','closedThreshold'])$(k).value=settings[k];log.add({kind:'calibration',result:calibration.result});}
+    if(calibration.stage==='DONE'){settings={...settings,...Object.fromEntries(['openThreshold','closedThreshold','minBlinkMs','maxIntervalMs','gestureTimeoutMs'].map(k=>[k,calibration.result[k]]))};controller.configure(settings);for(const k of ['openThreshold','closedThreshold','minBlinkMs','maxIntervalMs','gestureTimeoutMs'])$(k).value=settings[k];log.add({kind:'calibration',result:calibration.result});}
   }else if($('enabled').checked)controller.feed(frame.t,frame.left,frame.right,frame.face);else controller.loseFace();
   log.sample(frame.t,{kind:'sample',leftEyeScore:frame.left??null,rightEyeScore:frame.right??null,eyeStatus:controller.phase,blinkCount:controller.count,gestureState:controller.state,pageNumber:page,inferenceTimeMs:frame.inferenceMs});
 },status);

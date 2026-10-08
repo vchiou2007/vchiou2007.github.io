@@ -22,6 +22,8 @@ export class EyeCalibration{
   finish(){
     const peak=Math.min(percentile(this.peaks.map(x=>x[0]),.2),percentile(this.peaks.map(x=>x[1]),.2)),gap=peak-this.baseline;
     if(gap<.18){this.fail('睜眼與閉眼分數沒有足夠區別，請調整光線、距離或解析度');return;}
-    this.result={openThreshold:Number((this.baseline+gap*.2).toFixed(3)),closedThreshold:Number((this.baseline+gap*.6).toFixed(3)),openBaseline:this.baseline,closedPeak:peak,samples:this.openSamples.length,blinks:5};this.stage='DONE';this.message='校準完成；門檻已套用，仍可手動調整';
+    // Detection must accept the same sustained closure that passed calibration.
+    // A peak-based higher threshold can leave only one frame above threshold.
+    this.result={openThreshold:Number(Math.min(this.cut-.04,Math.max(this.baseline+.12,this.baseline+gap*.2)).toFixed(3)),closedThreshold:Number(this.cut.toFixed(3)),minBlinkMs:40,maxIntervalMs:900,gestureTimeoutMs:900,openBaseline:this.baseline,closedPeak:peak,samples:this.openSamples.length,blinks:5};this.stage='DONE';this.message='校準完成；請先睜眼一秒，再連眨三下。下方眨眼次數應依序顯示 1、2，再翻頁';
   }
 }
