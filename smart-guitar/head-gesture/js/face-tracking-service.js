@@ -105,10 +105,11 @@ export class FaceTrackingService {
     if (this._landmarker) return;
     this._settings = settings;
     const mp = await this.loadModule();
-    const fileset = await mp.FilesetForVisionTasks.forVisionTasks(pageAsset(LOCAL_WASM_PATH))
+    // tasks-vision 0.10.14 匯出 FilesetResolver（非舊名 FilesetForVisionTasks）
+    const fileset = await mp.FilesetResolver.forVisionTasks(pageAsset(LOCAL_WASM_PATH))
       .catch(async () => {
         console.warn('本機 WASM 載入失敗，改用 CDN');
-        return mp.FilesetForVisionTasks.forVisionTasks(CDN_WASM_BASE);
+        return mp.FilesetResolver.forVisionTasks(CDN_WASM_BASE);
       });
     const modelUrl = pageAsset(LOCAL_MODEL_PATH);
     const options = (delegate) => ({
