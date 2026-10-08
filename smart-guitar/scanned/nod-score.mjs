@@ -1,5 +1,5 @@
 import {CameraService} from '../../experiments/eye-blink-poc/js/camera-service.mjs?v=6';
-import {NodController} from '../../experiments/eye-blink-poc/js/nod-controller.mjs?v=8';
+import {NodController} from '../../experiments/eye-blink-poc/js/nod-controller.mjs?v=9';
 const bridge=window.NodScoreBridge;if(!bridge)throw Error('歌譜點頭介面未就緒');
 const css=document.createElement('link');css.rel='stylesheet';css.href='./nod-score.css?v=4';document.head.append(css);
 const panel=document.createElement('details');panel.className='score-nod-panel';panel.id='scoreNodPanel';panel.innerHTML='<summary>點頭翻頁（實驗）</summary><div class="score-nod-buttons"><button id="scoreNodStart">啟動點頭</button><button id="scoreNodCalibrate" disabled>校準點頭</button><button id="scoreNodStop" disabled>關閉攝影機</button></div><p>校準時只要正常看著螢幕中央兩秒，不用先點頭。往下點、回原位算一次；三次下頁，兩次上頁。</p><label>連續動作間隔 <input id="scoreNodInterval" type="range" min="400" max="4000" step="100" value="2000"> <output id="scoreNodSeconds">2.0</output> 秒</label><p id="scoreNodAngles">等待頭部角度資料</p><label>點頭幅度 <input id="scoreNodSensitivity" type="range" min="6" max="20" value="8"><output id="scoreNodDegrees">8</output>°</label><p id="scoreNodStatus" role="status">尚未啟動；只控制目前歌曲的頁面。</p>';
