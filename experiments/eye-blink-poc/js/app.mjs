@@ -1,5 +1,5 @@
 import {BlinkController,DEFAULTS,validateSettings} from './blink-controller.mjs';
-import {EyeCalibration} from './calibration.mjs';
+import {EyeCalibration} from './calibration.mjs?v=2';
 import {CameraService} from './camera-service.mjs';
 import {DebugLog} from './debug-log.mjs';
 const $=id=>document.getElementById(id),log=new DebugLog(),calibration=new EyeCalibration();
