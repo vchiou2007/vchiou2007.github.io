@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {BlinkFeedback} from '../js/blink-feedback.mjs';
+test('received numbers survive the controller resetting after gesture',()=>{const f=new BlinkFeedback();for(let n=1;n<=5;n++){f.receive(n,'calibration',n*200);assert.equal(f.snapshot(n*200+100).number,n);}f.receive(3,'next page',2000);assert.equal(f.snapshot(3000).number,3);assert.equal(f.snapshot(3700).number,0);f.reset();assert.equal(f.snapshot(3700).number,0);});

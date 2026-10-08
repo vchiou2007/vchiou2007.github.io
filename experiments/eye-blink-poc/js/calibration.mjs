@@ -2,7 +2,7 @@ export function percentile(values,fraction){const a=[...values].sort((a,b)=>a-b)
 export class EyeCalibration{
   constructor(){this.reset();}
   reset(){this.stage='OFF';this.openSamples=[];this.peaks=[];this.openStart=null;this.closed=null;this.lastTime=null;this.result=null;this.message='尚未校準';}
-  start(t){this.reset();this.stage='OPEN';this.started=t;this.message='距離約一公尺，保持雙眼自然睜開三秒';}
+  start(t){this.reset();this.stage='OPEN';this.started=t;this.message='距離約一公尺，看著螢幕中央，保持雙眼自然睜開三秒';}
   fail(message){this.stage='FAILED';this.closed=null;this.message='校準失敗：'+message;}
   feed(t,left,right,face){
     if(!['OPEN','BLINKS'].includes(this.stage))return;
