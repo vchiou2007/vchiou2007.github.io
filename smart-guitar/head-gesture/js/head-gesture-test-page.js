@@ -119,7 +119,9 @@ function renderAll(out, result) {
     const width = Math.min(50, Math.abs(rel) / 45 * 50);
     $('tiltFill').style.width = width + '%';
     $('tiltFill').style.left = rel >= 0 ? '50%' : (50 - width) + '%';
-    $('tiltFill').style.background = rel >= 0 ? 'var(--green)' : 'var(--blue)';
+    // 超過觸發角時改為警示色，讓使用者知道「已達翻頁門檻」
+    const armed = Math.abs(rel) >= settings.get('triggerAngleDeg');
+    $('tiltFill').style.background = armed ? 'var(--red)' : (rel >= 0 ? 'var(--green)' : 'var(--blue)');
   }
   $('rollRaw').textContent = Number.isFinite(result.rollDeg) ? result.rollDeg.toFixed(1) : '–';
   $('rollFiltered').textContent = Number.isFinite(out.filteredRollDeg) ? out.filteredRollDeg.toFixed(1) : '–';
@@ -393,3 +395,9 @@ service.loadModule().then(() => {
   $('modelStatus').textContent = '載入失敗';
 });
 $('delegateStatus').textContent = '–';
+
+// 診斷用：從主控台可讀取內部狀態（window.__hg）；simulate 可注入合成角度做端到端自測
+window.__hg = {
+  controller, settings, calibration, service, log, state,
+  simulate: (rollDeg, faceDetected = true) => handleResult({ rollDeg, faceDetected, inferenceMs: 0 }),
+};

@@ -65,6 +65,7 @@ export class HeadGestureController {
     this._triggeredAt = 0;       // 觸發時間（冷卻起點）
     this._centerSince = 0;       // 回正穩定起點
     this._lastEventSide = null;
+    this._recentAbs = [];        // 近期 |rel| 樣本（遲滯與 recentMax 用）
   }
 
   updateSettings(settings) {
@@ -84,6 +85,7 @@ export class HeadGestureController {
     this._candidateSince = 0;
     this._triggeredAt = 0;
     this._centerSince = 0;
+    this._recentAbs = [];
   }
 
   /**
@@ -117,7 +119,15 @@ export class HeadGestureController {
     }
 
     const absRel = Math.abs(rel);
+    this._recentAbs.push({ t: nowMs, v: absRel });
     const overTrigger = absRel >= s.triggerAngleDeg;
+    // 遲滯：進入候選用觸發角，取消候選用較低門檻，避免平滑雜訊造成反覆取消
+    const exitThreshold = Math.max(s.centerThresholdDeg + 1, s.triggerAngleDeg - 3);
+    const staysCandidate = absRel >= exitThreshold;
+    // 近期最大值（holdMs + 400ms 視窗）：短暫低於觸發角不重新計時
+    const recentWindow = s.holdMs + 400;
+    while (this._recentAbs.length && this._recentAbs[0].t < nowMs - recentWindow) this._recentAbs.shift();
+    const recentMax = this._recentAbs.reduce((m, x) => Math.max(m, x.v), 0);
     const atCenter = absRel <= s.centerThresholdDeg;
 
     switch (this.state) {
@@ -132,20 +142,20 @@ export class HeadGestureController {
         break;
 
       case GESTURE_STATES.CANDIDATE_RIGHT:
-        if (!overTrigger || rel <= 0) {
-          // 提早回到觸發角以下 → 取消候選
+        if (!staysCandidate || rel <= 0) {
+          // 明顯回位（低於遲滯門檻）或換邊 → 取消候選
           this.state = GESTURE_STATES.NEUTRAL;
           this._candidateSince = 0;
-        } else if (nowMs - this._candidateSince >= s.holdMs) {
+        } else if (nowMs - this._candidateSince >= s.holdMs && recentMax >= s.triggerAngleDeg) {
           this._fire(events, 'next-page', nowMs);
         }
         break;
 
       case GESTURE_STATES.CANDIDATE_LEFT:
-        if (!overTrigger || rel >= 0) {
+        if (!staysCandidate || rel >= 0) {
           this.state = GESTURE_STATES.NEUTRAL;
           this._candidateSince = 0;
-        } else if (nowMs - this._candidateSince >= s.holdMs) {
+        } else if (nowMs - this._candidateSince >= s.holdMs && recentMax >= s.triggerAngleDeg) {
           this._fire(events, 'prev-page', nowMs);
         }
         break;

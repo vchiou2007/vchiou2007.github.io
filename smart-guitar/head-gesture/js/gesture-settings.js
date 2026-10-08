@@ -13,7 +13,7 @@ export const DEFAULT_SETTINGS = Object.freeze({
   cameraWidth: 320,        // 攝影機解析度
   cameraHeight: 240,
   smoothingEnabled: true,  // 角度平滑
-  smoothingAlpha: 0.35,    // EMA 新樣本權重 (0~1)
+  smoothingAlpha: 0.5,     // EMA 新樣本權重 (0~1)：5 FPS 下 0.5 可在約 2 幀內跨過 15°
   directionFlip: false,    // 鏡像／方向反轉
   showPreview: false,      // 選擇性攝影機預覽
 });

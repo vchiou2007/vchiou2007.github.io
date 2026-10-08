@@ -165,13 +165,33 @@ test('未滿 hold 時間即回到觸發角以下 → 取消', () => {
   assert.equal(sim.events.length, 0);
 });
 
-console.log('\n[10] 平滑處理開關');
+console.log('\n[10] 平滑處理與遲滯');
 test('開啟平滑時單幀雜訊尖峰不越過觸發角', () => {
   const s = { ...DEFAULT_SETTINGS, smoothingEnabled: true, smoothingAlpha: 0.35, triggerAngleDeg: 15, holdMs: 300 };
   const sim = makeSim(s);
   sim.feed(0); sim.feed(0); sim.feed(0);      // 平滑值歸零
   const out = sim.feed(30);                    // 單幀尖峰
   assert.ok(Math.abs(out.relRollDeg) < 15, '平滑後仍應低於觸發角，實得 ' + out.relRollDeg);
+});
+test('候選期間短暫低於觸發角（高於遲滯門檻）不取消、不重新計時', () => {
+  // 5 FPS 下 EMA(α=0.5) 傾斜約需 3 幀跨過 15°；期間 13° 的 dips 不應取消候選
+  const s = { ...DEFAULT_SETTINGS, smoothingEnabled: true, smoothingAlpha: 0.5, triggerAngleDeg: 15, holdMs: 300 };
+  const sim = makeSim(s);
+  sim.feed(0);
+  sim.feed(25);        // f=12.5
+  sim.feed(25);        // f=18.75 → CANDIDATE
+  sim.feed(25);        // f≈22 → 持續計時
+  const out = sim.feed(25);  // 累計持有 ≥300ms 且 recentMax≥15 → 觸發
+  assert.equal(out.events.length, 1, '應觸發一次翻頁');
+  assert.equal(out.events[0].type, 'next-page');
+});
+test('明顯回位（低於遲滯門檻）仍會取消候選', () => {
+  const s = { ...DEFAULT_SETTINGS, smoothingEnabled: false };
+  const sim = makeSim(s);
+  sim.feed(0); sim.feed(20); sim.feed(20);
+  sim.feed(5);         // 低於 exitThreshold(12) → 取消
+  sim.feedFor(1000, 5);
+  assert.equal(sim.events.length, 0);
 });
 
 console.log('\n[11] 校準');
