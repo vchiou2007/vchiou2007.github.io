@@ -19,7 +19,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop('進�
 
 $('scoreNodSensitivity').oninput=()=>{nod.threshold=Number($('scoreNodSensitivity').value);$('scoreNodDegrees').textContent=nod.threshold;nod.loseFace('幅度已調整，請回到原位再點頭');saveProfile();};
 function updateGuide(){
-  guide.hidden=!(active||loading||guideRequested)||bridge.context().tab!=='score';if(guide.hidden)return;guide.classList.toggle('compact',!guideExpanded);
+  guide.hidden=!guideExpanded||!(active||loading||guideRequested)||bridge.context().tab!=='score';if(guide.hidden)return;guide.classList.toggle('compact',!guideExpanded);
   let title,text,step;const cal=!!nod.calibration,ready=nod.baseline!==null&&!cal;
   if(!active&&!loading){step='第 1 步 · 攝影機尚未啟動';title='請重新啟動攝影機';text=guideDetail;}else if(loading){step='第 1 步 · 啟動攝影機';title='請允許使用前鏡頭';text='按 Safari 的「允許」，等待載入。這時不用點頭。';}
   else if(cal){step='第 2 步 · 校準姿勢';title=nod.message;text='正常看著螢幕中央，保持原本姿勢；不要點頭，也不用盯著鏡頭。';}
