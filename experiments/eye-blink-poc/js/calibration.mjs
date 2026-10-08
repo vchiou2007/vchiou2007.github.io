@@ -24,6 +24,6 @@ export class EyeCalibration{
     if(gap<.18){this.fail('睜眼與閉眼分數沒有足夠區別，請調整光線、距離或解析度');return;}
     // Detection must accept the same sustained closure that passed calibration.
     // A peak-based higher threshold can leave only one frame above threshold.
-    this.result={openThreshold:Number(Math.min(this.cut-.04,Math.max(this.baseline+.12,this.baseline+gap*.2)).toFixed(3)),closedThreshold:Number(this.cut.toFixed(3)),minBlinkMs:40,maxIntervalMs:900,gestureTimeoutMs:900,openBaseline:this.baseline,closedPeak:peak,samples:this.openSamples.length,blinks:5};this.stage='DONE';this.message='校準完成；請先睜眼一秒，再連眨三下。下方眨眼次數應依序顯示 1、2，再翻頁';
+    this.result={openThreshold:Number(Math.min(this.cut-.04,Math.max(this.baseline+.12,this.baseline+gap*.2)).toFixed(3)),closedThreshold:Number(this.cut.toFixed(3)),minBlinkMs:40,maxBlinkMs:600,maxIntervalMs:1200,gestureTimeoutMs:1200,openBaseline:this.baseline,closedPeak:peak,samples:this.openSamples.length,blinks:5};this.stage='DONE';this.message='校準完成；已可翻頁，請連眨三下。下方眨眼次數應依序顯示 1、2，再翻頁';
   }
 }

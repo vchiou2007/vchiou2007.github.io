@@ -1,0 +1,9 @@
+const {chromium}=require('C:/Users/Vincent/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');const assert=require('node:assert/strict');
+const cameraMock=`export class CameraService{constructor(v,f,s){this.onFrame=f;this.onStatus=s;this.running=false;this.inferences=[];window.injectEye=(t,l,r)=>{this.onFrame({t,left:l,right:r,face:true,inferenceMs:1});};}start(){this.running=true;this.onStatus('CAMERA READY','Synthetic camera, no hardware');}stop(){this.running=false;this.onStatus('CAMERA OFF','Stopped');}stats(){return {cameraFps:24,inferenceFps:24,averageMs:1,stability:1,modelLoadMs:1};}}`;
+(async()=>{const b=await chromium.launch({channel:'chrome',headless:true});
+for(const old of [true,false]){const p=await b.newPage();const errors=[];p.on('pageerror',e=>errors.push(e.message));await p.route('**/camera-service.mjs',r=>r.fulfill({contentType:'text/javascript',body:cameraMock}));
+if(old)await p.route('**/app.mjs?v=3',async r=>{const response=await r.fetch();const s=(await response.text()).replace('controller.armFromCalibration(frame.t,frame.left,frame.right);','');await r.fulfill({response,body:s});});
+await p.goto('http://localhost:8788/experiments/eye-blink-poc/');await p.locator('#startCamera').click();await p.locator('#calibrate').click();
+await p.evaluate(()=>{let t=performance.now();const f=(n,v)=>{for(let i=0;i<n;i++){t+=40;window.injectEye(t,v,v);}};f(80,.05);for(let i=0;i<5;i++){f(1,.4);f(1,.9);f(1,.4);f(1,.05);}for(let i=0;i<3;i++){f(1,.4);f(1,.9);f(1,.4);f(1,.05);}});
+assert.equal(await p.locator('#bigPage').textContent(),old?'1':'2');assert.equal(errors.length,0);console.log(old?'Reproduced old transition failure: page stayed 1':'Fixed full flow: five calibration blinks, immediate triple blink => page 2');await p.close();}
+await b.close();})().catch(e=>{console.error(e);process.exit(1)});

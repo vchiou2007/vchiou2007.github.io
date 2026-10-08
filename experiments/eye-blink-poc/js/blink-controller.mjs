@@ -12,6 +12,7 @@ export class BlinkController {
   constructor(settings={},dispatch=()=>{}){this.settings=validateSettings(settings);this.dispatch=dispatch;this.reset();}
   reset(){this.phase='FACE_LOST';this.count=0;this.lastBlink=null;this.closedAt=null;this.closeCandidate=null;this.openCandidate=null;this.lastInput=null;this.lastTick=-Infinity;this.cooldownUntil=0;this.lastEvent=null;this.lastScores=null;}
   configure(s){this.settings=validateSettings(s);this.reset();}
+  armFromCalibration(t,left,right){if(left<=this.settings.openThreshold&&right<=this.settings.openThreshold){this.phase='IDLE';this.lastInput=t;this.lastTick=t;this.lastScores={left,right};}}
   loseFace(){this.phase='FACE_LOST';this.count=0;this.lastBlink=null;this.closedAt=null;this.closeCandidate=null;this.openCandidate=null;this.lastScores=null;}
   get state(){if(this.phase==='IDLE')return this.count===2?'WAIT_FOR_THIRD_BLINK':this.count===1?'BLINK_COUNT_1':'IDLE';return this.phase;}
   get deadline(){return this.lastBlink===null?Infinity:this.lastBlink+(this.count===2?Math.min(this.settings.maxIntervalMs,this.settings.gestureTimeoutMs):this.settings.maxIntervalMs);}
@@ -49,7 +50,7 @@ export class BlinkController {
       if(!open)this.openCandidate=null;
       else{
         this.openCandidate??={at:t,frames:0};this.openCandidate.frames++;
-        if(this.openCandidate.frames>=s.consecutiveFrames){
+        if(this.openCandidate.frames>=1){
           const duration=this.openCandidate.at-this.closedAt;this.phase='IDLE';this.openCandidate=null;this.closedAt=null;
           if(duration>=s.minBlinkMs&&duration<=s.maxBlinkMs){
             // A late third blink cannot first emit PREVIOUS and then NEXT.
@@ -62,7 +63,7 @@ export class BlinkController {
     }
     if(this.count&&t>this.deadline){this.expire(t);if(this.phase==='COOLDOWN')return this.snapshot();}
     if(closed){this.closeCandidate??={at:t,frames:0};this.closeCandidate.frames++;if(this.closeCandidate.frames>=s.consecutiveFrames){this.closedAt=this.closeCandidate.at;this.phase='EYES_CLOSED';this.closeCandidate=null;}}
-    else this.closeCandidate=null;
+    else if(open)this.closeCandidate=null;
     return this.snapshot();
   }
 }
