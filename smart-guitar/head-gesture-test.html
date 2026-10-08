@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090c11">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>AI 頭部翻頁 · POC 測試頁</title>
+<style>
+:root{color-scheme:dark;--bg:#090c11;--panel:#101722;--line:#263143;--text:#eef4ff;--muted:#aebdd1;--green:#20df83;--blue:#427bff;--amber:#f4e952;--red:#ff8168;--pink:#ee45ba}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,'Microsoft JhengHei',sans-serif;-webkit-text-size-adjust:100%}
+button,select,input{font:inherit;border:1px solid #344156;border-radius:9px;background:#1a2433;color:#edf4ff;padding:10px 14px}
+button{cursor:pointer;min-height:44px}
+button:hover:not(:disabled){background:#29394e}
+button:disabled{opacity:.4;cursor:default}
+button.primary{background:#14532d;border-color:#20df83}
+button.danger{background:#3a1d18;border-color:var(--red)}
+main{max-width:980px;margin:0 auto;padding:18px 18px 60px}
+header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:14px}
+header.top h1{font-size:22px;margin:0;flex:1}
+.badge{font-size:12px;color:#090c11;background:var(--amber);border-radius:20px;padding:3px 10px;font-weight:700}
+a.back{color:var(--green);text-decoration:none;font-size:15px;min-height:44px;display:inline-flex;align-items:center}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.card h2{font-size:15px;margin:0 0 10px;color:var(--muted);font-weight:600;letter-spacing:.05em}
+.card.wide{grid-column:1/-1}
+.status-pill{display:inline-block;font-size:22px;font-weight:800;border-radius:10px;padding:8px 18px;border:2px solid var(--line)}
+.status-pill.off{color:var(--muted)}
+.status-pill.on{color:var(--blue);border-color:var(--blue)}
+.status-pill.face{color:var(--green);border-color:var(--green)}
+.status-pill.lost{color:var(--amber);border-color:var(--amber)}
+.status-pill.denied,.status-pill.error{color:var(--red);border-color:var(--red)}
+.meta{color:var(--muted);font-size:13px;margin-top:8px;line-height:1.7}
+.big-readout{font-size:56px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.big-readout.pos{color:var(--green)}
+.big-readout.neg{color:var(--blue)}
+.tilt-track{position:relative;height:14px;background:#1a2433;border-radius:8px;margin-top:14px;overflow:hidden}
+.tilt-fill{position:absolute;top:0;bottom:0;left:50%;width:0;background:var(--green)}
+.tilt-marker{position:absolute;top:0;bottom:0;width:2px;background:#344156}
+.gesture-readout{font-size:34px;font-weight:800;letter-spacing:.04em}
+.gesture-readout.center{color:var(--muted)}
+.gesture-readout.tilt-r{color:var(--green)}
+.gesture-readout.tilt-l{color:var(--blue)}
+.gesture-readout.fire{color:var(--amber)}
+.gesture-readout.wait{color:var(--pink)}
+.page-stage{background:#000;border:1px solid var(--line);border-radius:14px;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.page-number{font-size:64px;font-weight:800}
+.page-dots{display:flex;gap:10px}
+.page-dots i{width:12px;height:12px;border-radius:50%;background:#263143;display:block}
+.page-dots i.on{background:var(--green)}
+.counters{display:flex;gap:22px;flex-wrap:wrap}
+.counters .num{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums}
+.counters small{display:block;color:var(--muted);font-size:12px}
+.perf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.perf .item{background:#1a2433;border-radius:10px;padding:10px 12px}
+.perf .val{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.perf small{color:var(--muted);font-size:12px}
+.controls{display:flex;gap:10px;flex-wrap:wrap}
+.settings-row{display:flex;align-items:center;gap:12px;margin:9px 0;flex-wrap:wrap}
+.settings-row label{flex:0 0 190px;color:var(--muted);font-size:14px}
+.settings-row output{min-width:86px;text-align:right;font-variant-numeric:tabular-nums}
+.settings-row input[type=range]{flex:1;min-width:140px;padding:0;height:28px}
+.settings-row select{min-width:140px}
+.settings-row input[type=checkbox]{width:22px;height:22px}
+.log-table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+.log-table th,.log-table td{border-bottom:1px solid #1c2635;padding:4px 6px;text-align:right;white-space:nowrap}
+.log-table th{color:var(--muted);font-weight:600}
+.log-scroll{max-height:220px;overflow:auto;-webkit-overflow-scrolling:touch}
+#previewWrap{margin-top:12px;display:none}
+#previewWrap.show{display:block}
+#preview{width:100%;max-width:320px;border-radius:10px;border:1px solid var(--line);transform:none}
+#preview.mirrored{transform:scaleX(-1)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;align-items:center;justify-content:center;z-index:50}
+.overlay.show{display:flex}
+.overlay .count{font-size:130px;font-weight:800;color:var(--green)}
+.overlay .cap{position:absolute;margin-top:210px;color:var(--muted);font-size:16px}
+.dir-test{border:1px dashed #344156;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:13px;color:var(--muted);line-height:1.8}
+.dir-test b{font-size:16px}
+.hint{color:var(--muted);font-size:13px;line-height:1.8}
+footer{margin-top:22px;color:#5a6a80;font-size:12px;text-align:center;line-height:1.8}
+</style>
+</head>
+<body>
+<main>
+<header class="top">
+  <a class="back" href="./scanned/">‹ 我的歌單</a>
+  <h1>AI 頭部翻頁 · 實驗測試頁</h1>
+  <span class="badge">POC · 不影響正式樂譜</span>
+</header>
+
+<div class="grid">
+  <!-- A. Camera Status -->
+  <section class="card">
+    <h2>A · CAMERA STATUS</h2>
+    <span id="cameraStatus" class="status-pill off">CAMERA OFF</span>
+    <p class="meta">模型：<span id="modelStatus">未載入</span>（delegate: <span id="delegateStatus">–</span>）<br>
+    影像：<span id="cameraInfo">–</span></p>
+  </section>
+
+  <!-- B. Current Head Angle -->
+  <section class="card">
+    <h2>B · CURRENT HEAD ANGLE（ROLL · 正值＝你的右方）</h2>
+    <div id="rollValue" class="big-readout">--.-°</div>
+    <div class="tilt-track" aria-hidden="true">
+      <span class="tilt-marker" style="left:15%"></span><span class="tilt-marker" style="left:85%"></span>
+      <div id="tiltFill" class="tilt-fill"></div>
+    </div>
+    <p class="meta">原始值：<span id="rollRaw">–</span>°　平滑值：<span id="rollFiltered">–</span>°　校準偏移：<span id="rollOffset">0.0</span>°</p>
+    <div class="dir-test">方向檢查：請將頭「向右肩」傾斜，上方角度應顯示 <b>正值</b>。若相反，請開啟下方「方向反轉」。</div>
+  </section>
+
+  <!-- C. Gesture Status -->
+  <section class="card">
+    <h2>C · GESTURE STATUS</h2>
+    <div id="gestureStatus" class="gesture-readout center">CENTER</div>
+    <p class="meta">狀態機：<span id="stateMachine">NEUTRAL</span></p>
+  </section>
+
+  <!-- D. Virtual Page -->
+  <section class="card">
+    <h2>D · VIRTUAL PAGE</h2>
+    <div class="page-stage">
+      <div id="virtualPage" class="page-number">PAGE 1</div>
+      <div id="pageDots" class="page-dots" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- E. Counter -->
+  <section class="card">
+    <h2>E · COUNTER</h2>
+    <div class="counters">
+      <div><span id="nextCount" class="num">0</span><small>NEXT PAGE COUNT</small></div>
+      <div><span id="prevCount" class="num">0</span><small>PREVIOUS PAGE COUNT</small></div>
+      <div><span id="totalCount" class="num">0</span><small>TOTAL GESTURE COUNT</small></div>
+    </div>
+  </section>
+
+  <!-- F. Performance -->
+  <section class="card">
+    <h2>F · PERFORMANCE</h2>
+    <div class="perf">
+      <div class="item"><div id="cameraFps" class="val">–</div><small>CAMERA FPS</small></div>
+      <div class="item"><div id="inferenceFps" class="val">–</div><small>AI INFERENCE FPS</small></div>
+      <div class="item"><div id="avgInference" class="val">–</div><small>AVG INFERENCE (ms)</small></div>
+      <div class="item"><div id="estLatency" class="val">–</div><small>EST. GESTURE LATENCY (ms)</small></div>
+    </div>
+  </section>
+
+  <!-- G. Control Buttons -->
+  <section class="card wide">
+    <h2>G · CONTROL</h2>
+    <div class="controls">
+      <button id="btnStart" class="primary">START CAMERA</button>
+      <button id="btnStop" class="danger" disabled>STOP CAMERA</button>
+      <button id="btnCalibrate" disabled>CALIBRATE（3 秒）</button>
+      <button id="btnReset">RESET COUNTERS</button>
+      <button id="btnExportJson">EXPORT LOG · JSON</button>
+      <button id="btnExportCsv">EXPORT LOG · CSV</button>
+      <button id="btnClearLog">CLEAR LOG</button>
+    </div>
+    <p class="meta">校準狀態：<span id="calibrationInfo">未校準</span></p>
+    <div id="previewWrap"><video id="preview" class="mirrored" autoplay muted playsinline></video></div>
+  </section>
+
+  <!-- Settings -->
+  <section class="card wide">
+    <h2>設定（即時生效，並存入本機）</h2>
+    <div class="settings-row"><label>Trigger Angle 觸發角度</label><input id="setTrigger" type="range" min="5" max="45" step="1"><output id="setTriggerOut"></output></div>
+    <div class="settings-row"><label>Hold Duration 持續時間 (ms)</label><input id="setHold" type="range" min="100" max="2000" step="50"><output id="setHoldOut"></output></div>
+    <div class="settings-row"><label>Center Threshold 回中央角度</label><input id="setCenter" type="range" min="2" max="20" step="1"><output id="setCenterOut"></output></div>
+    <div class="settings-row"><label>Cooldown 冷卻時間 (ms)</label><input id="setCooldown" type="range" min="200" max="5000" step="100"><output id="setCooldownOut"></output></div>
+    <div class="settings-row"><label>Detection FPS 推論頻率</label><input id="setFps" type="range" min="1" max="15" step="1"><output id="setFpsOut"></output></div>
+    <div class="settings-row"><label>Camera Resolution 攝影機解析度</label><select id="setResolution">
+      <option value="160x120">160 × 120</option>
+      <option value="320x240">320 × 240（預設）</option>
+      <option value="480x360">480 × 360</option>
+      <option value="640x480">640 × 480</option>
+    </select></div>
+    <div class="settings-row"><label>Enable Smoothing 角度平滑</label><input id="setSmoothing" type="checkbox"><span class="meta">α（新樣本權重）</span><input id="setAlpha" type="range" min="0.05" max="1" step="0.05"><output id="setAlphaOut"></output></div>
+    <div class="settings-row"><label>方向反轉（鏡像修正）</label><input id="setFlip" type="checkbox"><span class="meta">若「向右傾斜」顯示負值時勾選</span></div>
+    <div class="settings-row"><label>攝影機預覽（除錯用）</label><input id="setPreview" type="checkbox"><span class="meta">預設關閉，節省效能</span></div>
+    <div class="settings-row"><button id="btnResetSettings">還原預設參數</button></div>
+  </section>
+
+  <!-- Debug Log -->
+  <section class="card wide">
+    <h2>DEBUG LOG（保留最近 <span id="logMax">600</span> 筆 · 目前 <span id="logCount">0</span> 筆）</h2>
+    <div class="log-scroll">
+    <table class="log-table">
+      <thead><tr><th>時間</th><th>Raw°</th><th>Filtered°</th><th>Rel°</th><th>State</th><th>Page</th><th>Event</th><th>Inf.ms</th></tr></thead>
+      <tbody id="logBody"></tbody>
+    </table>
+    </div>
+  </section>
+</div>
+
+<footer>
+  Head Gesture POC · MediaPipe Face Landmarker（本機推論）· 僅供實驗，未整合正式翻頁流程<br>
+  所有影像皆在本機辨識，不錄影、不拍照、不上傳。
+</footer>
+</main>
+
+<div id="countdownOverlay" class="overlay"><div class="count" id="countdownNum">3</div><div class="cap">請看著樂譜，保持自然彈奏姿勢…</div></div>
+
+<script type="module" src="./head-gesture/js/head-gesture-test-page.js"></script>
+</body>
+</html>
