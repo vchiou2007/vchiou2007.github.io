@@ -396,7 +396,7 @@ function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.s
 
 
 
-const READER_BUILD='20261008.3';
+const READER_BUILD='20261008.4';
 
 
 
@@ -914,12 +914,12 @@ importLibrary=async function(f){if(!f)return;try{const v=validateLibrary(JSON.pa
 
 
 
-window.NodScoreBridge={context:()=>({tab:activeTab,songId,title:song()?.title,pageIndex,pageCount:song()?.pages.length||0,correcting:correctionInput.checked,pageFit}),turn:(delta)=>{const target=pageIndex+delta;if(activeTab!=='score'||correctionInput.checked||!song()||target<0||target>=song().pages.length)return {turned:false,pageIndex};go(delta);return {turned:true,pageIndex};}};
+window.NodScoreBridge={wholePage:()=>showWholePage(),context:()=>({tab:activeTab,songId,title:song()?.title,pageIndex,pageCount:song()?.pages.length||0,correcting:correctionInput.checked,pageFit}),turn:(delta)=>{const target=pageIndex+delta;if(activeTab!=='score'||correctionInput.checked||!song()||target<0||target>=song().pages.length)return {turned:false,pageIndex};go(delta);return {turned:true,pageIndex};}};
 init();
 
 
 
-</script><script type="module" src="./nod-score.mjs?v=2"></script></html>
+</script><script type="module" src="./nod-score.mjs?v=3"></script></html>
 
 
 
