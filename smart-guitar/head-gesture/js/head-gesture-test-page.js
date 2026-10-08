@@ -192,7 +192,12 @@ $('btnStart').onclick = async () => {
     controller.reset();
     applyCalibrationIfFresh();
     syncPreview();
-  } catch (e) { /* 狀態已由 onStatus 回報 */ }
+  } catch (e) {
+    // 權限被拒或已回報錯誤時不覆蓋；其餘例外（例如模組載入失敗）必須顯示給使用者
+    if (state.status !== 'permission-denied' && state.status !== 'error') {
+      handleStatus('error', '啟動失敗：' + (e && e.message ? e.message : e));
+    }
+  }
   setBusy(false);
 };
 

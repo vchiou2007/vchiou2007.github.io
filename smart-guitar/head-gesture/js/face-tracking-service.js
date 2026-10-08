@@ -14,12 +14,23 @@
 const RIGHT_EYE_OUTER = 33;
 const LEFT_EYE_OUTER = 263;
 
-const LOCAL_MODULE_URL = './head-gesture/vendor/tasks-vision/vision_bundle.mjs';
-const CDN_MODULE_URL = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.min.mjs';
-const LOCAL_WASM_BASE = './head-gesture/vendor/tasks-vision/wasm';
-const LOCAL_MODEL_URL = './head-gesture/vendor/models/face_landmarker.task';
+// 注意：模組內的動態 import / fetch 會以「本模組所在目錄」解析相對路徑，
+// 因此資源一律改以「頁面」（document.baseURI）為基準，否則會 404 而靜默失敗。
+function pageAsset(path) {
+  const base = (typeof document !== 'undefined' && document.baseURI) || 'http://localhost/';
+  return new URL(path, base).href;
+}
+const LOCAL_MODULE_PATH = './head-gesture/vendor/tasks-vision/vision_bundle.mjs';
+const LOCAL_WASM_PATH = './head-gesture/vendor/tasks-vision/wasm';
+const LOCAL_MODEL_PATH = './head-gesture/vendor/models/face_landmarker.task';
+const CDN_MODULE_URLS = [
+  'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.min.mjs',
+  'https://unpkg.com/@mediapipe/tasks-vision@0.10.14/vision_bundle.min.mjs',
+];
 const CDN_WASM_BASE = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm';
 const CDN_MODEL_URL = 'https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+
+function errMsg(e) { return e && e.message ? e.message : String(e); }
 
 // 由雙眼連線估算頭部 Roll（左右傾斜）角度。
 // 座標系：影像 y 軸向下；回傳值定義為「使用者本人的右傾 = 正角度」。
@@ -75,13 +86,18 @@ export class FaceTrackingService {
     if (this._mp) return this._mp;
     this._onStatus('model-loading', '載入 AI 模組…');
     try {
-      this._mp = await import(LOCAL_MODULE_URL);
+      this._mp = await import(pageAsset(LOCAL_MODULE_PATH));
       return this._mp;
     } catch (e) {
       console.warn('本機 MediaPipe 模組載入失敗，改用 CDN：', e);
-      this._mp = await import(CDN_MODULE_URL);
-      return this._mp;
     }
+    let lastErr = null;
+    for (const url of CDN_MODULE_URLS) {
+      try { this._mp = await import(url); return this._mp; }
+      catch (e) { lastErr = e; console.warn('CDN 模組載入失敗：', url, e); }
+    }
+    this._onStatus('error', 'AI 模組載入失敗（本機與 CDN 皆不可用）：' + errMsg(lastErr));
+    throw lastErr || new Error('module load failed');
   }
 
   // 初始化 Face Landmarker；GPU 失敗自動降級 CPU。
@@ -89,11 +105,15 @@ export class FaceTrackingService {
     if (this._landmarker) return;
     this._settings = settings;
     const mp = await this.loadModule();
-    const fileset = await mp.FilesetForVisionTasks.forVisionTasks(LOCAL_WASM_BASE)
-      .catch(async () => mp.FilesetForVisionTasks.forVisionTasks(CDN_WASM_BASE));
+    const fileset = await mp.FilesetForVisionTasks.forVisionTasks(pageAsset(LOCAL_WASM_PATH))
+      .catch(async () => {
+        console.warn('本機 WASM 載入失敗，改用 CDN');
+        return mp.FilesetForVisionTasks.forVisionTasks(CDN_WASM_BASE);
+      });
+    const modelUrl = pageAsset(LOCAL_MODEL_PATH);
     const options = (delegate) => ({
       baseOptions: {
-        modelAssetPath: LOCAL_MODEL_URL,
+        modelAssetPath: modelUrl,
         delegate,
       },
       runningMode: 'VIDEO',
@@ -114,7 +134,7 @@ export class FaceTrackingService {
         this._delegate = 'CPU';
       } catch (e2) {
         this._landmarker = null;
-        this._onStatus('error', '模型初始化失敗：' + (e2 && e2.message ? e2.message : e2));
+        this._onStatus('error', '模型初始化失敗：' + errMsg(e2));
         throw e2;
       }
     }
