@@ -396,7 +396,7 @@ function drawCueStars(){const s=song(),p=page();if(!s?.aeroband||!p)return;ctx.s
 
 
 
-const READER_BUILD='20261007.16';
+const READER_BUILD='20261008.1';
 
 
 
@@ -544,7 +544,7 @@ const management=document.querySelector('.song-management');management.querySele
 
 
 
-const bottomTabs=el('nav',null,'bottom-tabs');bottomTabs.setAttribute('aria-label','主要分頁');const libraryTab=el('button','♫ 歌單管理'),scoreTab=el('button','▤ 歌曲樂譜');libraryTab.id='libraryTab';scoreTab.id='scoreTab';const snapshotTab=el('button','▦ 快照表');snapshotTab.id='snapshotTab';bottomTabs.append(libraryTab,scoreTab,snapshotTab);document.body.append(bottomTabs);
+const bottomTabs=el('nav',null,'bottom-tabs');bottomTabs.setAttribute('aria-label','主要分頁');const libraryTab=el('button','♫ 歌單管理'),scoreTab=el('button','▤ 歌曲樂譜');libraryTab.id='libraryTab';scoreTab.id='scoreTab';const snapshotTab=el('button','▦ 快照表');snapshotTab.id='snapshotTab';const blinkTab=el('button','◉ 眨眼測試');blinkTab.id='blinkTab';blinkTab.onclick=()=>{location.href='../../experiments/eye-blink-poc/'};bottomTabs.append(libraryTab,scoreTab,snapshotTab,blinkTab);document.body.append(bottomTabs);
 const snapshotView=el('section',null,'snapshot-view');snapshotView.id='snapshotView';snapshotView.hidden=true;const snapshotHeading=el('h1','快照表'),snapshotBoard=el('div',null,'snapshot-board');snapshotView.append(snapshotHeading,snapshotBoard);readingSurface.prepend(snapshotView);snapshotTab.onclick=()=>setTab('snapshot');
 function renderSnapshot(){snapshotBoard.replaceChildren();const groups=[{language:'國語',songs:library.songs.filter(s=>songCredits(s).language!=='台語')},{language:'台語',songs:library.songs.filter(s=>songCredits(s).language==='台語')}];for(const group of groups){const section=el('section',null,'snapshot-group');section.dataset.language=group.language;const heading=el('h2',null,'snapshot-heading');heading.append(el('span',group.language==='國語'&&group.songs.some(s=>songCredits(s).language!=='國語')?'國語／其他':group.language),el('small',group.songs.length+' 首'));const names=el('div',null,'snapshot-names');for(const s of group.songs){const name=el('button',s.title,'snapshot-name');name.type='button';name.dataset.songId=s.id;name.onclick=()=>openScore(s.id);names.append(name)}section.append(heading,names);snapshotBoard.append(section)}}
 

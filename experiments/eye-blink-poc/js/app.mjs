@@ -1,0 +1,35 @@
+import {BlinkController,DEFAULTS,validateSettings} from './blink-controller.mjs';
+import {EyeCalibration} from './calibration.mjs';
+import {CameraService} from './camera-service.mjs';
+import {DebugLog} from './debug-log.mjs';
+const $=id=>document.getElementById(id),log=new DebugLog(),calibration=new EyeCalibration();
+let page=1,settings={...DEFAULTS},targetFps=24,width=320,delegate='CPU',lastFrame=null,lastFaceStatus=null;
+function dispatch(event){const previous=page;page=Math.max(1,Math.min(5,page+(event.gesture==='NEXT_PAGE'?1:-1)));$('pageNumber').textContent='PAGE '+page+' / 5';$('bigPage').textContent=String(page);$('pageTheme').textContent='練習頁 '+page;$('gestureMessage').textContent=(event.gesture==='NEXT_PAGE'?'三眨：下一頁':'兩眨：上一頁')+(page===previous?'（已到邊界）':'');if(event.manual)$('gestureMessage').textContent='手動模擬翻頁';$('gestureLatency').textContent=event.manual?'—':Math.round(event.latencyMs)+' ms';log.add({kind:event.manual?'manual':'gesture',...event,pageNumber:page});$('manualPrev').disabled=page===1;$('manualNext').disabled=page===5;}
+const controller=new BlinkController(settings,dispatch);
+function status(value,message){$('cameraStatus').textContent=value;$('message').textContent=message;const off=!camera?.running;$('startCamera').disabled=!off||value==='MODEL LOADING';$('stopCamera').disabled=off&&value!=='MODEL LOADING';$('calibrate').disabled=off;log.add({kind:'camera',status:value,message});if(off){controller.loseFace();lastFrame=null;lastFaceStatus=null;}}
+let camera=new CameraService($('cameraVideo'),frame=>{
+  lastFrame=frame;
+  if(lastFaceStatus!==frame.face){lastFaceStatus=frame.face;status(frame.face?'FACE DETECTED':'FACE LOST',frame.face?'偵測到人臉；雙眼穩定睜開後開始判斷眨眼':'沒有可靠的雙眼分數，已取消未完成手勢');}
+  if(['OPEN','BLINKS'].includes(calibration.stage)){
+    calibration.feed(frame.t,frame.left,frame.right,frame.face);controller.loseFace();$('calibrationStatus').textContent=calibration.message;
+    if(calibration.stage==='DONE'){settings={...settings,...Object.fromEntries(['openThreshold','closedThreshold'].map(k=>[k,calibration.result[k]]))};controller.configure(settings);for(const k of ['openThreshold','closedThreshold'])$(k).value=settings[k];log.add({kind:'calibration',result:calibration.result});}
+  }else if($('enabled').checked)controller.feed(frame.t,frame.left,frame.right,frame.face);else controller.loseFace();
+  log.sample(frame.t,{kind:'sample',leftEyeScore:frame.left??null,rightEyeScore:frame.right??null,eyeStatus:controller.phase,blinkCount:controller.count,gestureState:controller.state,pageNumber:page,inferenceTimeMs:frame.inferenceMs});
+},status);
+$('startCamera').onclick=()=>{controller.reset();calibration.reset();$('calibrationStatus').textContent='初始門檻僅供實驗，建議校準';$('startCamera').disabled=true;camera.start({width,targetFps,delegate});};
+$('stopCamera').onclick=()=>{camera.stop();if(['OPEN','BLINKS'].includes(calibration.stage))calibration.fail('攝影機已停止');};
+$('calibrate').onclick=()=>{controller.reset();calibration.start(performance.now());$('calibrationStatus').textContent=calibration.message;};
+$('enabled').onchange=()=>{controller.reset();log.add({kind:'enabled',value:$('enabled').checked});};
+$('manualPrev').disabled=true;$('manualPrev').onclick=()=>dispatch({gesture:'PREVIOUS_PAGE',manual:true});$('manualNext').onclick=()=>dispatch({gesture:'NEXT_PAGE',manual:true});
+$('settingsForm').onsubmit=e=>{e.preventDefault();try{const s={...settings};for(const k of ['closedThreshold','openThreshold','minBlinkMs','maxBlinkMs','maxIntervalMs','gestureTimeoutMs','cooldownMs'])s[k]=Number($(k).value);const fps=Number($('targetFps').value);if(!Number.isFinite(fps)||fps<10||fps>30)throw Error('目標 FPS 須為10～30');settings=validateSettings(s);targetFps=fps;width=Number($('resolution').value);delegate=$('delegate').value;camera.stop('設定已套用，請重新啟動攝影機');controller.configure(settings);calibration.reset();$('calibrationStatus').textContent='使用手動門檻；可重新校準';log.add({kind:'settings',settings:{...settings,targetFps,width,delegate}});}catch(err){$('message').textContent=err.message;}};
+$('exportLog').onclick=()=>{const blob=new Blob([JSON.stringify(log.export({...settings,targetFps,width,delegate}),null,2)],{type:'application/json;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='eye-blink-poc-log.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};$('clearLog').onclick=()=>{log.entries=[];};
+const eyeLabels={IDLE:'BOTH EYES OPEN',EYES_CLOSED:'BOTH EYES CLOSED',LONG_EYE_CLOSURE:'LONG EYE CLOSURE',WAIT_FOR_REOPEN:'等待雙眼穩定睜開',FACE_LOST:'FACE LOST',COOLDOWN:'COOLDOWN'};
+const uiTimer=setInterval(()=>{
+  if(camera.running&&!['OPEN','BLINKS'].includes(calibration.stage)&&$('enabled').checked)controller.tick(performance.now());
+  const f=lastFrame,s=camera.stats();$('leftScore').textContent=f?.left?.toFixed(3)??'—';$('rightScore').textContent=f?.right?.toFixed(3)??'—';$('leftMeter').value=f?.left??0;$('rightMeter').value=f?.right??0;$('eyeStatus').textContent=eyeLabels[controller.phase]||controller.phase;$('blinkCount').textContent=String(controller.count);$('gestureState').textContent=controller.state;
+  $('cameraFps').textContent=camera.running?s.cameraFps.toFixed(1):'—';$('inferenceFps').textContent=camera.running?s.inferenceFps.toFixed(1):'—';$('inferenceMs').textContent=camera.running?s.averageMs.toFixed(1)+' ms':'—';$('faceStability').textContent=camera.running?(s.stability*100).toFixed(0)+'%':'—';$('modelMs').textContent=s.modelLoadMs===null?'—':Math.round(s.modelLoadMs)+' ms';
+  if(camera.running&&camera.inferences.length>10)$('performanceNote').textContent=(s.inferenceFps<20?'目前實際推論低於20 FPS：'+s.inferenceFps.toFixed(1)+'。可比較 CPU／GPU 或解析度，尚未在目標 iPad 驗證。':'目前推論 '+s.inferenceFps.toFixed(1)+' FPS；此值只代表當前裝置。')+' 畫面FPS方式：'+s.cameraFpsMethod;
+  $('debugLog').textContent=log.entries.slice(-12).map(e=>JSON.stringify(e)).join('\n')||'尚無紀錄';
+},100);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){camera.stop('頁面進入背景，攝影機已關閉；返回後請重新啟動');controller.reset();if(['OPEN','BLINKS'].includes(calibration.stage))calibration.fail('切換背景中止校準');}});
+window.addEventListener('pagehide',()=>{camera.stop();controller.reset();});
