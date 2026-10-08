@@ -1,10 +1,10 @@
-import {BlinkFeedback} from './blink-feedback.mjs?v=4';
-import {BlinkController,DEFAULTS,validateSettings} from './blink-controller.mjs?v=4';
-import {EyeCalibration} from './calibration.mjs?v=4';
-import {CameraService} from './camera-service.mjs';
+import {BlinkFeedback} from './blink-feedback.mjs?v=5';
+import {BlinkController,DEFAULTS,validateSettings} from './blink-controller.mjs?v=5';
+import {EyeCalibration} from './calibration.mjs?v=5';
+import {CameraService} from './camera-service.mjs?v=5';
 import {DebugLog} from './debug-log.mjs';
 const $=id=>document.getElementById(id),log=new DebugLog(),calibration=new EyeCalibration();
-const feedback=new BlinkFeedback();let rhythmMs=1200;
+const feedback=new BlinkFeedback();let rhythmMs=2000;
 let page=1,settings={...DEFAULTS,maxIntervalMs:rhythmMs,gestureTimeoutMs:rhythmMs},targetFps=24,width=320,delegate='CPU',lastFrame=null,lastFaceStatus=null;
 function dispatch(event){if(!event.manual)feedback.receive(event.blinkCount,event.gesture==='NEXT_PAGE'?'收到 3 次：下一頁':'收到 2 次：上一頁',event.timestamp);const previous=page;page=Math.max(1,Math.min(5,page+(event.gesture==='NEXT_PAGE'?1:-1)));$('pageNumber').textContent='PAGE '+page+' / 5';$('bigPage').textContent=String(page);$('pageTheme').textContent='練習頁 '+page;$('gestureMessage').textContent=(event.gesture==='NEXT_PAGE'?'三眨：下一頁':'兩眨：上一頁')+(page===previous?'（已到邊界）':'');if(event.manual)$('gestureMessage').textContent='手動模擬翻頁';$('gestureLatency').textContent=event.manual?'—':Math.round(event.latencyMs)+' ms';log.add({kind:event.manual?'manual':'gesture',...event,pageNumber:page});$('manualPrev').disabled=page===1;$('manualNext').disabled=page===5;}
 const controller=new BlinkController(settings,dispatch);
@@ -28,7 +28,7 @@ $('exportLog').onclick=()=>{const blob=new Blob([JSON.stringify(log.export({...s
 const eyeLabels={IDLE:'BOTH EYES OPEN',EYES_CLOSED:'BOTH EYES CLOSED',LONG_EYE_CLOSURE:'LONG EYE CLOSURE',WAIT_FOR_REOPEN:'等待雙眼穩定睜開',FACE_LOST:'FACE LOST',COOLDOWN:'COOLDOWN'};
 const uiTimer=setInterval(()=>{
   if(camera.running&&!['OPEN','BLINKS'].includes(calibration.stage)&&$('enabled').checked)controller.tick(performance.now());
-  const signal=feedback.snapshot(performance.now());$('receivedBlink').textContent=String(signal.number);$('receivedLabel').textContent=signal.label;$('receivedBlink').closest('section').dataset.received=String(signal.number>0);const f=lastFrame,s=camera.stats();$('leftScore').textContent=f?.left?.toFixed(3)??'—';$('rightScore').textContent=f?.right?.toFixed(3)??'—';$('leftMeter').value=f?.left??0;$('rightMeter').value=f?.right??0;$('eyeStatus').textContent=eyeLabels[controller.phase]||controller.phase;$('blinkCount').textContent=String(controller.count);$('gestureState').textContent=controller.state;
+  $('cancelReason').textContent=controller.cancelReason||'依序眨眼，兩次之間自然睜開。收到 3 次就下一頁。';const signal=feedback.snapshot(performance.now());$('receivedBlink').textContent=String(signal.number);$('receivedLabel').textContent=signal.label;$('receivedBlink').closest('section').dataset.received=String(signal.number>0);const f=lastFrame,s=camera.stats();$('leftScore').textContent=f?.left?.toFixed(3)??'—';$('rightScore').textContent=f?.right?.toFixed(3)??'—';$('leftMeter').value=f?.left??0;$('rightMeter').value=f?.right??0;$('eyeStatus').textContent=eyeLabels[controller.phase]||controller.phase;$('blinkCount').textContent=String(controller.count);$('gestureState').textContent=controller.state;
   $('cameraFps').textContent=camera.running?s.cameraFps.toFixed(1):'—';$('inferenceFps').textContent=camera.running?s.inferenceFps.toFixed(1):'—';$('inferenceMs').textContent=camera.running?s.averageMs.toFixed(1)+' ms':'—';$('faceStability').textContent=camera.running?(s.stability*100).toFixed(0)+'%':'—';$('modelMs').textContent=s.modelLoadMs===null?'—':Math.round(s.modelLoadMs)+' ms';
   if(camera.running&&camera.inferences.length>10)$('performanceNote').textContent=(s.inferenceFps<20?'目前實際推論低於20 FPS：'+s.inferenceFps.toFixed(1)+'。可比較 CPU／GPU 或解析度，尚未在目標 iPad 驗證。':'目前推論 '+s.inferenceFps.toFixed(1)+' FPS；此值只代表當前裝置。')+' 畫面FPS方式：'+s.cameraFpsMethod;
   $('debugLog').textContent=log.entries.slice(-12).map(e=>JSON.stringify(e)).join('\n')||'尚無紀錄';

@@ -27,7 +27,7 @@ export class CameraService{
     if(t-this.lastInference<1000/this.options.targetFps)return;this.lastInference=t;
     try{
       const began=performance.now();const result=this.model.detectForVideo(this.video,t),ms=performance.now()-began;const cats=result.faceBlendshapes?.[0]?.categories||[];const left=cats.find(x=>x.categoryName==='eyeBlinkLeft')?.score,right=cats.find(x=>x.categoryName==='eyeBlinkRight')?.score,face=Number.isFinite(left)&&Number.isFinite(right);
-      this.inferences.push({t,ms,face});this.inferences=this.inferences.filter(x=>t-x.t<=2000);this.onFrame({t,left,right,face,inferenceMs:ms});
+      this.inferences.push({t,ms,face});this.inferences=this.inferences.filter(x=>t-x.t<=2000);this.onFrame({t:performance.now(),left,right,face,inferenceMs:ms});
     }catch(e){this.stop();this.onStatus('MODEL ERROR','推論失敗：'+e.message);}
   }
   stats(){const t=performance.now(),frames=this.frameTimes.filter(x=>t-x<=2000),runs=this.inferences.filter(x=>t-x.t<=2000);const fps=a=>a.length<2?0:(a.length-1)*1000/(a.at(-1)-a[0]);return {cameraFps:fps(frames),inferenceFps:fps(runs.map(x=>x.t)),averageMs:runs.length?runs.reduce((a,x)=>a+x.ms,0)/runs.length:0,stability:runs.length?runs.filter(x=>x.face).length/runs.length:0,modelLoadMs:this.modelLoadMs,cameraSettings:this.stream?.getVideoTracks()[0]?.getSettings(),cameraFpsMethod:this.usesVideoCallback?'requestVideoFrameCallback':'主執行緒觀測（可能漏影格）'};}

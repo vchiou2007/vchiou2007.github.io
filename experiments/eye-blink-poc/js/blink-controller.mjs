@@ -4,25 +4,25 @@ export function validateSettings(input){
   for(const [key,value] of Object.entries(s))if(!Number.isFinite(value))throw Error(key+' 必須是數字');
   if(s.openThreshold<0||s.closedThreshold>1||s.openThreshold>=s.closedThreshold)throw Error('睜眼門檻必須小於閉眼門檻，範圍為 0～1');
   if(s.minBlinkMs<20||s.maxBlinkMs<=s.minBlinkMs||s.maxBlinkMs>1000)throw Error('眨眼時間範圍不正確');
-  for(const k of ['maxIntervalMs','gestureTimeoutMs'])if(s[k]<100||s[k]>1500)throw Error('眨眼間隔及等待時間須為100～1500ms');
+  for(const k of ['maxIntervalMs','gestureTimeoutMs'])if(s[k]<100||s[k]>4000)throw Error('眨眼間隔及等待時間須為100～4000ms');
   if(s.cooldownMs<500||s.cooldownMs>5000)throw Error('冷卻須為500～5000ms');
   return s;
 }
 export class BlinkController {
   constructor(settings={},dispatch=()=>{}){this.settings=validateSettings(settings);this.dispatch=dispatch;this.reset();}
-  reset(){this.phase='FACE_LOST';this.count=0;this.lastBlink=null;this.closedAt=null;this.closeCandidate=null;this.openCandidate=null;this.lastInput=null;this.lastTick=-Infinity;this.cooldownUntil=0;this.lastEvent=null;this.lastScores=null;}
+  reset(){this.cancelReason=null;this.phase='FACE_LOST';this.count=0;this.lastBlink=null;this.closedAt=null;this.closeCandidate=null;this.openCandidate=null;this.lastInput=null;this.lastTick=-Infinity;this.cooldownUntil=0;this.lastEvent=null;this.lastScores=null;}
   configure(s){this.settings=validateSettings(s);this.reset();}
   armFromCalibration(t,left,right){if(left<=this.settings.openThreshold&&right<=this.settings.openThreshold){this.phase='IDLE';this.lastInput=t;this.lastTick=t;this.lastScores={left,right};}}
-  loseFace(){this.phase='FACE_LOST';this.count=0;this.lastBlink=null;this.closedAt=null;this.closeCandidate=null;this.openCandidate=null;this.lastScores=null;}
+  loseFace(reason='人臉或雙眼追蹤中斷'){if(this.count||this.phase==='EYES_CLOSED')this.cancelReason=reason;this.phase='FACE_LOST';this.count=0;this.lastBlink=null;this.closedAt=null;this.closeCandidate=null;this.openCandidate=null;this.lastScores=null;}
   get state(){if(this.phase==='IDLE')return this.count===2?'WAIT_FOR_THIRD_BLINK':this.count===1?'BLINK_COUNT_1':'IDLE';return this.phase;}
   get deadline(){return this.lastBlink===null?Infinity:this.lastBlink+(this.count===2?Math.min(this.settings.maxIntervalMs,this.settings.gestureTimeoutMs):this.settings.maxIntervalMs);}
   snapshot(){return {state:this.state,eyeState:this.phase,blinkCount:this.count,lastGesture:this.lastEvent,deadline:this.deadline};}
   tick(t){
     if(t<this.lastTick)return;this.lastTick=t;
-    if(this.lastInput!==null&&t-this.lastInput>this.settings.maxFrameGapMs){this.loseFace();return;}
-    if(this.phase==='IDLE'&&this.count&&t>this.deadline)this.expire(t);
+    if(this.lastInput!==null&&t-this.lastInput>this.settings.maxFrameGapMs){this.loseFace('辨識影格中斷超過 '+this.settings.maxFrameGapMs+' ms');return;}
+    if(this.phase==='IDLE'&&!this.closeCandidate&&this.count&&t>this.deadline)this.expire(t);
   }
-  expire(t){if(this.count===2)this.confirm('PREVIOUS_PAGE',t);else{this.count=0;this.lastBlink=null;}}
+  expire(t){if(this.count===2)this.confirm('PREVIOUS_PAGE',t);else{this.cancelReason='未在 '+(this.settings.maxIntervalMs/1000).toFixed(1)+' 秒內收到下一次閉眼，重新計數';this.count=0;this.lastBlink=null;}}
   confirm(gesture,t){
     const event={gesture,timestamp:t,blinkCount:this.count,latencyMs:t-this.lastBlink};
     this.lastEvent=event;this.count=0;this.lastBlink=null;this.phase='COOLDOWN';this.cooldownUntil=t+this.settings.cooldownMs;this.openCandidate=null;this.closeCandidate=null;this.closedAt=null;
@@ -31,7 +31,7 @@ export class BlinkController {
   }
   feed(t,left,right,face=true){
     if(this.lastInput!==null&&t<=this.lastInput)return this.snapshot();
-    if(this.lastInput!==null&&t-this.lastInput>this.settings.maxFrameGapMs)this.loseFace();
+    if(this.lastInput!==null&&t-this.lastInput>this.settings.maxFrameGapMs)this.loseFace('辨識影格中斷超過 '+this.settings.maxFrameGapMs+' ms');
     this.lastInput=t;this.lastTick=t;
     if(!face||![left,right].every(v=>Number.isFinite(v)&&v>=0&&v<=1)){this.loseFace();return this.snapshot();}
     this.lastScores={left,right};const s=this.settings,open=left<=s.openThreshold&&right<=s.openThreshold,closed=left>=s.closedThreshold&&right>=s.closedThreshold;
@@ -46,22 +46,22 @@ export class BlinkController {
       return this.snapshot();
     }
     if(this.phase==='EYES_CLOSED'){
-      if((this.openCandidate?.at??t)-this.closedAt>s.maxBlinkMs){this.phase='LONG_EYE_CLOSURE';this.count=0;this.lastBlink=null;this.openCandidate=null;this.closeCandidate=null;return this.snapshot();}
+      if((this.openCandidate?.at??t)-this.closedAt>s.maxBlinkMs){this.cancelReason='閉眼超過 '+s.maxBlinkMs+' ms，這組取消';this.phase='LONG_EYE_CLOSURE';this.count=0;this.lastBlink=null;this.openCandidate=null;this.closeCandidate=null;return this.snapshot();}
       if(!open)this.openCandidate=null;
       else{
         this.openCandidate??={at:t,frames:0};this.openCandidate.frames++;
         if(this.openCandidate.frames>=1){
-          const duration=this.openCandidate.at-this.closedAt;this.phase='IDLE';this.openCandidate=null;this.closedAt=null;
+          const began=this.closedAt,duration=this.openCandidate.at-began;this.phase='IDLE';this.openCandidate=null;this.closedAt=null;
           if(duration>=s.minBlinkMs&&duration<=s.maxBlinkMs){
             // A late third blink cannot first emit PREVIOUS and then NEXT.
-            if(this.count&&t>this.deadline){this.expire(t);return this.snapshot();}
-            this.count++;this.lastBlink=t;if(this.count===3)this.confirm('NEXT_PAGE',t);
+            if(this.count&&began>this.deadline){this.expire(t);return this.snapshot();}
+            this.cancelReason=null;this.count++;this.lastBlink=t;if(this.count===3)this.confirm('NEXT_PAGE',t);
           }
         }
       }
       return this.snapshot();
     }
-    if(this.count&&t>this.deadline){this.expire(t);if(this.phase==='COOLDOWN')return this.snapshot();}
+    if(this.count&&t>this.deadline&&(!this.closeCandidate||this.closeCandidate.at>this.deadline)){this.expire(t);if(this.phase==='COOLDOWN')return this.snapshot();}
     if(closed){this.closeCandidate??={at:t,frames:0};this.closeCandidate.frames++;if(this.closeCandidate.frames>=s.consecutiveFrames){this.closedAt=this.closeCandidate.at;this.phase='EYES_CLOSED';this.closeCandidate=null;}}
     else if(open)this.closeCandidate=null;
     return this.snapshot();
