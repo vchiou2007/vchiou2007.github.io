@@ -25,7 +25,7 @@ test('紅黃複選、五種排序與統計不把灰色納入全部未熟',()=>{
  assert.deepEqual(ids({sort:'weak'}),[sample[3].id,sample[2].id,sample[1].id,sample[0].id]);
  assert.deepEqual(ids({sort:'familiar'}),[sample[0].id,sample[2].id,sample[3].id,sample[1].id]);
  assert.equal(ids({sort:'updated'})[0],sample[3].id);assert.equal(ids({sort:'reviewed'})[0],sample[0].id);
- const stats=familiarityCounts(registry,s,'poem');assert.equal(stats.familiar,1);assert.equal(stats.unlearned,498);
+ const stats=familiarityCounts(registry,s,'poem');assert.equal(stats.familiar,1);assert.equal(stats.unlearned,515);
 });
 test('批次只修改指定層級、收藏與排程不變，清除仍保留複習時間',()=>{
  let s=applyReview(defaults(),'li-jing',3,stamp);s=togglePoem(s,'li-jing');s=toggleQuote(s,'li-jing:pair:1');const original=structuredClone(s);

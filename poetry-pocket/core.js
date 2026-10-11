@@ -20,7 +20,7 @@ const searchVariants={...characterVariants,'軾':'轼','願':'愿','閒':'闲','
 export function normalizeSearch(text){return [...String(text).normalize('NFKC').toLowerCase()].map(c=>searchVariants[c]||c).join('').replace(/[\p{P}\p{S}\s]+/gu,'');}
 export function matchesSearch(text,query=''){const haystack=normalizeSearch(text);return query.trim().split(/\s+/u).filter(Boolean).every(term=>haystack.includes(normalizeSearch(term)));}
 export function searchPoems(poems, query = '', category = '') {
- return poems.filter(p=>(!category||p.type===category||p.author===category||p.locations.includes(category))&&matchesSearch([p.title,p.author,p.dynasty,p.type,...p.lines,...p.tags,...p.locations].join(' '),query));
+ return poems.filter(p=>(!category||(category==='熱門'||category==='🔥 熱門'?p.tags.includes('熱門'):p.type===category||p.author===category||p.locations.includes(category)||p.tags.includes(category)))&&matchesSearch([p.title,p.author,p.dynasty,p.type,...p.lines,...p.tags,...p.locations].join(' '),query));
 }
 export function dailyPoem(poems, now = new Date()) { return poems[(now.getFullYear() * 372 + (now.getMonth() + 1) * 31 + now.getDate()) % poems.length]; }
 export function nextReviewDate(rating, count, now = new Date()) {
