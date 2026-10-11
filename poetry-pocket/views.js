@@ -85,9 +85,22 @@ export function quotesView(poems,state,index) {
   const quotes=quoteEntries(poems),q=quotes[index%quotes.length],favorite=state.quotes.includes(q.id);
   return `<div class="page-heading"><p class="eyebrow">不必背整首，也能留住一句</p><h1>千古名句</h1></div><section class="quote-stage"><div id="quote-swipe">${hero(q.poem,q.text,'每日名句',false)}${quoteTools(q,false)}</div><div class="row between quote-controls">${button(icon('back'),'quote-prev','aria-label="上一句"','icon-button')}<span class="counter">${index+1} / ${quotes.length}　左右滑動</span>${button(icon('arrow'),'quote-next','aria-label="下一句"','icon-button')}</div><div class="row between wrap">${button(`${icon('heart')}${favorite?'已收藏名句':'收藏名句'}`,'quote-favorite',`data-id="${e(q.id)}" aria-pressed="${favorite}"`,'button soft')}${link('讀全篇 →',`/read/${e(q.poem.id)}`,'button text')}</div><div class="quote-explanation">${e(q.poem.translation)}</div></section>`;
 }
-export function studyView(poems,state) {
-  const due=filterItems(duePoems(poems,state),'poem'),available=filterItems(poems,'poem'),studied=Object.values(state.progress).filter(p=>p.reviewCount>0).length;
-  return `<div class="page-heading"><p class="eyebrow">不求一字不差，先找回一點記憶</p><h1>今天，一句一句來</h1></div>${homeFamiliarity()}${controls(available,'poem')}<div class="practice-prompt row between wrap"><div><h2>${due.length?'準備好，再讀一遍':'今天的複習完成了'}</h2><p>${studied} 首有練習紀錄 · ${due.length} 首待學習或複習</p></div>${link(`${icon('chart')}學習進度`,'/progress','button soft')}</div><section class="section"><div class="section-heading"><h2>待學習與複習</h2><span class="pill">${due.length} 首</span></div>${due.length?`<div class="poem-list">${due.map(p=>row(p,'practice',state.progress[p.id]?.reviewCount?'該複習了':'尚無複習紀錄')).join('')}</div>`:empty('把今天的詩留在心裡','下次到期時，作品會再次出現在這裡。')}</section><section class="section"><h2>自由練習</h2><div class="filters section">${available.map(p=>`<span class="fam-free-practice">${itemTools('poem',p.id)}${link(e(p.title),`/practice/${p.id}`,'button')}</span>`).join('')}</div></section>`;
+export function studyView(poems,state,uiStudy={popular:false}) {
+  const isPop=Boolean(uiStudy?.popular);
+  const targetPoems=isPop?poems.filter(p=>(p.tags||[]).includes('熱門')):poems;
+  const due=filterItems(duePoems(targetPoems,state),'poem'),available=filterItems(targetPoems,'poem');
+  const studied=targetPoems.filter(p=>(state.progress[p.id]?.reviewCount||0)>0).length;
+
+  const popList=poems.filter(p=>(p.tags||[]).includes('熱門'));
+  const popCounts={familiar:0,shaky:0,weak:0,unlearned:0};
+  for(const p of popList){
+    const lvl=statusOf('poem',p.id);
+    if(popCounts[lvl]!==undefined)popCounts[lvl]++;
+    else popCounts.unlearned++;
+  }
+  const popCard=`<section class="section pop-progress-card" aria-label="熱門學習進度"><div class="section-heading"><h2>🔥 熱門學習進度</h2><span class="pill">${popList.length} 首</span></div><div class="stats-grid"><div class="stat"><strong>${popCounts.familiar}</strong><span>已熟讀</span></div><div class="stat"><strong>${popCounts.shaky}</strong><span>不太熟</span></div><div class="stat"><strong>${popCounts.weak}</strong><span>很不熟</span></div><div class="stat"><strong>${popCounts.unlearned}</strong><span>尚未背誦</span></div></div></section>`;
+
+  return `<div class="page-heading"><p class="eyebrow">不求一字不差，先找回一點記憶</p><h1>今天，一句一句來</h1></div><div class="filters section" aria-label="作品範圍篩選"><button class="chip ${!isPop?'selected':''}" data-act="study-popular" data-value="all" aria-pressed="${!isPop}">全部作品</button><button class="chip ${isPop?'selected':''}" data-act="study-popular" data-value="popular" aria-pressed="${isPop}">🔥 只背熱門</button></div>${homeFamiliarity()}${popCard}${controls(available,'poem')}<div class="practice-prompt row between wrap"><div><h2>${due.length?'準備好，再讀一遍':'今天的複習完成了'}</h2><p>${isPop?`熱門作品 ${targetPoems.length} 首，其中 ${studied} 首已練習 · ${due.length} 首待學習或複習`:`${studied} 首有練習紀錄 · ${due.length} 首待學習或複習`}</p></div>${link(`${icon('chart')}學習進度`,'/progress','button soft')}</div><section class="section"><div class="section-heading"><h2>待學習與複習</h2><span class="pill">${due.length} 首</span></div>${due.length?`<div class="poem-list">${due.map(p=>row(p,'practice',state.progress[p.id]?.reviewCount?'該複習了':'尚無複習紀錄')).join('')}</div>`:empty('把今天的詩留在心裡','下次到期時，作品會再次出現在這裡。')}</section><section class="section"><h2>自由練習</h2><div class="filters section">${available.map(p=>`<span class="fam-free-practice">${itemTools('poem',p.id)}${link(e(p.title),`/practice/${p.id}`,'button')}</span>`).join('')}</div></section>`;
 }
 export function practiceView(poem,state,practice) {
   const {mode,revealed,submitted,rating}=practice;

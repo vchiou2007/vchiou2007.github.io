@@ -15,11 +15,12 @@ const storage=new LearningStorage();
 let poems=[],state=defaults(),storageError='',offline='preparing',offlineError='',toastTimer,modal='',pendingBackup=null;
 const ui={query:'',category:'',quote:0,favoriteKind:'poems',practice:{id:'',mode:'read',revealed:new Set(),submitted:false,rating:false}};
 ui.catalogue={query:'',type:'',theme:'',sort:'default',selected:[]};
-ui.pairs={query:'',type:'',theme:'',saved:false};
+ui.pairs={query:'',type:'',theme:'',saved:false,popular:false};
+ui.study={popular:false};
 ui.pair={id:'',mode:'read',revealed:new Set()};
 let fhEntries=[],fhKeywords=[],famRegistry=createRegistry([],[]),famTargets=[],famReview=false;
 ui.familiarity={};
-function familiarityOptions(){const {parts,params}=route();const key=[parts[0]||'today',parts[0]==='feihua'?parts[1]||'index':'',parts[0]==='favorites'?ui.favoriteKind:'',parts[0]==='my-recitation'?params.get('kind')||'poem':''].join('/');return ui.familiarity[key]??={filters:[],sort:'default',batch:false,selected:[]};}
+function familiarityOptions(){const {parts,params}=route();const key=[parts[0]||'today',parts[0]==='feihua'?parts[1]||'index':'',parts[0]==='favorites'?ui.favoriteKind:'',parts[0]==='my-recitation'?params.get('kind')||'poem':''].join('/');return ui.familiarity[key]??={filters:[],sort:'default',batch:false,selected:[],popular:false};}
 function openFamiliarity(keys,review=false){famTargets=[...new Set(keys)].map(key=>famRegistry.byKey.get(key)).filter(Boolean);famReview=review;if(!famTargets.length)return;showSheet('設定背誦熟悉度',fam.selector(famTargets,review),'familiarity');}
 function filterAddress(){const {parts,params}=route();params.delete('levels');history.replaceState(null,'','#/'+parts.map(encodeURIComponent).join('/')+(params.size?'?'+params.toString():''));}
 function familiarityQuote(id){const q=quoteEntries(poems).find(q=>q.id===id);if(!q)return null;const all=[...famRegistry.byKey.values()].filter(r=>r.contentType==='quote');const index=all.findIndex(r=>r.key===famRegistry.resolve('quote',id));return {...q,lines:q.lines||[q.text],previous:q.previous||all[(index+all.length-1)%all.length].contentId,next:q.next||all[(index+1)%all.length].contentId};}
@@ -67,7 +68,7 @@ function render(keepScroll=false, input=document.activeElement) {
     case 'authors':case 'locations':content=view.categoriesView(poems,page);tab='library';break;
     case 'read':content=poem?view.readerView(poem,state):view.empty('找不到這首詩','請回到詩集重新選擇。');tab='library';break;
     case 'quotes':content=explorer.pairsView(poems,state,ui.pairs);break;
-    case 'study':content=view.studyView(poems,state);break;
+    case 'study':content=view.studyView(poems,state,ui.study);break;
     case 'practice':
       if(poem&&ui.practice.id!==poem.id)ui.practice={id:poem.id,mode:'read',revealed:new Set(),submitted:false,rating:false};
       content=poem?view.practiceView(poem,state,ui.practice):view.empty('找不到練習作品','請回到詩集重新選擇。');tab='study';break;
@@ -128,6 +129,9 @@ document.addEventListener('click',async event=>{
   const act=button.dataset.act;
   try{
     switch(act){
+      case 'fam-popular':{const o=familiarityOptions();o.popular=(button.dataset.value==='popular');o.selected=[];render(true);break;}
+      case 'pair-popular':ui.pairs.popular=(button.dataset.value==='popular');if(button.dataset.value==='all'&&ui.pairs.type==='熱門')ui.pairs.type='';render(true);break;
+      case 'study-popular':ui.study.popular=(button.dataset.value==='popular');render(true);break;
       case 'fam-open':openFamiliarity([button.dataset.key]);break;
       case 'fam-review':openFamiliarity([famRegistry.resolve(button.dataset.type,button.dataset.id)],true);break;
       case 'fam-batch-set':openFamiliarity(familiarityOptions().selected);break;
