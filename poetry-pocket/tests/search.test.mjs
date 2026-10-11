@@ -9,7 +9,7 @@ test('搜尋繁簡、標點、跨行詩句與多關鍵字，保留正文',()=>{
  assert.ok(searchPoems(poems,'苏轼').some(p=>p.author==='蘇軾'));
  assert.ok(searchPoems(poems,'明月').length>1);
  assert.equal(searchPoems(poems,'不存在的作品xyz').length,0);
- assert.equal(searchPoems(poems,'').length,501);
+ assert.equal(searchPoems(poems,'').length,518);
  assert.ok(matchesSearch('明月幾時有？把酒問青天。','明月几时有把酒问青天'));
  assert.equal(JSON.stringify(poems),before);
 });
